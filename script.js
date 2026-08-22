@@ -8,6 +8,7 @@ const menuToggle =
 const mobileNav =
     document.getElementById("mobileNav");
 
+
 if (menuToggle && mobileNav) {
 
     menuToggle.addEventListener("click", () => {
@@ -17,15 +18,19 @@ if (menuToggle && mobileNav) {
     });
 
 
-    mobileNav.querySelectorAll("a").forEach(link => {
+    mobileNav
+        .querySelectorAll("a")
+        .forEach(link => {
 
-        link.addEventListener("click", () => {
+            link.addEventListener("click", () => {
 
-            mobileNav.classList.remove("active");
+                mobileNav.classList.remove(
+                    "active"
+                );
+
+            });
 
         });
-
-    });
 
 }
 
@@ -36,6 +41,7 @@ if (menuToggle && mobileNav) {
 
 const yearElement =
     document.getElementById("year");
+
 
 if (yearElement) {
 
@@ -55,6 +61,7 @@ const typingElements =
 
 const typingObserver =
     new IntersectionObserver(
+
         (entries, observer) => {
 
             entries.forEach(entry => {
@@ -123,21 +130,26 @@ const typingObserver =
                 typeCharacter();
 
 
-                observer.unobserve(element);
+                observer.unobserve(
+                    element
+                );
 
             });
 
         },
+
         {
-            threshold:
-                0.2
+            threshold: 0.2
         }
+
     );
 
 
 typingElements.forEach(element => {
 
-    typingObserver.observe(element);
+    typingObserver.observe(
+        element
+    );
 
 });
 
@@ -147,37 +159,49 @@ typingElements.forEach(element => {
 ===================================================== */
 
 const faqQuestions =
-    document.querySelectorAll(".faq-question");
+    document.querySelectorAll(
+        ".faq-question"
+    );
 
 
 faqQuestions.forEach(question => {
 
-    question.addEventListener("click", () => {
+    question.addEventListener(
+        "click",
+        () => {
 
-        const currentItem =
-            question.closest(".faq-item");
-
-
-        document
-            .querySelectorAll(".faq-item")
-            .forEach(item => {
-
-                if (item !== currentItem) {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            });
+            const currentItem =
+                question.closest(
+                    ".faq-item"
+                );
 
 
-        currentItem.classList.toggle(
-            "active"
-        );
+            document
+                .querySelectorAll(
+                    ".faq-item"
+                )
+                .forEach(item => {
 
-    });
+                    if (
+                        item !==
+                        currentItem
+                    ) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                });
+
+
+            currentItem.classList.toggle(
+                "active"
+            );
+
+        }
+    );
 
 });
 
@@ -254,10 +278,10 @@ const projectData = {
             "Data Analytics",
 
         description:
-            "Eksplorasi data untuk menemukan pola, insight, dan informasi yang dapat digunakan sebagai dasar pengambilan keputusan.",
+            "Eksplorasi pengolahan data untuk menghasilkan insight melalui analisis dan visualisasi.",
 
         details:
-            "Project ini mencakup proses data cleaning, exploratory data analysis, transformasi data, visualisasi, dan interpretasi hasil. Fokusnya adalah mengubah data mentah menjadi informasi yang lebih mudah dipahami.",
+            "Project ini berfokus pada proses pengolahan data mulai dari data cleaning, exploratory data analysis, identifikasi pola, hingga visualisasi. Tujuannya adalah mengubah data mentah menjadi informasi yang lebih mudah dipahami.",
 
         technologies: [
             "Python",
@@ -310,31 +334,57 @@ const projectData = {
 ===================================================== */
 
 const projectModal =
-    document.getElementById("projectModal");
+    document.getElementById(
+        "projectModal"
+    );
+
 
 const modalOverlay =
-    document.getElementById("modalOverlay");
+    document.getElementById(
+        "modalOverlay"
+    );
+
 
 const modalClose =
-    document.getElementById("modalClose");
+    document.getElementById(
+        "modalClose"
+    );
+
 
 const modalCategory =
-    document.getElementById("modalCategory");
+    document.getElementById(
+        "modalCategory"
+    );
+
 
 const modalTitle =
-    document.getElementById("modalTitle");
+    document.getElementById(
+        "modalTitle"
+    );
+
 
 const modalDescription =
-    document.getElementById("modalDescription");
+    document.getElementById(
+        "modalDescription"
+    );
+
 
 const modalDetails =
-    document.getElementById("modalDetails");
+    document.getElementById(
+        "modalDetails"
+    );
+
 
 const modalTags =
-    document.getElementById("modalTags");
+    document.getElementById(
+        "modalTags"
+    );
+
 
 const modalProjectLink =
-    document.getElementById("modalProjectLink");
+    document.getElementById(
+        "modalProjectLink"
+    );
 
 
 /* =====================================================
@@ -376,7 +426,9 @@ function openProject(projectId) {
         technology => {
 
             const tag =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
 
             tag.textContent =
                 technology;
@@ -449,7 +501,7 @@ function closeProject() {
 
 
 /* =====================================================
-   PROJECT CLICK
+   PROJECT CARDS
 ===================================================== */
 
 const projectCards =
@@ -459,6 +511,7 @@ const projectCards =
 
 
 projectCards.forEach(card => {
+
 
     card.addEventListener(
         "click",
@@ -483,6 +536,7 @@ projectCards.forEach(card => {
 
                 event.preventDefault();
 
+
                 openProject(
                     card.dataset.project
                 );
@@ -496,19 +550,27 @@ projectCards.forEach(card => {
 
 
 /* =====================================================
-   MODAL CLOSE
+   CLOSE MODAL
 ===================================================== */
 
-modalClose.addEventListener(
-    "click",
-    closeProject
-);
+if (modalClose) {
+
+    modalClose.addEventListener(
+        "click",
+        closeProject
+    );
+
+}
 
 
-modalOverlay.addEventListener(
-    "click",
-    closeProject
-);
+if (modalOverlay) {
+
+    modalOverlay.addEventListener(
+        "click",
+        closeProject
+    );
+
+}
 
 
 /* =====================================================
