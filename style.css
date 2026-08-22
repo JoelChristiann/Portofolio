@@ -2787,3 +2787,253 @@ footer {
     }
 
 }
+
+/* =====================================================
+   JC PLANET ORBIT
+===================================================== */
+
+.hero-center {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+    z-index: 10 !important;
+}
+
+
+/* JC */
+
+.jc-text {
+    position: relative;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    letter-spacing: -0.08em;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 10px rgba(100, 255, 170, 0.35),
+        0 0 30px rgba(100, 255, 170, 0.15);
+
+    pointer-events: none;
+}
+
+
+/* ORBIT */
+
+.jc-orbit {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border: 1px solid rgba(90, 255, 160, 0.28);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transform-origin: center center;
+}
+
+
+/* ORBIT 1 */
+
+.jc-orbit-1 {
+
+    width: 170px;
+    height: 70px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-20deg);
+
+    animation:
+        jcOrbit1 6s linear infinite;
+}
+
+
+/* ORBIT 2 */
+
+.jc-orbit-2 {
+
+    width: 200px;
+    height: 90px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(35deg);
+
+    animation:
+        jcOrbit2 9s linear infinite reverse;
+}
+
+
+/* ORBIT 3 */
+
+.jc-orbit-3 {
+
+    width: 230px;
+    height: 110px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(70deg);
+
+    animation:
+        jcOrbit3 13s linear infinite;
+}
+
+
+/* TITIK PLANET */
+
+.jc-orbit-dot {
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #7dffb2;
+
+    box-shadow:
+        0 0 8px #7dffb2,
+        0 0 18px rgba(125, 255, 178, 0.8),
+        0 0 30px rgba(125, 255, 178, 0.4);
+
+    top: 50%;
+    left: 0;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+/* TITIK ORBIT 2 */
+
+.jc-orbit-2 .jc-orbit-dot {
+
+    width: 7px;
+    height: 7px;
+
+    background: #b4ffd0;
+
+    box-shadow:
+        0 0 8px #b4ffd0,
+        0 0 18px rgba(180, 255, 208, 0.7);
+}
+
+
+/* TITIK ORBIT 3 */
+
+.jc-orbit-3 .jc-orbit-dot {
+
+    width: 6px;
+    height: 6px;
+
+    background: #55ff9b;
+
+    box-shadow:
+        0 0 8px #55ff9b,
+        0 0 20px rgba(85, 255, 155, 0.7);
+}
+
+
+/* ROTASI */
+
+@keyframes jcOrbit1 {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            rotate(-20deg);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            rotate(340deg);
+    }
+
+}
+
+
+@keyframes jcOrbit2 {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            rotate(35deg);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            rotate(395deg);
+    }
+
+}
+
+
+@keyframes jcOrbit3 {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            rotate(70deg);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            rotate(430deg);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .jc-orbit-1 {
+        width: 140px;
+        height: 60px;
+    }
+
+    .jc-orbit-2 {
+        width: 165px;
+        height: 75px;
+    }
+
+    .jc-orbit-3 {
+        width: 190px;
+        height: 90px;
+    }
+
+    .jc-text {
+        font-size: 2rem;
+    }
+
+    .jc-orbit-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+}
