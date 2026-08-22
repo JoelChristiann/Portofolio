@@ -1,4 +1,15 @@
 /* =====================================================
+   YEAR
+===================================================== */
+
+const yearElement = document.getElementById("year");
+
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}
+
+
+/* =====================================================
    MOBILE MENU
 ===================================================== */
 
@@ -8,18 +19,13 @@ const mobileNav = document.getElementById("mobileNav");
 if (menuToggle && mobileNav) {
 
     menuToggle.addEventListener("click", () => {
-
         mobileNav.classList.toggle("active");
-
     });
-
 
     mobileNav.querySelectorAll("a").forEach(link => {
 
         link.addEventListener("click", () => {
-
             mobileNav.classList.remove("active");
-
         });
 
     });
@@ -27,202 +33,69 @@ if (menuToggle && mobileNav) {
 }
 
 
-
-/* =====================================================
-   CURRENT YEAR
-===================================================== */
-
-const yearElement = document.getElementById("year");
-
-if (yearElement) {
-
-    yearElement.textContent = new Date().getFullYear();
-
-}
-
-
-
 /* =====================================================
    TYPING EFFECT
 ===================================================== */
 
-const typingElements =
-    document.querySelectorAll(".typing-title");
+const typingElements = document.querySelectorAll(".typing-title");
 
+const typingSpeed = 35;
 
-function typeText(element) {
+const typingObserver = new IntersectionObserver(
+    entries => {
 
-    if (element.dataset.typed === "true") {
-        return;
-    }
+        entries.forEach(entry => {
 
-    const text =
-        element.getAttribute("data-text");
-
-    if (!text) {
-        return;
-    }
-
-    element.dataset.typed = "true";
-
-    element.innerHTML = "";
-
-    let index = 0;
-
-
-    const cursor = document.createElement("span");
-
-    cursor.className = "typing-cursor";
-
-    cursor.textContent = "|";
-
-
-    function type() {
-
-        if (index < text.length) {
-
-            element.insertBefore(
-                document.createTextNode(
-                    text.charAt(index)
-                ),
-                cursor
-            );
-
-            index++;
-
-            setTimeout(type, 35);
-
-        } else {
-
-            setTimeout(() => {
-
-                cursor.classList.add("typing-finished");
-
-            }, 800);
-
-        }
-
-    }
-
-
-    element.appendChild(cursor);
-
-    type();
-
-}
-
-
-
-/* =====================================================
-   TYPING CURSOR STYLE
-===================================================== */
-
-const typingStyle =
-    document.createElement("style");
-
-typingStyle.textContent = `
-
-    .typing-cursor {
-
-        display: inline-block;
-
-        margin-left: 4px;
-
-        color: #38ff72;
-
-        font-weight: 400;
-
-        animation:
-            typingCursorBlink
-            0.8s
-            infinite;
-
-    }
-
-
-    .typing-cursor.typing-finished {
-
-        opacity: 0;
-
-        transition: opacity 0.5s ease;
-
-    }
-
-
-    @keyframes typingCursorBlink {
-
-        0%,
-        50% {
-
-            opacity: 1;
-
-        }
-
-        51%,
-        100% {
-
-            opacity: 0;
-
-        }
-
-    }
-
-`;
-
-document.head.appendChild(typingStyle);
-
-
-
-/* =====================================================
-   TYPING OBSERVER
-===================================================== */
-
-if ("IntersectionObserver" in window) {
-
-    const typingObserver =
-        new IntersectionObserver(
-
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (entry.isIntersecting) {
-
-                        typeText(entry.target);
-
-                        typingObserver.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold: 0.25
+            if (!entry.isIntersecting) {
+                return;
             }
 
-        );
+            const element = entry.target;
+
+            if (element.dataset.typed === "true") {
+                return;
+            }
+
+            element.dataset.typed = "true";
+
+            const text = element.dataset.text || "";
+
+            element.textContent = "";
+
+            let index = 0;
+
+            function typeText() {
+
+                if (index < text.length) {
+
+                    element.textContent += text.charAt(index);
+
+                    index++;
+
+                    setTimeout(typeText, typingSpeed);
+
+                }
+
+            }
+
+            typeText();
+
+            typingObserver.unobserve(element);
+
+        });
+
+    },
+    {
+        threshold: 0.25
+    }
+);
 
 
-    typingElements.forEach(element => {
+typingElements.forEach(element => {
 
-        typingObserver.observe(element);
+    typingObserver.observe(element);
 
-    });
-
-} else {
-
-    typingElements.forEach(element => {
-
-        typeText(element);
-
-    });
-
-}
-
+});
 
 
 /* =====================================================
@@ -232,7 +105,6 @@ if ("IntersectionObserver" in window) {
 const faqQuestions =
     document.querySelectorAll(".faq-question");
 
-
 faqQuestions.forEach(question => {
 
     question.addEventListener("click", () => {
@@ -240,26 +112,21 @@ faqQuestions.forEach(question => {
         const currentItem =
             question.closest(".faq-item");
 
-
         document
-            .querySelectorAll(".faq-item.active")
+            .querySelectorAll(".faq-item")
             .forEach(item => {
 
                 if (item !== currentItem) {
-
                     item.classList.remove("active");
-
                 }
 
             });
-
 
         currentItem.classList.toggle("active");
 
     });
 
 });
-
 
 
 /* =====================================================
@@ -272,62 +139,73 @@ const projects = {
 
         number: "01",
 
-        category:
-            "ARTIFICIAL INTELLIGENCE",
+        category: "ARTIFICIAL INTELLIGENCE",
 
-        title:
-            "AI Research",
+        title: "AI Research",
 
         description:
-            "Eksplorasi Artificial Intelligence dan Machine Learning untuk memahami bagaimana model dapat digunakan dalam menyelesaikan permasalahan dunia nyata.",
+            "Eksplorasi Artificial Intelligence dan Machine Learning untuk memahami bagaimana model dapat digunakan untuk menyelesaikan permasalahan dunia nyata.",
 
         overview:
-            "Project ini berfokus pada proses eksperimen AI mulai dari pengumpulan dan preprocessing data, eksplorasi algoritma, training model, evaluasi performa, hingga analisis hasil.",
+            "Project ini berfokus pada proses eksperimen AI mulai dari memahami dataset, melakukan preprocessing, membangun model, melakukan training, mengevaluasi performa, hingga menganalisis hasil.",
 
         technologies: [
             "Python",
+            "Scikit-learn",
+            "Pandas",
+            "NumPy",
             "Machine Learning",
-            "Artificial Intelligence",
-            "Data Processing"
+            "AI"
         ],
 
-        status:
-            "Research & Experiment",
+        work: [
+            "Data preprocessing",
+            "Eksplorasi dataset",
+            "Training machine learning model",
+            "Evaluasi performa model",
+            "Analisis hasil eksperimen"
+        ],
 
-        link:
-            "#"
+        github: "#",
+
+        demo: "#"
 
     },
 
 
-    village: {
+    website: {
 
         number: "02",
 
-        category:
-            "WEB DEVELOPMENT",
+        category: "WEB DEVELOPMENT",
 
-        title:
-            "Digital Village",
+        title: "Digital Village",
 
         description:
-            "Website informasi desa dengan desain modern, responsif, dan mudah digunakan oleh masyarakat.",
+            "Website informasi desa dengan desain modern, responsive, dan mudah digunakan oleh masyarakat.",
 
         overview:
-            "Project ini dirancang sebagai platform informasi digital desa yang dapat menampilkan informasi, berita, kegiatan, layanan, serta berbagai informasi publik secara lebih modern.",
+            "Project ini dibuat untuk menyediakan informasi desa secara digital. Struktur website dirancang agar informasi penting dapat ditemukan dengan mudah melalui perangkat desktop maupun smartphone.",
 
         technologies: [
             "HTML",
             "CSS",
             "JavaScript",
-            "Responsive Design"
+            "Responsive Design",
+            "GitHub Pages"
         ],
 
-        status:
-            "Development",
+        work: [
+            "Membuat struktur halaman website",
+            "Membangun responsive layout",
+            "Membuat navigasi interaktif",
+            "Membuat komponen informasi",
+            "Deploy website menggunakan GitHub Pages"
+        ],
 
-        link:
-            "#"
+        github: "#",
+
+        demo: "#"
 
     },
 
@@ -336,31 +214,36 @@ const projects = {
 
         number: "03",
 
-        category:
-            "DATA SCIENCE",
+        category: "DATA SCIENCE",
 
-        title:
-            "Data Analytics",
+        title: "Data Analytics",
 
         description:
-            "Eksperimen pengolahan data untuk menemukan pola, insight, dan informasi yang dapat digunakan sebagai dasar pengambilan keputusan.",
+            "Project analisis data yang mengubah data mentah menjadi informasi dan insight yang lebih mudah dipahami.",
 
         overview:
-            "Project ini mencakup data cleaning, exploratory data analysis, transformasi data, visualisasi, serta interpretasi hasil menggunakan pendekatan statistik dan data science.",
+            "Project ini berfokus pada proses pengolahan data mulai dari data cleaning, exploratory data analysis, visualisasi, hingga interpretasi hasil.",
 
         technologies: [
             "Python",
             "Pandas",
             "NumPy",
+            "Matplotlib",
             "SQL",
-            "Data Visualization"
+            "Data Analysis"
         ],
 
-        status:
-            "Research & Experiment",
+        work: [
+            "Data cleaning",
+            "Exploratory Data Analysis",
+            "Data transformation",
+            "Data visualization",
+            "Interpretasi insight"
+        ],
 
-        link:
-            "#"
+        github: "#",
+
+        demo: "#"
 
     },
 
@@ -369,41 +252,49 @@ const projects = {
 
         number: "04",
 
-        category:
-            "ALGORITHMIC TRADING",
+        category: "ALGORITHMIC TRADING",
 
-        title:
-            "XAUUSD Trading EA",
+        title: "XAUUSD Trading EA",
 
         description:
-            "Eksperimen Expert Advisor untuk MetaTrader 5 menggunakan MQL5 dengan fokus pada pengujian strategi trading secara sistematis.",
+            "Eksperimen Expert Advisor untuk XAUUSD menggunakan MQL5 dan MetaTrader 5.",
 
         overview:
-            "Project ini mengeksplorasi pembuatan Expert Advisor untuk XAUUSD, termasuk signal generation, risk management, spread filtering, stop loss, take profit, backtesting, dan evaluasi strategi.",
+            "Project ini merupakan eksperimen algorithmic trading yang berfokus pada pengujian strategi secara sistematis. EA dirancang untuk membaca kondisi market dan mengeksekusi transaksi berdasarkan aturan yang telah ditentukan.",
 
         technologies: [
             "MQL5",
             "MetaTrader 5",
             "XAUUSD",
-            "Algorithmic Trading",
-            "Backtesting"
+            "EMA",
+            "RSI",
+            "ATR"
         ],
 
-        status:
-            "Experimental / Backtesting",
+        work: [
+            "Membuat struktur Expert Advisor",
+            "Membuat entry signal",
+            "Mengatur Stop Loss dan Take Profit",
+            "Membuat risk management",
+            "Melakukan backtest",
+            "Mengevaluasi hasil strategi"
+        ],
 
-        link:
-            "#"
+        github: "#",
+
+        demo: "#"
 
     }
 
 };
 
 
-
 /* =====================================================
-   PROJECT MODAL ELEMENTS
+   PROJECT MODAL
 ===================================================== */
+
+const projectCards =
+    document.querySelectorAll(".project-clickable");
 
 const projectModal =
     document.getElementById("projectModal");
@@ -432,93 +323,86 @@ const modalOverview =
 const modalTags =
     document.getElementById("modalTags");
 
-const modalStatus =
-    document.getElementById("modalStatus");
+const modalWork =
+    document.getElementById("modalWork");
 
-const modalProjectLink =
-    document.getElementById("modalProjectLink");
+const modalGithub =
+    document.getElementById("modalGithub");
 
+const modalDemo =
+    document.getElementById("modalDemo");
 
 
 /* =====================================================
-   OPEN PROJECT MODAL
+   OPEN MODAL
 ===================================================== */
 
-function openProject(projectID) {
+function openProject(projectId) {
 
-    const project =
-        projects[projectID];
+    const project = projects[projectId];
 
     if (!project) {
         return;
     }
 
-
     modalNumber.textContent =
         project.number;
-
 
     modalCategory.textContent =
         project.category;
 
-
     modalTitle.textContent =
         project.title;
 
-
     modalDescription.textContent =
         project.description;
-
 
     modalOverview.textContent =
         project.overview;
 
 
-    modalStatus.textContent =
-        project.status;
-
+    /* TAGS */
 
     modalTags.innerHTML = "";
-
 
     project.technologies.forEach(technology => {
 
         const tag =
             document.createElement("span");
 
-        tag.textContent =
-            technology;
+        tag.textContent = technology;
 
         modalTags.appendChild(tag);
 
     });
 
 
-    modalProjectLink.href =
-        project.link;
+    /* WORK */
+
+    modalWork.innerHTML = "";
+
+    project.work.forEach(item => {
+
+        const li =
+            document.createElement("li");
+
+        li.textContent = item;
+
+        modalWork.appendChild(li);
+
+    });
 
 
-    /*
-       Kalau project belum memiliki link,
-       tombol tidak dibuat seolah-olah
-       memiliki halaman.
-    */
+    /* LINKS */
 
-    if (
-        !project.link ||
-        project.link === "#"
-    ) {
+    modalGithub.href =
+        project.github;
 
-        modalProjectLink.style.display =
-            "none";
+    modalDemo.href =
+        project.demo;
 
-    } else {
 
-        modalProjectLink.style.display =
-            "inline-flex";
-
-    }
-
+    /* SHOW */
 
     projectModal.classList.add("active");
 
@@ -527,95 +411,66 @@ function openProject(projectID) {
         "false"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
+    document.body.style.overflow = "hidden";
 
 }
 
 
-
 /* =====================================================
-   CLOSE PROJECT MODAL
+   CLOSE MODAL
 ===================================================== */
 
 function closeProject() {
 
-    projectModal.classList.remove(
-        "active"
-    );
+    projectModal.classList.remove("active");
 
     projectModal.setAttribute(
         "aria-hidden",
         "true"
     );
 
-    document.body.classList.remove(
-        "modal-open"
-    );
+    document.body.style.overflow = "";
 
 }
 
 
-
 /* =====================================================
-   PROJECT CARD CLICK
+   CLICK PROJECT
 ===================================================== */
-
-const projectCards =
-    document.querySelectorAll(
-        ".project-card"
-    );
-
 
 projectCards.forEach(card => {
 
-    card.addEventListener(
-        "click",
-        event => {
+    card.addEventListener("click", () => {
 
-            /*
-               Kalau yang diklik adalah
-               link/button di dalam card,
-               tetap buka modal.
-            */
+        const projectId =
+            card.dataset.project;
 
-            const projectID =
+        openProject(projectId);
+
+    });
+
+
+    /* KEYBOARD */
+
+    card.addEventListener("keydown", event => {
+
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
+
+            event.preventDefault();
+
+            const projectId =
                 card.dataset.project;
 
-            openProject(projectID);
+            openProject(projectId);
 
         }
-    );
 
-
-    /*
-       Bisa dibuka dengan keyboard
-       menggunakan Enter atau Space.
-    */
-
-    card.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Enter" ||
-                event.key === " "
-            ) {
-
-                event.preventDefault();
-
-                openProject(
-                    card.dataset.project
-                );
-
-            }
-
-        }
-    );
+    });
 
 });
-
 
 
 /* =====================================================
@@ -632,9 +487,8 @@ if (modalClose) {
 }
 
 
-
 /* =====================================================
-   CLICK OUTSIDE MODAL
+   CLICK OUTSIDE
 ===================================================== */
 
 if (modalOverlay) {
@@ -647,9 +501,8 @@ if (modalOverlay) {
 }
 
 
-
 /* =====================================================
-   ESC TO CLOSE
+   ESCAPE
 ===================================================== */
 
 document.addEventListener(
@@ -658,9 +511,7 @@ document.addEventListener(
 
         if (
             event.key === "Escape" &&
-            projectModal.classList.contains(
-                "active"
-            )
+            projectModal.classList.contains("active")
         ) {
 
             closeProject();
