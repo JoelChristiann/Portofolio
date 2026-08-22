@@ -24,9 +24,7 @@ if (menuToggle && mobileNav) {
 
             link.addEventListener("click", () => {
 
-                mobileNav.classList.remove(
-                    "active"
-                );
+                mobileNav.classList.remove("active");
 
             });
 
@@ -41,7 +39,6 @@ if (menuToggle && mobileNav) {
 
 const yearElement =
     document.getElementById("year");
-
 
 if (yearElement) {
 
@@ -147,9 +144,7 @@ const typingObserver =
 
 typingElements.forEach(element => {
 
-    typingObserver.observe(
-        element
-    );
+    typingObserver.observe(element);
 
 });
 
@@ -183,8 +178,7 @@ faqQuestions.forEach(question => {
                 .forEach(item => {
 
                     if (
-                        item !==
-                        currentItem
+                        item !== currentItem
                     ) {
 
                         item.classList.remove(
@@ -338,48 +332,40 @@ const projectModal =
         "projectModal"
     );
 
-
 const modalOverlay =
     document.getElementById(
         "modalOverlay"
     );
-
 
 const modalClose =
     document.getElementById(
         "modalClose"
     );
 
-
 const modalCategory =
     document.getElementById(
         "modalCategory"
     );
-
 
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
 
-
 const modalDescription =
     document.getElementById(
         "modalDescription"
     );
-
 
 const modalDetails =
     document.getElementById(
         "modalDetails"
     );
 
-
 const modalTags =
     document.getElementById(
         "modalTags"
     );
-
 
 const modalProjectLink =
     document.getElementById(
@@ -511,7 +497,6 @@ const projectCards =
 
 
 projectCards.forEach(card => {
-
 
     card.addEventListener(
         "click",
