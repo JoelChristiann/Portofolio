@@ -69,20 +69,27 @@ button {
 
 .navbar {
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
+
     z-index: 100;
 
-    background: rgba(5,7,5,0.78);
+    background:
+        rgba(5,7,5,0.78);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
 
     border-bottom:
-        1px solid rgba(255,255,255,0.06);
+        1px solid
+        rgba(255,255,255,0.06);
 }
 
 .nav-inner {
+
     height: 78px;
 
     width:
@@ -94,80 +101,116 @@ button {
 
     align-items: center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 }
 
 .brand {
+
     font-family:
         "Space Grotesk",
         sans-serif;
 
-    font-size: 25px;
+    font-size:
+        25px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: -1px;
+    letter-spacing:
+        -1px;
 }
 
 .nav-links {
-    display: flex;
 
-    gap: 36px;
+    display:
+        flex;
 
-    color: #9ba29d;
+    gap:
+        36px;
 
-    font-size: 14px;
+    color:
+        #9ba29d;
+
+    font-size:
+        14px;
 }
 
 .nav-links a:hover {
-    color: var(--green);
+    color:
+        var(--green);
 }
 
 .nav-cta {
-    display: flex;
 
-    gap: 10px;
+    display:
+        flex;
 
-    align-items: center;
+    gap:
+        10px;
 
-    padding: 11px 17px;
+    align-items:
+        center;
+
+    padding:
+        11px 17px;
 
     border:
-        1px solid rgba(255,255,255,0.12);
+        1px solid
+        rgba(255,255,255,0.12);
 
-    border-radius: 100px;
+    border-radius:
+        100px;
 
-    font-size: 13px;
+    font-size:
+        13px;
 }
 
 .nav-cta:hover {
-    border-color: var(--green);
-    color: var(--green);
+
+    border-color:
+        var(--green);
+
+    color:
+        var(--green);
 }
 
 .menu-toggle {
-    display: none;
 
-    border: 0;
+    display:
+        none;
 
-    background: transparent;
+    border:
+        0;
 
-    cursor: pointer;
+    background:
+        transparent;
+
+    cursor:
+        pointer;
 }
 
 .menu-toggle span {
-    display: block;
 
-    width: 25px;
-    height: 1px;
+    display:
+        block;
 
-    margin: 6px;
+    width:
+        25px;
 
-    background: white;
+    height:
+        1px;
+
+    margin:
+        6px;
+
+    background:
+        white;
 }
 
 .mobile-nav {
-    display: none;
+    display:
+        none;
 }
 
 
@@ -176,152 +219,222 @@ button {
 ===================================================== */
 
 .hero {
-    min-height: 100vh;
 
-    padding-top: 150px;
-    padding-bottom: 70px;
+    min-height:
+        100vh;
 
-    position: relative;
+    padding-top:
+        150px;
 
-    overflow: hidden;
+    padding-bottom:
+        70px;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
 }
 
 .hero::before {
-    content: "";
 
-    position: absolute;
+    content:
+        "";
 
-    width: 650px;
-    height: 650px;
+    position:
+        absolute;
 
-    right: -250px;
-    top: 100px;
+    width:
+        650px;
+
+    height:
+        650px;
+
+    right:
+        -250px;
+
+    top:
+        100px;
 
     background:
         rgba(20,255,100,0.04);
 
-    filter: blur(120px);
+    filter:
+        blur(120px);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 .hero-top {
-    margin-bottom: 30px;
+    margin-bottom:
+        30px;
 }
 
 .available {
-    display: inline-flex;
 
-    align-items: center;
+    display:
+        inline-flex;
 
-    gap: 10px;
+    align-items:
+        center;
 
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size: 11px;
-
-    letter-spacing: 1.5px;
-
-    color: #9ca59e;
-}
-
-.available-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background:
-        var(--green);
-
-    box-shadow:
-        0 0 12px var(--green);
-}
-
-.hero-title {
-    max-width: 950px;
+    gap:
+        10px;
 
     font-family:
         "Space Grotesk",
         sans-serif;
 
     font-size:
-        clamp(50px, 8vw, 105px);
+        11px;
 
-    line-height: 0.94;
+    letter-spacing:
+        1.5px;
 
-    letter-spacing: -5px;
+    color:
+        #9ca59e;
+}
 
-    font-weight: 600;
+.available-dot {
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 12px
+        var(--green);
+}
+
+.hero-title {
+
+    max-width:
+        950px;
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size:
+        clamp(50px,8vw,105px);
+
+    line-height:
+        0.94;
+
+    letter-spacing:
+        -5px;
+
+    font-weight:
+        600;
 }
 
 .hero-title span {
-    display: block;
 
-    color: var(--green);
+    display:
+        block;
+
+    color:
+        var(--green);
 
     text-shadow:
-        0 0 35px rgba(56,255,114,0.13);
+        0 0 35px
+        rgba(56,255,114,0.13);
 }
 
 .hero-bottom {
-    display: flex;
 
-    justify-content: space-between;
+    display:
+        flex;
 
-    align-items: end;
+    justify-content:
+        space-between;
 
-    margin-top: 55px;
+    align-items:
+        end;
+
+    margin-top:
+        55px;
 }
 
 .hero-description {
-    max-width: 470px;
 
-    color: var(--muted);
+    max-width:
+        470px;
 
-    line-height: 1.8;
+    color:
+        var(--muted);
 
-    font-size: 16px;
+    line-height:
+        1.8;
+
+    font-size:
+        16px;
 }
 
 .round-button {
-    width: 95px;
-    height: 95px;
 
-    border-radius: 50%;
+    width:
+        95px;
+
+    height:
+        95px;
+
+    border-radius:
+        50%;
 
     border:
-        1px solid rgba(56,255,114,0.35);
+        1px solid
+        rgba(56,255,114,0.35);
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 5px;
+    gap:
+        5px;
 
-    color: var(--green);
+    color:
+        var(--green);
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    transition: 0.3s;
+    transition:
+        0.3s;
 }
 
 .round-button strong {
-    font-size: 18px;
+    font-size:
+        18px;
 }
 
 .round-button:hover {
-    background: var(--green);
 
-    color: #041006;
+    background:
+        var(--green);
+
+    color:
+        #041006;
 
     transform:
         rotate(-10deg);
@@ -329,38 +442,58 @@ button {
 
 
 /* =====================================================
-   HERO VISUAL
+   HERO VISUAL / 3D SPACE
 ===================================================== */
 
 .hero-visual {
-    position: relative;
 
-    width: 100%;
+    position:
+        relative;
 
-    height: 520px;
+    width:
+        100%;
 
-    margin-top: 55px;
+    height:
+        520px;
 
-    display: flex;
+    margin-top:
+        55px;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: center;
+    align-items:
+        center;
 
-    overflow: hidden;
+    justify-content:
+        center;
 
-    isolation: isolate;
+    overflow:
+        hidden;
+
+    perspective:
+        1200px;
+
+    perspective-origin:
+        center center;
+
+    transform-style:
+        preserve-3d;
+
+    isolation:
+        isolate;
 }
 
 
-/* =====================================================
-   HERO GRID
-===================================================== */
+/* GRID */
 
 .hero-visual-grid {
-    position: absolute;
 
-    inset: 0;
+    position:
+        absolute;
+
+    inset:
+        0;
 
     background-image:
 
@@ -385,42 +518,63 @@ button {
             transparent 70%
         );
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: 1;
+    z-index:
+        1;
 }
 
 
 /* =====================================================
-   JC = SUN
+   JC SUN
 ===================================================== */
 
 .hero-center {
-    position: absolute;
 
-    width: 130px;
-    height: 130px;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 50%;
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        130px;
+
+    height:
+        130px;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%,-50%);
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
-    justify-content: center;
+    align-items:
+        center;
 
-    border-radius: 50%;
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
 
     background:
+
         radial-gradient(
             circle at 35% 30%,
+
             #e4ffe9 0%,
+
             #8cffae 15%,
+
             #38ff72 38%,
+
             #13c950 67%,
+
             #087d32 100%
         );
 
@@ -442,25 +596,35 @@ button {
         0 0 160px
         rgba(56,255,114,0.16);
 
-    z-index: 20;
+    z-index:
+        20;
+
+    transform-style:
+        preserve-3d;
 
     animation:
-        jcPulse 3s ease-in-out infinite;
+        jcPulse 3s
+        ease-in-out
+        infinite;
 }
 
 .hero-center span {
 
-    color: #001b08;
+    color:
+        #001b08;
 
     font-family:
         "Space Grotesk",
         sans-serif;
 
-    font-size: 34px;
+    font-size:
+        34px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: -2px;
+    letter-spacing:
+        -2px;
 
     text-shadow:
         0 1px 8px
@@ -469,31 +633,41 @@ button {
 
 .hero-center::before {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: -25px;
+    inset:
+        -25px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         rgba(56,255,114,0.08);
 
-    filter: blur(20px);
+    filter:
+        blur(20px);
 
-    z-index: -1;
+    z-index:
+        -1;
 }
 
 .hero-center::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: -42px;
+    inset:
+        -42px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     border:
         1px solid
@@ -504,122 +678,186 @@ button {
         rgba(56,255,114,0.14);
 
     animation:
-        solarGlow 4s ease-in-out infinite;
+        solarGlow 4s
+        ease-in-out
+        infinite;
 }
 
 
 /* =====================================================
-   TRUE ORBIT SYSTEM
+   3D PLANET SYSTEM
 ===================================================== */
 
-.planet-orbit {
+.planet-system {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 50%;
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        var(--orbit-width);
+
+    height:
+        var(--orbit-height);
+
+    margin-left:
+        calc(var(--orbit-width) / -2);
+
+    margin-top:
+        calc(var(--orbit-height) / -2);
+
+    transform-style:
+        preserve-3d;
+
+    pointer-events:
+        none;
+
+    will-change:
+        transform;
+
+    z-index:
+        30;
+}
+
+
+/* =====================================================
+   ORBIT RING
+===================================================== */
+
+.orbit-ring {
+
+    position:
+        absolute;
+
+    inset:
+        0;
 
     border:
         1px solid
         rgba(70,255,130,0.16);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    transform-origin:
-        center center;
+    transform-style:
+        preserve-3d;
 
-    pointer-events: none;
-
-    will-change: transform;
-
-    z-index: 30;
+    pointer-events:
+        none;
 }
 
 
 /* =====================================================
-   ORBIT 1
+   ORBIT SIZES
 ===================================================== */
 
-.orbit-1 {
+.orbit-system-1 {
 
-    width: 230px;
-    height: 120px;
+    --orbit-width:
+        230px;
+
+    --orbit-height:
+        120px;
 
     animation:
-        orbitOne 7s linear infinite;
+        orbitSystem1
+        7s
+        linear
+        infinite;
+}
+
+
+.orbit-system-2 {
+
+    --orbit-width:
+        330px;
+
+    --orbit-height:
+        175px;
+
+    animation:
+        orbitSystem2
+        11s
+        linear
+        infinite;
+}
+
+
+.orbit-system-3 {
+
+    --orbit-width:
+        440px;
+
+    --orbit-height:
+        235px;
+
+    animation:
+        orbitSystem3
+        15s
+        linear
+        infinite;
+}
+
+
+.orbit-system-4 {
+
+    --orbit-width:
+        550px;
+
+    --orbit-height:
+        290px;
+
+    animation:
+        orbitSystem4
+        20s
+        linear
+        infinite;
 }
 
 
 /* =====================================================
-   ORBIT 2
-===================================================== */
-
-.orbit-2 {
-
-    width: 330px;
-    height: 175px;
-
-    animation:
-        orbitTwo 11s linear infinite;
-}
-
-
-/* =====================================================
-   ORBIT 3
-===================================================== */
-
-.orbit-3 {
-
-    width: 440px;
-    height: 235px;
-
-    animation:
-        orbitThree 15s linear infinite;
-}
-
-
-/* =====================================================
-   ORBIT 4
-===================================================== */
-
-.orbit-4 {
-
-    width: 550px;
-    height: 290px;
-
-    animation:
-        orbitFour 20s linear infinite;
-}
-
-
-/* =====================================================
-   PLANET
+   PLANETS
 ===================================================== */
 
 .planet {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 0;
+    left:
+        50%;
+
+    top:
+        0;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%,-50%);
 
-    min-width: 48px;
-    height: 30px;
+    min-width:
+        48px;
+
+    height:
+        30px;
 
     padding:
         0 12px;
 
-    border-radius: 999px;
+    display:
+        flex;
 
-    display: flex;
+    align-items:
+        center;
 
-    align-items: center;
-    justify-content: center;
+    justify-content:
+        center;
 
-    color: var(--green-light);
+    border-radius:
+        999px;
 
     background:
         #050805;
@@ -628,6 +866,31 @@ button {
         1px solid
         rgba(56,255,114,0.55);
 
+    color:
+        var(--green-light);
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1px;
+
+    white-space:
+        nowrap;
+
+    transform-style:
+        preserve-3d;
+
+    backface-visibility:
+        visible;
+
     box-shadow:
 
         0 0 12px
@@ -635,40 +898,36 @@ button {
 
         0 0 25px
         rgba(56,255,114,0.08);
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-    white-space: nowrap;
-
-    pointer-events: none;
-
-    z-index: 50;
 }
+
+
+/* PLANET DOT */
 
 .planet::before {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 5px;
-    height: 5px;
+    width:
+        5px;
 
-    left: -3px;
-    top: 50%;
+    height:
+        5px;
+
+    left:
+        -3px;
+
+    top:
+        50%;
 
     transform:
         translateY(-50%);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         var(--green);
@@ -684,91 +943,207 @@ button {
 
 
 /* =====================================================
-   ORBIT ROTATION
+   TRUE 3D ORBIT ANIMATION
 ===================================================== */
 
-@keyframes orbitOne {
+@keyframes orbitSystem1 {
 
-    from {
+    0% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(-12deg);
+            translateZ(-120px)
+            rotateX(68deg)
+            rotateZ(0deg);
 
     }
 
-    to {
+    25% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(348deg);
-
-    }
-}
-
-
-@keyframes orbitTwo {
-
-    from {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(18deg);
+            translateZ(0px)
+            rotateX(68deg)
+            rotateZ(90deg);
 
     }
 
-    to {
+    50% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(378deg);
-
-    }
-}
-
-
-@keyframes orbitThree {
-
-    from {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(-8deg);
+            translateZ(120px)
+            rotateX(68deg)
+            rotateZ(180deg);
 
     }
 
-    to {
+    75% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(352deg);
+            translateZ(0px)
+            rotateX(68deg)
+            rotateZ(270deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateZ(-120px)
+            rotateX(68deg)
+            rotateZ(360deg);
 
     }
 }
 
 
-@keyframes orbitFour {
+@keyframes orbitSystem2 {
 
-    from {
+    0% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(15deg);
+            translateZ(120px)
+            rotateX(64deg)
+            rotateZ(0deg);
 
     }
 
-    to {
+    25% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(375deg);
+            translateZ(0px)
+            rotateX(64deg)
+            rotateZ(90deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateZ(-120px)
+            rotateX(64deg)
+            rotateZ(180deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateZ(0px)
+            rotateX(64deg)
+            rotateZ(270deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateZ(120px)
+            rotateX(64deg)
+            rotateZ(360deg);
+
+    }
+}
+
+
+@keyframes orbitSystem3 {
+
+    0% {
+
+        transform:
+            translateZ(-150px)
+            rotateX(72deg)
+            rotateZ(45deg);
+
+    }
+
+    25% {
+
+        transform:
+            translateZ(0px)
+            rotateX(72deg)
+            rotateZ(135deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateZ(150px)
+            rotateX(72deg)
+            rotateZ(225deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateZ(0px)
+            rotateX(72deg)
+            rotateZ(315deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateZ(-150px)
+            rotateX(72deg)
+            rotateZ(405deg);
+
+    }
+}
+
+
+@keyframes orbitSystem4 {
+
+    0% {
+
+        transform:
+            translateZ(150px)
+            rotateX(66deg)
+            rotateZ(135deg);
+
+    }
+
+    25% {
+
+        transform:
+            translateZ(0px)
+            rotateX(66deg)
+            rotateZ(225deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateZ(-150px)
+            rotateX(66deg)
+            rotateZ(315deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateZ(0px)
+            rotateX(66deg)
+            rotateZ(405deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateZ(150px)
+            rotateX(66deg)
+            rotateZ(495deg);
 
     }
 }
 
 
 /* =====================================================
-   JC PULSE
+   JC ANIMATION
 ===================================================== */
 
 @keyframes jcPulse {
@@ -777,7 +1152,7 @@ button {
     100% {
 
         transform:
-            translate(-50%, -50%)
+            translate(-50%,-50%)
             scale(1);
 
     }
@@ -785,7 +1160,7 @@ button {
     50% {
 
         transform:
-            translate(-50%, -50%)
+            translate(-50%,-50%)
             scale(1.05);
 
     }
@@ -797,7 +1172,8 @@ button {
     0%,
     100% {
 
-        opacity: 0.4;
+        opacity:
+            0.4;
 
         transform:
             scale(0.96);
@@ -806,7 +1182,8 @@ button {
 
     50% {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
             scale(1.04);
@@ -816,124 +1193,34 @@ button {
 
 
 /* =====================================================
-   IMPORTANT:
-   ORBIT TIDAK PERNAH BERHENTI
-===================================================== */
-
-.hero-visual .planet-orbit {
-
-    animation-play-state:
-        running !important;
-}
-
-
-/* =====================================================
-   TICKER
-===================================================== */
-
-.ticker-section {
-
-    padding: 35px 0;
-
-    border-top:
-        1px solid var(--border);
-
-    border-bottom:
-        1px solid var(--border);
-
-    overflow: hidden;
-}
-
-.ticker-label {
-
-    font-size: 10px;
-
-    color: #69716b;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 18px;
-}
-
-.ticker {
-
-    overflow: hidden;
-
-    white-space: nowrap;
-}
-
-.ticker-track {
-
-    display: inline-flex;
-
-    gap: 28px;
-
-    align-items: center;
-
-    animation:
-        tickerMove 25s linear infinite;
-}
-
-.ticker-track span {
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size: 22px;
-
-    color: #b7beb9;
-}
-
-.ticker-track i {
-
-    color:
-        var(--green);
-
-    font-style:
-        normal;
-}
-
-@keyframes tickerMove {
-
-    from {
-
-        transform:
-            translateX(0);
-
-    }
-
-    to {
-
-        transform:
-            translateX(-50%);
-
-    }
-}
-
-
-/* =====================================================
-   TYPING EFFECT
+   TYPING
 ===================================================== */
 
 .typing-title {
 
-    position: relative;
+    position:
+        relative;
 
-    min-height: 1em;
+    min-height:
+        1em;
 }
 
 .typing-title.typing-active::after {
 
-    content: "";
+    content:
+        "";
 
-    display: inline-block;
+    display:
+        inline-block;
 
-    width: 2px;
+    width:
+        2px;
 
-    height: 0.9em;
+    height:
+        0.9em;
 
-    margin-left: 5px;
+    margin-left:
+        5px;
 
     background:
         var(--green);
@@ -952,16 +1239,109 @@ button {
 
     0%,
     50% {
-
-        opacity: 1;
-
+        opacity:
+            1;
     }
 
     51%,
     100% {
+        opacity:
+            0;
+    }
+}
 
-        opacity: 0;
 
+/* =====================================================
+   TICKER
+===================================================== */
+
+.ticker-section {
+
+    padding:
+        35px 0;
+
+    border-top:
+        1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
+    overflow:
+        hidden;
+}
+
+.ticker-label {
+
+    font-size:
+        10px;
+
+    color:
+        #69716b;
+
+    letter-spacing:
+        2px;
+
+    margin-bottom:
+        18px;
+}
+
+.ticker {
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+}
+
+.ticker-track {
+
+    display:
+        inline-flex;
+
+    gap:
+        28px;
+
+    align-items:
+        center;
+
+    animation:
+        tickerMove
+        25s linear infinite;
+}
+
+.ticker-track span {
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size:
+        22px;
+
+    color:
+        #b7beb9;
+}
+
+.ticker-track i {
+
+    color:
+        var(--green);
+
+    font-style:
+        normal;
+}
+
+@keyframes tickerMove {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%);
     }
 }
 
@@ -982,7 +1362,8 @@ button {
         "Space Grotesk",
         sans-serif;
 
-    font-size: 11px;
+    font-size:
+        11px;
 
     color:
         var(--green);
@@ -1188,9 +1569,6 @@ button {
         hidden;
 }
 
-
-/* PROJECT AI */
-
 .project-ai {
 
     background:
@@ -1243,10 +1621,12 @@ button {
         50%;
 
     box-shadow:
-        0 0 15px var(--green);
+        0 0 15px
+        var(--green);
 }
 
 .ai-network div:nth-child(1) {
+
     left:
         20%;
 
@@ -1255,6 +1635,7 @@ button {
 }
 
 .ai-network div:nth-child(2) {
+
     left:
         38%;
 
@@ -1263,6 +1644,7 @@ button {
 }
 
 .ai-network div:nth-child(3) {
+
     left:
         60%;
 
@@ -1271,6 +1653,7 @@ button {
 }
 
 .ai-network div:nth-child(4) {
+
     left:
         72%;
 
@@ -1279,15 +1662,13 @@ button {
 }
 
 .ai-network div:nth-child(5) {
+
     left:
         48%;
 
     top:
         78%;
 }
-
-
-/* PROJECT WEB */
 
 .project-web {
 
@@ -1388,9 +1769,6 @@ button {
         90%;
 }
 
-
-/* PROJECT DATA */
-
 .project-data {
 
     background:
@@ -1459,9 +1837,6 @@ button {
         95%;
 }
 
-
-/* PROJECT TRADING */
-
 .project-trading {
 
     background:
@@ -1498,9 +1873,6 @@ button {
             rgba(56,255,114,0.5)
         );
 }
-
-
-/* PROJECT BODY */
 
 .project-body {
 
@@ -1580,7 +1952,7 @@ button {
         10px;
 }
 
-.project-open {
+.project-view {
 
     margin-top:
         22px;
@@ -1598,7 +1970,7 @@ button {
         0.3s;
 }
 
-.project-card:hover .project-open {
+.project-card:hover .project-view {
 
     opacity:
         1;
@@ -1689,6 +2061,7 @@ button {
         rgba(56,255,114,0.22);
 
     box-shadow:
+
         0 0 60px
         rgba(56,255,114,0.08),
 
@@ -1749,9 +2122,6 @@ button {
     font-size:
         26px;
 
-    line-height:
-        1;
-
     cursor:
         pointer;
 
@@ -1793,7 +2163,8 @@ button {
 .modal-content h2 {
 
     font-family:
-        "Space Grotesk";
+        "Space Grotesk",
+        sans-serif;
 
     font-size:
         clamp(35px,6vw,58px);
@@ -1832,8 +2203,7 @@ button {
         25px;
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .modal-section > span {
@@ -1845,7 +2215,8 @@ button {
         var(--green);
 
     font-family:
-        "Space Grotesk";
+        "Space Grotesk",
+        sans-serif;
 
     font-size:
         9px;
@@ -2031,8 +2402,7 @@ button {
         var(--card);
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     transition:
         0.3s;
@@ -2113,12 +2483,10 @@ button {
 .metrics {
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-bottom:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .metrics-grid {
@@ -2139,8 +2507,7 @@ button {
         35px;
 
     border-left:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .metrics-grid strong {
@@ -2211,15 +2578,13 @@ button {
 .faq-item {
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .faq-item:last-child {
 
     border-bottom:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .faq-question {
@@ -2297,9 +2662,7 @@ button {
         200px;
 }
 
-.faq-item.active
-.faq-question
-span {
+.faq-item.active .faq-question span {
 
     transform:
         rotate(45deg);
@@ -2325,8 +2688,7 @@ span {
         hidden;
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 .cta-grid {
@@ -2454,8 +2816,7 @@ span {
 footer {
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     padding:
         70px 0 25px;
@@ -2533,8 +2894,7 @@ footer {
 .footer-bottom {
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     margin-top:
         70px;
@@ -2560,7 +2920,7 @@ footer {
    MOBILE
 ===================================================== */
 
-@media (max-width: 768px) {
+@media (max-width:768px) {
 
     .container,
     .nav-inner {
@@ -2591,8 +2951,7 @@ footer {
             20px 25px;
 
         border-top:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
     .mobile-nav.active {
@@ -2638,7 +2997,7 @@ footer {
     }
 
 
-    /* HERO VISUAL */
+    /* 3D VISUAL */
 
     .hero-visual {
 
@@ -2647,6 +3006,9 @@ footer {
 
         margin-top:
             35px;
+
+        perspective:
+            900px;
     }
 
     .hero-center {
@@ -2665,41 +3027,39 @@ footer {
     }
 
 
-    /* ORBITS MOBILE */
+    .orbit-system-1 {
 
-    .orbit-1 {
-
-        width:
+        --orbit-width:
             170px;
 
-        height:
+        --orbit-height:
             90px;
     }
 
-    .orbit-2 {
+    .orbit-system-2 {
 
-        width:
+        --orbit-width:
             245px;
 
-        height:
+        --orbit-height:
             130px;
     }
 
-    .orbit-3 {
+    .orbit-system-3 {
 
-        width:
+        --orbit-width:
             320px;
 
-        height:
+        --orbit-height:
             170px;
     }
 
-    .orbit-4 {
+    .orbit-system-4 {
 
-        width:
+        --orbit-width:
             390px;
 
-        height:
+        --orbit-height:
             205px;
     }
 
@@ -2811,7 +3171,7 @@ footer {
     .modal-content {
 
         padding:
-            35px 25px;
+            32px 22px;
     }
 
     .modal-content h2 {
