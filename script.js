@@ -3,31 +3,22 @@
 ===================================================== */
 
 const navbar =
-    document.querySelector(".navbar");
+    document.getElementById("navbar");
 
 
-window.addEventListener(
-    "scroll",
-    () => {
+window.addEventListener("scroll", () => {
 
-        if (!navbar) return;
+    if (window.scrollY > 40) {
 
+        navbar.classList.add("scrolled");
 
-        if (window.scrollY > 30) {
+    } else {
 
-            navbar.classList.add("scrolled");
+        navbar.classList.remove("scrolled");
 
-        } else {
-
-            navbar.classList.remove("scrolled");
-
-        }
-
-    },
-    {
-        passive: true
     }
-);
+
+});
 
 
 
@@ -36,96 +27,60 @@ window.addEventListener(
 ===================================================== */
 
 const menuToggle =
-    document.getElementById(
-        "menuToggle"
-    );
-
+    document.getElementById("menuToggle");
 
 const mobileNav =
-    document.getElementById(
-        "mobileNav"
-    );
+    document.getElementById("mobileNav");
 
 
-if (
-    menuToggle &&
-    mobileNav
-) {
+menuToggle.addEventListener("click", () => {
 
-    menuToggle.addEventListener(
-        "click",
-        () => {
+    mobileNav.classList.toggle("active");
 
-            mobileNav.classList.toggle(
-                "open"
-            );
-
-        }
-    );
+});
 
 
-    mobileNav
-        .querySelectorAll("a")
-        .forEach(link => {
+mobileNav
+    .querySelectorAll("a")
+    .forEach(link => {
 
-            link.addEventListener(
-                "click",
-                () => {
+        link.addEventListener("click", () => {
 
-                    mobileNav.classList.remove(
-                        "open"
-                    );
-
-                }
-            );
+            mobileNav.classList.remove("active");
 
         });
 
-}
+    });
 
 
 
 /* =====================================================
-   TYPING TITLES
+   TYPING TITLE
 ===================================================== */
 
 const typingTitles =
-    document.querySelectorAll(
-        ".typing-title"
-    );
+    document.querySelectorAll(".typing-title");
 
 
-function startTyping(element) {
-
-    if (!element) return;
-
+function typeElement(element) {
 
     if (
-        element.dataset.started === "true"
+        element.dataset.typed === "true"
     ) {
-
         return;
-
     }
-
-
-    element.dataset.started = "true";
 
 
     const text =
         element.dataset.text || "";
 
 
-    if (!text) return;
+    element.dataset.typed =
+        "true";
 
 
     element.classList.add(
-        "visible"
-    );
-
-
-    element.classList.add(
-        "typing"
+        "typing-active"
     );
 
 
@@ -135,89 +90,83 @@ function startTyping(element) {
     let index = 0;
 
 
-    function write() {
+    const speed = 45;
+
+
+    function type() {
 
         if (index < text.length) {
 
             element.textContent +=
-                text[index];
+                text.charAt(index);
 
             index++;
 
-
             setTimeout(
-                write,
-                38
+                type,
+                speed
             );
 
         } else {
 
-            /*
-             * Jangan hapus text.
-             *
-             * Hanya matikan cursor.
-             */
+            setTimeout(() => {
 
-            element.classList.remove(
-                "typing"
-            );
+                element.classList.remove(
+                    "typing-active"
+                );
+
+            }, 500);
 
         }
 
     }
 
 
-    write();
+    type();
 
 }
-
 
 
 /* =====================================================
    INTERSECTION OBSERVER
 ===================================================== */
 
-const observer =
+const typingObserver =
     new IntersectionObserver(
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                if (
+                    entry.isIntersecting
+                ) {
 
-                        startTyping(
-                            entry.target
-                        );
+                    typeElement(
+                        entry.target
+                    );
 
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
+                    typingObserver.unobserve(
+                        entry.target
+                    );
 
                 }
-            );
+
+            });
 
         },
         {
-            threshold: 0.15
+            threshold: .25
         }
     );
 
 
-typingTitles.forEach(
-    title => {
+typingTitles.forEach(element => {
 
-        title.textContent = "";
+    typingObserver.observe(
+        element
+    );
 
-        observer.observe(title);
-
-    }
-);
+});
 
 
 
@@ -231,187 +180,491 @@ const faqItems =
     );
 
 
-faqItems.forEach(
-    item => {
+faqItems.forEach(item => {
 
-        const question =
-            item.querySelector(
-                ".faq-question"
-            );
-
-
-        const answer =
-            item.querySelector(
-                ".faq-answer"
-            );
+    const question =
+        item.querySelector(
+            ".faq-question"
+        );
 
 
-        question.addEventListener(
-            "click",
-            () => {
+    question.addEventListener(
+        "click",
+        () => {
 
-                const isActive =
-                    item.classList.contains(
-                        "active"
-                    );
-
-
-                /*
-                 * Tutup semua
-                 */
-
-                faqItems.forEach(
-                    other => {
-
-                        other.classList.remove(
-                            "active"
-                        );
-
-
-                        const otherAnswer =
-                            other.querySelector(
-                                ".faq-answer"
-                            );
-
-
-                        otherAnswer.style.maxHeight =
-                            null;
-
-                    }
+            const isActive =
+                item.classList.contains(
+                    "active"
                 );
 
 
-                /*
-                 * Buka yang dipilih
-                 */
+            faqItems.forEach(otherItem => {
 
-                if (!isActive) {
+                otherItem.classList.remove(
+                    "active"
+                );
 
-                    item.classList.add(
-                        "active"
+
+                const answer =
+                    otherItem.querySelector(
+                        ".faq-answer"
                     );
 
 
-                    answer.style.maxHeight =
-                        answer.scrollHeight +
-                        "px";
+                answer.style.maxHeight =
+                    null;
 
-                }
+            });
+
+
+            if (!isActive) {
+
+                item.classList.add(
+                    "active"
+                );
+
+
+                const answer =
+                    item.querySelector(
+                        ".faq-answer"
+                    );
+
+
+                answer.style.maxHeight =
+                    answer.scrollHeight + "px";
 
             }
-        );
+
+        }
+    );
+
+});
+
+
+
+/* =====================================================
+   PROJECT DATA
+===================================================== */
+
+const projects = {
+
+
+    ai: {
+
+        number:
+            "01",
+
+        category:
+            "ARTIFICIAL INTELLIGENCE",
+
+        title:
+            "AI Research",
+
+        description:
+            "Eksplorasi Machine Learning dan Artificial Intelligence untuk menyelesaikan permasalahan dunia nyata melalui pendekatan berbasis data.",
+
+        tags: [
+            "Python",
+            "Machine Learning",
+            "AI"
+        ],
+
+        status:
+            "In Progress",
+
+        github:
+            "#",
+
+        demo:
+            "#"
+
+    },
+
+
+    village: {
+
+        number:
+            "02",
+
+        category:
+            "WEB DEVELOPMENT",
+
+        title:
+            "Digital Village",
+
+        description:
+            "Website informasi desa dengan pendekatan modern, responsive, dan interaktif untuk membantu masyarakat mendapatkan informasi secara lebih mudah.",
+
+        tags: [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+
+        status:
+            "Completed",
+
+        github:
+            "#",
+
+        demo:
+            "#"
+
+    },
+
+
+    data: {
+
+        number:
+            "03",
+
+        category:
+            "DATA SCIENCE",
+
+        title:
+            "Data Analytics",
+
+        description:
+            "Eksplorasi data menggunakan proses cleaning, analysis, visualization, dan statistical thinking untuk menghasilkan insight yang dapat digunakan.",
+
+        tags: [
+            "Python",
+            "Pandas",
+            "NumPy",
+            "SQL"
+        ],
+
+        status:
+            "In Progress",
+
+        github:
+            "#",
+
+        demo:
+            "#"
+
+    },
+
+
+    trading: {
+
+        number:
+            "04",
+
+        category:
+            "ALGORITHMIC TRADING",
+
+        title:
+            "XAUUSD Trading EA",
+
+        description:
+            "Eksperimen Expert Advisor untuk MetaTrader 5 menggunakan MQL5 dengan pendekatan pengujian strategi, risk management, dan evaluasi performa.",
+
+        tags: [
+            "MQL5",
+            "MT5",
+            "Trading"
+        ],
+
+        status:
+            "Experimental",
+
+        github:
+            "#",
+
+        demo:
+            "#"
 
     }
+
+};
+
+
+
+/* =====================================================
+   PROJECT MODAL ELEMENTS
+===================================================== */
+
+const projectModal =
+    document.getElementById(
+        "projectModal"
+    );
+
+
+const projectModalClose =
+    document.getElementById(
+        "projectModalClose"
+    );
+
+
+const projectModalOverlay =
+    document.querySelector(
+        ".project-modal-overlay"
+    );
+
+
+const modalNumber =
+    document.getElementById(
+        "modalNumber"
+    );
+
+
+const modalCategory =
+    document.getElementById(
+        "modalCategory"
+    );
+
+
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
+
+
+const modalDescription =
+    document.getElementById(
+        "modalDescription"
+    );
+
+
+const modalTags =
+    document.getElementById(
+        "modalTags"
+    );
+
+
+const modalStatus =
+    document.getElementById(
+        "modalStatus"
+    );
+
+
+const modalGithub =
+    document.getElementById(
+        "modalGithub"
+    );
+
+
+const modalDemo =
+    document.getElementById(
+        "modalDemo"
+    );
+
+
+
+/* =====================================================
+   OPEN PROJECT
+===================================================== */
+
+function openProject(projectId) {
+
+
+    const project =
+        projects[projectId];
+
+
+    if (!project) {
+
+        return;
+
+    }
+
+
+    modalNumber.textContent =
+        project.number;
+
+
+    modalCategory.textContent =
+        project.category;
+
+
+    modalTitle.textContent =
+        project.title;
+
+
+    modalDescription.textContent =
+        project.description;
+
+
+    modalStatus.textContent =
+        project.status;
+
+
+    modalGithub.href =
+        project.github;
+
+
+    modalDemo.href =
+        project.demo;
+
+
+    modalTags.innerHTML =
+        "";
+
+
+    project.tags.forEach(tag => {
+
+
+        const tagElement =
+            document.createElement(
+                "span"
+            );
+
+
+        tagElement.textContent =
+            tag;
+
+
+        modalTags.appendChild(
+            tagElement
+        );
+
+
+    });
+
+
+    projectModal.classList.add(
+        "active"
+    );
+
+
+    projectModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+}
+
+
+
+/* =====================================================
+   CLOSE PROJECT
+===================================================== */
+
+function closeProject() {
+
+
+    projectModal.classList.remove(
+        "active"
+    );
+
+
+    projectModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+}
+
+
+
+/* =====================================================
+   PROJECT CARD CLICK
+===================================================== */
+
+const projectCards =
+    document.querySelectorAll(
+        ".project-card"
+    );
+
+
+projectCards.forEach(card => {
+
+
+    card.addEventListener(
+        "click",
+        event => {
+
+
+            /*
+             Jika suatu saat card
+             memiliki link internal,
+             jangan buka modal ketika
+             link tersebut diklik.
+            */
+
+            if (
+                event.target.closest("a")
+            ) {
+
+                return;
+
+            }
+
+
+            const projectId =
+                card.dataset.project;
+
+
+            openProject(
+                projectId
+            );
+
+
+        }
+    );
+
+
+});
+
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+projectModalClose.addEventListener(
+    "click",
+    closeProject
 );
 
 
 
 /* =====================================================
-   SMOOTH SCROLL
+   CLOSE CLICK OUTSIDE
 ===================================================== */
 
-document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const id =
-                    link.getAttribute(
-                        "href"
-                    );
-
-
-                if (
-                    !id ||
-                    id === "#"
-                ) return;
-
-
-                const target =
-                    document.querySelector(
-                        id
-                    );
-
-
-                if (!target) return;
-
-
-                event.preventDefault();
-
-
-                target.scrollIntoView({
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    });
+projectModalOverlay.addEventListener(
+    "click",
+    closeProject
+);
 
 
 
 /* =====================================================
-   HERO PARALLAX
+   CLOSE WITH ESC
 ===================================================== */
 
-const heroVisual =
-    document.querySelector(
-        ".hero-visual"
-    );
+document.addEventListener(
+    "keydown",
+    event => {
 
 
-if (heroVisual) {
+        if (
+            event.key === "Escape" &&
+            projectModal.classList.contains(
+                "active"
+            )
+        ) {
 
-    document.addEventListener(
-        "mousemove",
-        event => {
-
-            if (
-                window.innerWidth < 800
-            ) return;
-
-
-            const x =
-                (
-                    event.clientX /
-                    window.innerWidth
-                ) - .5;
-
-
-            const y =
-                (
-                    event.clientY /
-                    window.innerHeight
-                ) - .5;
-
-
-            heroVisual.style.transform =
-                `
-                perspective(1000px)
-                rotateY(${x * 2}deg)
-                rotateX(${y * -1.5}deg)
-                `;
+            closeProject();
 
         }
-    );
 
-
-    heroVisual.addEventListener(
-        "mouseleave",
-        () => {
-
-            heroVisual.style.transform =
-                "none";
-
-        }
-    );
-
-}
+    }
+);
 
 
 
@@ -425,40 +678,133 @@ const year =
     );
 
 
-if (year) {
+year.textContent =
+    new Date().getFullYear();
 
-    year.textContent =
-        new Date().getFullYear();
+
+
+/* =====================================================
+   HERO VISUAL PARALLAX
+===================================================== */
+
+const heroVisual =
+    document.querySelector(
+        ".hero-visual"
+    );
+
+
+if (heroVisual) {
+
+
+    heroVisual.addEventListener(
+        "mousemove",
+        event => {
+
+
+            const rect =
+                heroVisual.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const rotateX =
+                ((y / rect.height) - .5)
+                * -4;
+
+
+            const rotateY =
+                ((x / rect.width) - .5)
+                * 4;
+
+
+            heroVisual.style.transform =
+                `perspective(1000px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)`;
+
+
+        }
+    );
+
+
+    heroVisual.addEventListener(
+        "mouseleave",
+        () => {
+
+
+            heroVisual.style.transform =
+                "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+
+
+        }
+    );
 
 }
 
 
 
 /* =====================================================
-   REDUCED MOTION
+   SMOOTH ANCHOR
 ===================================================== */
 
-const prefersReducedMotion =
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    );
+document
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
+    .forEach(link => {
 
 
-if (
-    prefersReducedMotion.matches
-) {
+        link.addEventListener(
+            "click",
+            event => {
 
-    typingTitles.forEach(
-        element => {
 
-            element.textContent =
-                element.dataset.text;
+                const targetId =
+                    link.getAttribute(
+                        "href"
+                    );
 
-            element.classList.add(
-                "visible"
-            );
 
-        }
-    );
+                if (
+                    targetId === "#"
+                ) {
 
-}
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (!target) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+
+            }
+        );
+
+
+    });
