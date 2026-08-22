@@ -2,8 +2,11 @@
    MOBILE MENU
 ===================================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const mobileNav = document.getElementById("mobileNav");
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const mobileNav =
+    document.getElementById("mobileNav");
 
 if (menuToggle && mobileNav) {
 
@@ -31,10 +34,14 @@ if (menuToggle && mobileNav) {
    YEAR
 ===================================================== */
 
-const yearElement = document.getElementById("year");
+const yearElement =
+    document.getElementById("year");
 
 if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+
+    yearElement.textContent =
+        new Date().getFullYear();
+
 }
 
 
@@ -42,80 +49,90 @@ if (yearElement) {
    TYPING EFFECT
 ===================================================== */
 
-const typingElements = document.querySelectorAll(".typing-title");
+const typingElements =
+    document.querySelectorAll(".typing-title");
 
 
-function typeText(element) {
+const typingObserver =
+    new IntersectionObserver(
+        (entries, observer) => {
 
-    const text = element.dataset.text;
+            entries.forEach(entry => {
 
-    if (!text) {
-        return;
-    }
-
-    element.textContent = "";
-    element.classList.add("typing-active");
-
-    let index = 0;
-
-    const speed = 45;
+                if (!entry.isIntersecting) {
+                    return;
+                }
 
 
-    function type() {
-
-        if (index < text.length) {
-
-            element.textContent += text.charAt(index);
-
-            index++;
-
-            setTimeout(type, speed);
-
-        } else {
-
-            element.classList.remove("typing-active");
-
-        }
-
-    }
-
-    type();
-}
+                const element =
+                    entry.target;
 
 
-/*
-   Jalankan typing ketika elemen
-   masuk ke layar.
-*/
+                if (
+                    element.dataset.typed === "true"
+                ) {
+                    return;
+                }
 
-const typingObserver = new IntersectionObserver(
-    (entries, observer) => {
 
-        entries.forEach(entry => {
+                element.dataset.typed =
+                    "true";
 
-            if (entry.isIntersecting) {
 
-                const element = entry.target;
+                const text =
+                    element.dataset.text || "";
 
-                if (!element.dataset.typed) {
 
-                    element.dataset.typed = "true";
+                element.textContent =
+                    "";
 
-                    typeText(element);
+
+                element.classList.add(
+                    "typing-active"
+                );
+
+
+                let index = 0;
+
+
+                function typeCharacter() {
+
+                    if (index < text.length) {
+
+                        element.textContent +=
+                            text.charAt(index);
+
+                        index++;
+
+                        setTimeout(
+                            typeCharacter,
+                            42
+                        );
+
+                    } else {
+
+                        element.classList.remove(
+                            "typing-active"
+                        );
+
+                    }
 
                 }
 
+
+                typeCharacter();
+
+
                 observer.unobserve(element);
 
-            }
+            });
 
-        });
-
-    },
-    {
-        threshold: 0.25
-    }
-);
+        },
+        {
+            threshold:
+                0.2
+        }
+    );
 
 
 typingElements.forEach(element => {
@@ -126,70 +143,121 @@ typingElements.forEach(element => {
 
 
 /* =====================================================
+   FAQ
+===================================================== */
+
+const faqQuestions =
+    document.querySelectorAll(".faq-question");
+
+
+faqQuestions.forEach(question => {
+
+    question.addEventListener("click", () => {
+
+        const currentItem =
+            question.closest(".faq-item");
+
+
+        document
+            .querySelectorAll(".faq-item")
+            .forEach(item => {
+
+                if (item !== currentItem) {
+
+                    item.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+
+        currentItem.classList.toggle(
+            "active"
+        );
+
+    });
+
+});
+
+
+/* =====================================================
    PROJECT DATA
 ===================================================== */
 
-const projects = {
+const projectData = {
+
 
     ai: {
 
-        category: "ARTIFICIAL INTELLIGENCE",
+        category:
+            "ARTIFICIAL INTELLIGENCE",
 
-        title: "AI Research",
+        title:
+            "AI Research",
 
         description:
-            "Eksplorasi Machine Learning dan Artificial Intelligence untuk menyelesaikan permasalahan dunia nyata.",
+            "Eksplorasi Artificial Intelligence dan Machine Learning untuk menyelesaikan permasalahan dunia nyata.",
 
         details:
-            "Project ini menjadi bagian dari eksplorasi saya dalam memahami bagaimana data dapat diproses menjadi model machine learning yang mampu melakukan klasifikasi, prediksi, atau analisis. Fokus pengembangan meliputi preprocessing data, training model, evaluasi, dan eksperimen terhadap berbagai pendekatan.",
+            "Project ini berfokus pada eksplorasi proses machine learning mulai dari data preprocessing, eksplorasi dataset, training model, evaluasi performa, sampai analisis hasil. Tujuan utamanya adalah memahami bagaimana model AI dapat diterapkan untuk persoalan nyata.",
 
         technologies: [
             "Python",
             "Machine Learning",
             "Artificial Intelligence",
-            "Data Processing"
+            "Pandas",
+            "NumPy"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
 
     web: {
 
-        category: "WEB DEVELOPMENT",
+        category:
+            "WEB DEVELOPMENT",
 
-        title: "Digital Village",
+        title:
+            "Digital Village",
 
         description:
-            "Website informasi desa dengan pendekatan modern, responsive, dan mudah digunakan.",
+            "Website informasi desa dengan desain modern, responsive, dan mudah digunakan masyarakat.",
 
         details:
-            "Project ini dikembangkan sebagai platform informasi digital untuk membantu masyarakat mendapatkan informasi mengenai desa. Konsep desain dibuat modern dengan fokus pada struktur informasi, responsive design, navigasi, dan pengalaman pengguna.",
+            "Project ini dibuat sebagai website informasi desa yang menampilkan berbagai informasi publik menggunakan pendekatan desain modern. Website menggunakan HTML, CSS, dan JavaScript serta dirancang agar tetap nyaman digunakan pada desktop maupun smartphone.",
 
         technologies: [
             "HTML",
             "CSS",
             "JavaScript",
-            "Responsive Design"
+            "Responsive Design",
+            "GitHub Pages"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
 
     data: {
 
-        category: "DATA SCIENCE",
+        category:
+            "DATA SCIENCE",
 
-        title: "Data Analytics",
+        title:
+            "Data Analytics",
 
         description:
-            "Eksplorasi pengolahan data untuk menghasilkan insight melalui analisis dan visualisasi.",
+            "Eksplorasi data untuk menemukan pola, insight, dan informasi yang dapat digunakan sebagai dasar pengambilan keputusan.",
 
         details:
-            "Project ini berfokus pada proses pengolahan data mulai dari data cleaning, exploratory data analysis, identifikasi pola, hingga visualisasi. Tujuannya adalah mengubah data mentah menjadi informasi yang lebih mudah dipahami dan digunakan untuk pengambilan keputusan.",
+            "Project ini mencakup proses data cleaning, exploratory data analysis, transformasi data, visualisasi, dan interpretasi hasil. Fokusnya adalah mengubah data mentah menjadi informasi yang lebih mudah dipahami.",
 
         technologies: [
             "Python",
@@ -199,32 +267,38 @@ const projects = {
             "Data Visualization"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
 
     trading: {
 
-        category: "ALGORITHMIC TRADING",
+        category:
+            "ALGORITHMIC TRADING",
 
-        title: "XAUUSD Trading EA",
+        title:
+            "XAUUSD Trading EA",
 
         description:
             "Eksperimen Expert Advisor untuk XAUUSD menggunakan MQL5 dan MetaTrader 5.",
 
         details:
-            "Project ini merupakan eksperimen pengembangan Expert Advisor pada MetaTrader 5. Sistem dirancang untuk menguji strategi trading secara sistematis melalui indikator, risk management, spread filter, position management, serta backtesting. Hasil pengujian harus tetap divalidasi melalui data out-of-sample dan akun demo sebelum digunakan pada kondisi nyata.",
+            "Project ini merupakan eksperimen algorithmic trading yang mencakup pembuatan entry signal, Stop Loss, Take Profit, spread filter, risk management, pembatasan posisi, dan backtesting. Strategi tetap perlu melalui pengujian out-of-sample dan demo sebelum penggunaan nyata.",
 
         technologies: [
             "MQL5",
             "MetaTrader 5",
             "XAUUSD",
-            "Algorithmic Trading",
+            "EMA",
+            "RSI",
+            "ATR",
             "Backtesting"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     }
 
@@ -232,169 +306,229 @@ const projects = {
 
 
 /* =====================================================
-   PROJECT MODAL
+   MODAL ELEMENTS
 ===================================================== */
 
-const projectCards = document.querySelectorAll(".project-card");
+const projectModal =
+    document.getElementById("projectModal");
 
-const projectModal = document.getElementById("projectModal");
+const modalOverlay =
+    document.getElementById("modalOverlay");
 
-const modalOverlay = document.getElementById("modalOverlay");
+const modalClose =
+    document.getElementById("modalClose");
 
-const modalClose = document.getElementById("modalClose");
+const modalCategory =
+    document.getElementById("modalCategory");
 
-const modalCategory = document.getElementById("modalCategory");
+const modalTitle =
+    document.getElementById("modalTitle");
 
-const modalTitle = document.getElementById("modalTitle");
+const modalDescription =
+    document.getElementById("modalDescription");
 
-const modalDescription = document.getElementById("modalDescription");
+const modalDetails =
+    document.getElementById("modalDetails");
 
-const modalDetails = document.getElementById("modalDetails");
+const modalTags =
+    document.getElementById("modalTags");
 
-const modalTags = document.getElementById("modalTags");
+const modalProjectLink =
+    document.getElementById("modalProjectLink");
 
-const modalProjectLink = document.getElementById("modalProjectLink");
 
+/* =====================================================
+   OPEN PROJECT
+===================================================== */
 
-function openProject(projectKey) {
+function openProject(projectId) {
 
-    const project = projects[projectKey];
+    const project =
+        projectData[projectId];
+
 
     if (!project) {
         return;
     }
 
 
-    modalCategory.textContent = project.category;
-
-    modalTitle.textContent = project.title;
-
-    modalDescription.textContent = project.description;
-
-    modalDetails.textContent = project.details;
+    modalCategory.textContent =
+        project.category;
 
 
-    modalTags.innerHTML = "";
+    modalTitle.textContent =
+        project.title;
 
 
-    project.technologies.forEach(technology => {
-
-        const tag = document.createElement("span");
-
-        tag.textContent = technology;
-
-        modalTags.appendChild(tag);
-
-    });
+    modalDescription.textContent =
+        project.description;
 
 
-    modalProjectLink.href = project.link;
+    modalDetails.textContent =
+        project.details;
 
 
-    /*
-       Kalau link project masih "#",
-       tombol dibuat tidak aktif.
-    */
+    modalTags.innerHTML =
+        "";
+
+
+    project.technologies.forEach(
+        technology => {
+
+            const tag =
+                document.createElement("span");
+
+            tag.textContent =
+                technology;
+
+            modalTags.appendChild(
+                tag
+            );
+
+        }
+    );
+
+
+    modalProjectLink.href =
+        project.link;
+
 
     if (project.link === "#") {
 
-        modalProjectLink.style.display = "none";
+        modalProjectLink.style.display =
+            "none";
 
     } else {
 
-        modalProjectLink.style.display = "inline-flex";
+        modalProjectLink.style.display =
+            "inline-flex";
 
     }
 
 
-    projectModal.classList.add("active");
+    projectModal.classList.add(
+        "active"
+    );
 
-    projectModal.setAttribute("aria-hidden", "false");
 
-    document.body.classList.add("modal-open");
+    projectModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
 
 }
 
+
+/* =====================================================
+   CLOSE PROJECT
+===================================================== */
 
 function closeProject() {
 
-    projectModal.classList.remove("active");
+    projectModal.classList.remove(
+        "active"
+    );
 
-    projectModal.setAttribute("aria-hidden", "true");
 
-    document.body.classList.remove("modal-open");
+    projectModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
 
 }
 
 
 /* =====================================================
-   CLICK PROJECT
+   PROJECT CLICK
 ===================================================== */
+
+const projectCards =
+    document.querySelectorAll(
+        ".project-card"
+    );
+
 
 projectCards.forEach(card => {
 
-    card.addEventListener("click", () => {
+    card.addEventListener(
+        "click",
+        () => {
 
-        const projectKey = card.dataset.project;
+            openProject(
+                card.dataset.project
+            );
 
-        openProject(projectKey);
-
-    });
-
-});
-
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
-
-modalClose.addEventListener("click", closeProject);
-
-modalOverlay.addEventListener("click", closeProject);
+        }
+    );
 
 
-/* =====================================================
-   ESC KEY
-===================================================== */
+    card.addEventListener(
+        "keydown",
+        event => {
 
-document.addEventListener("keydown", event => {
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
 
-    if (event.key === "Escape") {
+                event.preventDefault();
 
-        closeProject();
-
-    }
-
-});
-
-
-/* =====================================================
-   FAQ
-===================================================== */
-
-const faqQuestions = document.querySelectorAll(".faq-question");
-
-
-faqQuestions.forEach(question => {
-
-    question.addEventListener("click", () => {
-
-        const currentItem = question.parentElement;
-
-
-        document.querySelectorAll(".faq-item").forEach(item => {
-
-            if (item !== currentItem) {
-
-                item.classList.remove("active");
+                openProject(
+                    card.dataset.project
+                );
 
             }
 
-        });
-
-
-        currentItem.classList.toggle("active");
-
-    });
+        }
+    );
 
 });
+
+
+/* =====================================================
+   MODAL CLOSE
+===================================================== */
+
+modalClose.addEventListener(
+    "click",
+    closeProject
+);
+
+
+modalOverlay.addEventListener(
+    "click",
+    closeProject
+);
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            projectModal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeProject();
+
+        }
+
+    }
+);
