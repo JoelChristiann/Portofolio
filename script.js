@@ -1,810 +1,733 @@
 /* =====================================================
-   NAVBAR
+   DOM READY
 ===================================================== */
 
-const navbar =
-    document.getElementById("navbar");
+document.addEventListener("DOMContentLoaded", () => {
 
 
-window.addEventListener("scroll", () => {
+    /* =================================================
+       YEAR
+    ================================================== */
 
-    if (window.scrollY > 40) {
+    const yearElement =
+        document.getElementById("year");
 
-        navbar.classList.add("scrolled");
+    if (yearElement) {
 
-    } else {
-
-        navbar.classList.remove("scrolled");
+        yearElement.textContent =
+            new Date().getFullYear();
 
     }
 
-});
 
 
+    /* =================================================
+       NAVBAR SCROLL
+    ================================================== */
 
-/* =====================================================
-   MOBILE MENU
-===================================================== */
+    const navbar =
+        document.querySelector(".navbar");
 
-const menuToggle =
-    document.getElementById("menuToggle");
+    function updateNavbar() {
 
-const mobileNav =
-    document.getElementById("mobileNav");
+        if (window.scrollY > 30) {
 
-
-menuToggle.addEventListener("click", () => {
-
-    mobileNav.classList.toggle("active");
-
-});
-
-
-mobileNav
-    .querySelectorAll("a")
-    .forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            mobileNav.classList.remove("active");
-
-        });
-
-    });
-
-
-
-/* =====================================================
-   TYPING TITLE
-===================================================== */
-
-const typingTitles =
-    document.querySelectorAll(".typing-title");
-
-
-function typeElement(element) {
-
-    if (
-        element.dataset.typed === "true"
-    ) {
-        return;
-    }
-
-
-    const text =
-        element.dataset.text || "";
-
-
-    element.dataset.typed =
-        "true";
-
-
-    element.classList.add(
-        "typing-active"
-    );
-
-
-    element.textContent = "";
-
-
-    let index = 0;
-
-
-    const speed = 45;
-
-
-    function type() {
-
-        if (index < text.length) {
-
-            element.textContent +=
-                text.charAt(index);
-
-            index++;
-
-            setTimeout(
-                type,
-                speed
-            );
+            navbar.classList.add("scrolled");
 
         } else {
 
-            setTimeout(() => {
-
-                element.classList.remove(
-                    "typing-active"
-                );
-
-            }, 500);
+            navbar.classList.remove("scrolled");
 
         }
 
     }
 
-
-    type();
-
-}
-
-
-/* =====================================================
-   INTERSECTION OBSERVER
-===================================================== */
-
-const typingObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    typeElement(
-                        entry.target
-                    );
-
-                    typingObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .25
-        }
+    window.addEventListener(
+        "scroll",
+        updateNavbar,
+        { passive: true }
     );
 
-
-typingTitles.forEach(element => {
-
-    typingObserver.observe(
-        element
-    );
-
-});
+    updateNavbar();
 
 
 
-/* =====================================================
-   FAQ
-===================================================== */
+    /* =================================================
+       MOBILE MENU
+    ================================================== */
 
-const faqItems =
-    document.querySelectorAll(
-        ".faq-item"
-    );
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const mobileNav =
+        document.getElementById("mobileNav");
 
 
-faqItems.forEach(item => {
+    if (menuToggle && mobileNav) {
 
-    const question =
-        item.querySelector(
-            ".faq-question"
+        menuToggle.addEventListener(
+            "click",
+            () => {
+
+                mobileNav.classList.toggle(
+                    "active"
+                );
+
+            }
         );
 
 
-    question.addEventListener(
-        "click",
-        () => {
+        mobileNav
+            .querySelectorAll("a")
+            .forEach(link => {
 
-            const isActive =
-                item.classList.contains(
-                    "active"
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        mobileNav.classList.remove(
+                            "active"
+                        );
+
+                    }
                 );
-
-
-            faqItems.forEach(otherItem => {
-
-                otherItem.classList.remove(
-                    "active"
-                );
-
-
-                const answer =
-                    otherItem.querySelector(
-                        ".faq-answer"
-                    );
-
-
-                answer.style.maxHeight =
-                    null;
 
             });
 
-
-            if (!isActive) {
-
-                item.classList.add(
-                    "active"
-                );
+    }
 
 
-                const answer =
-                    item.querySelector(
-                        ".faq-answer"
+
+    /* =================================================
+       TYPING EFFECT
+    ================================================== */
+
+    const typingElements =
+        document.querySelectorAll(
+            ".typing-title"
+        );
+
+
+    const typingObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+
+                    const element =
+                        entry.target;
+
+
+                    if (
+                        element.dataset.typed === "true"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    element.dataset.typed =
+                        "true";
+
+
+                    const text =
+                        element.dataset.text || "";
+
+
+                    element.textContent =
+                        "";
+
+
+                    element.classList.add(
+                        "typing-active"
                     );
 
 
-                answer.style.maxHeight =
-                    answer.scrollHeight + "px";
+                    let index = 0;
 
+
+                    function type() {
+
+                        if (index < text.length) {
+
+                            element.textContent +=
+                                text.charAt(index);
+
+                            index++;
+
+                            setTimeout(
+                                type,
+                                35
+                            );
+
+                        } else {
+
+                            element.classList.remove(
+                                "typing-active"
+                            );
+
+                        }
+
+                    }
+
+
+                    type();
+
+                    typingObserver.unobserve(
+                        element
+                    );
+
+                });
+
+            },
+            {
+                threshold: 0.25
             }
+        );
+
+
+    typingElements.forEach(
+        element => {
+
+            typingObserver.observe(
+                element
+            );
 
         }
     );
 
-});
 
 
+    /* =================================================
+       FAQ
+    ================================================== */
 
-/* =====================================================
-   PROJECT DATA
-===================================================== */
+    const faqItems =
+        document.querySelectorAll(
+            ".faq-item"
+        );
 
-const projects = {
 
+    faqItems.forEach(item => {
 
-    ai: {
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
 
-        number:
-            "01",
-
-        category:
-            "ARTIFICIAL INTELLIGENCE",
-
-        title:
-            "AI Research",
-
-        description:
-            "Eksplorasi Machine Learning dan Artificial Intelligence untuk menyelesaikan permasalahan dunia nyata melalui pendekatan berbasis data.",
-
-        tags: [
-            "Python",
-            "Machine Learning",
-            "AI"
-        ],
-
-        status:
-            "In Progress",
-
-        github:
-            "#",
-
-        demo:
-            "#"
-
-    },
-
-
-    village: {
-
-        number:
-            "02",
-
-        category:
-            "WEB DEVELOPMENT",
-
-        title:
-            "Digital Village",
-
-        description:
-            "Website informasi desa dengan pendekatan modern, responsive, dan interaktif untuk membantu masyarakat mendapatkan informasi secara lebih mudah.",
-
-        tags: [
-            "HTML",
-            "CSS",
-            "JavaScript"
-        ],
-
-        status:
-            "Completed",
-
-        github:
-            "#",
-
-        demo:
-            "#"
-
-    },
-
-
-    data: {
-
-        number:
-            "03",
-
-        category:
-            "DATA SCIENCE",
-
-        title:
-            "Data Analytics",
-
-        description:
-            "Eksplorasi data menggunakan proses cleaning, analysis, visualization, dan statistical thinking untuk menghasilkan insight yang dapat digunakan.",
-
-        tags: [
-            "Python",
-            "Pandas",
-            "NumPy",
-            "SQL"
-        ],
-
-        status:
-            "In Progress",
-
-        github:
-            "#",
-
-        demo:
-            "#"
-
-    },
-
-
-    trading: {
-
-        number:
-            "04",
-
-        category:
-            "ALGORITHMIC TRADING",
-
-        title:
-            "XAUUSD Trading EA",
-
-        description:
-            "Eksperimen Expert Advisor untuk MetaTrader 5 menggunakan MQL5 dengan pendekatan pengujian strategi, risk management, dan evaluasi performa.",
-
-        tags: [
-            "MQL5",
-            "MT5",
-            "Trading"
-        ],
-
-        status:
-            "Experimental",
-
-        github:
-            "#",
-
-        demo:
-            "#"
-
-    }
-
-};
-
-
-
-/* =====================================================
-   PROJECT MODAL ELEMENTS
-===================================================== */
-
-const projectModal =
-    document.getElementById(
-        "projectModal"
-    );
-
-
-const projectModalClose =
-    document.getElementById(
-        "projectModalClose"
-    );
-
-
-const projectModalOverlay =
-    document.querySelector(
-        ".project-modal-overlay"
-    );
-
-
-const modalNumber =
-    document.getElementById(
-        "modalNumber"
-    );
-
-
-const modalCategory =
-    document.getElementById(
-        "modalCategory"
-    );
-
-
-const modalTitle =
-    document.getElementById(
-        "modalTitle"
-    );
-
-
-const modalDescription =
-    document.getElementById(
-        "modalDescription"
-    );
-
-
-const modalTags =
-    document.getElementById(
-        "modalTags"
-    );
-
-
-const modalStatus =
-    document.getElementById(
-        "modalStatus"
-    );
-
-
-const modalGithub =
-    document.getElementById(
-        "modalGithub"
-    );
-
-
-const modalDemo =
-    document.getElementById(
-        "modalDemo"
-    );
-
-
-
-/* =====================================================
-   OPEN PROJECT
-===================================================== */
-
-function openProject(projectId) {
-
-
-    const project =
-        projects[projectId];
-
-
-    if (!project) {
-
-        return;
-
-    }
-
-
-    modalNumber.textContent =
-        project.number;
-
-
-    modalCategory.textContent =
-        project.category;
-
-
-    modalTitle.textContent =
-        project.title;
-
-
-    modalDescription.textContent =
-        project.description;
-
-
-    modalStatus.textContent =
-        project.status;
-
-
-    modalGithub.href =
-        project.github;
-
-
-    modalDemo.href =
-        project.demo;
-
-
-    modalTags.innerHTML =
-        "";
-
-
-    project.tags.forEach(tag => {
-
-
-        const tagElement =
-            document.createElement(
-                "span"
+        const answer =
+            item.querySelector(
+                ".faq-answer"
             );
 
 
-        tagElement.textContent =
-            tag;
+        question.addEventListener(
+            "click",
+            () => {
+
+                const isActive =
+                    item.classList.contains(
+                        "active"
+                    );
 
 
-        modalTags.appendChild(
-            tagElement
+                faqItems.forEach(
+                    otherItem => {
+
+                        otherItem.classList.remove(
+                            "active"
+                        );
+
+                        const otherAnswer =
+                            otherItem.querySelector(
+                                ".faq-answer"
+                            );
+
+                        otherAnswer.style.maxHeight =
+                            null;
+
+                    }
+                );
+
+
+                if (!isActive) {
+
+                    item.classList.add(
+                        "active"
+                    );
+
+                    answer.style.maxHeight =
+                        answer.scrollHeight + "px";
+
+                }
+
+            }
         );
-
 
     });
 
 
-    projectModal.classList.add(
-        "active"
-    );
+
+    /* =================================================
+       PROJECT DATA
+    ================================================== */
+
+    const projects = {
+
+        ai: {
+
+            number: "01",
+
+            category:
+                "ARTIFICIAL INTELLIGENCE",
+
+            title:
+                "AI Research",
+
+            imageText:
+                "AI",
+
+            description:
+                "Eksplorasi Artificial Intelligence dan Machine Learning untuk memahami bagaimana model berbasis data dapat digunakan untuk menyelesaikan permasalahan nyata.",
+
+            status:
+                "In Progress",
+
+            technology:
+                "Python · Machine Learning · AI",
+
+            tags: [
+                "Python",
+                "Machine Learning",
+                "Artificial Intelligence",
+                "Data"
+            ],
+
+            demo:
+                "#",
+
+            github:
+                "#"
+
+        },
 
 
-    projectModal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+        village: {
+
+            number: "02",
+
+            category:
+                "WEB DEVELOPMENT",
+
+            title:
+                "Digital Village",
+
+            imageText:
+                "WEB",
+
+            description:
+                "Website informasi desa dengan pendekatan modern, responsive, dan mudah digunakan untuk membantu masyarakat memperoleh informasi serta layanan desa.",
+
+            status:
+                "Completed",
+
+            technology:
+                "HTML · CSS · JavaScript",
+
+            tags: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Responsive Web"
+            ],
+
+            demo:
+                "#",
+
+            github:
+                "#"
+
+        },
 
 
-    document.body.classList.add(
-        "modal-open"
-    );
+        data: {
+
+            number: "03",
+
+            category:
+                "DATA SCIENCE",
+
+            title:
+                "Data Analytics",
+
+            imageText:
+                "DATA",
+
+            description:
+                "Proyek pengolahan data untuk melakukan data cleaning, exploratory analysis, visualisasi, dan menemukan insight yang dapat digunakan untuk pengambilan keputusan.",
+
+            status:
+                "In Progress",
+
+            technology:
+                "Python · Pandas · NumPy · SQL",
+
+            tags: [
+                "Python",
+                "Pandas",
+                "NumPy",
+                "SQL",
+                "Visualization"
+            ],
+
+            demo:
+                "#",
+
+            github:
+                "#"
+
+        },
 
 
-}
+        trading: {
+
+            number: "04",
+
+            category:
+                "ALGORITHMIC TRADING",
+
+            title:
+                "XAUUSD Trading EA",
+
+            imageText:
+                "EA",
+
+            description:
+                "Eksperimen Expert Advisor pada MetaTrader 5 menggunakan MQL5 untuk menguji strategi trading XAUUSD secara sistematis melalui backtest dan optimasi parameter.",
+
+            status:
+                "Testing",
+
+            technology:
+                "MQL5 · MetaTrader 5",
+
+            tags: [
+                "MQL5",
+                "MT5",
+                "XAUUSD",
+                "Algorithmic Trading"
+            ],
+
+            demo:
+                "#",
+
+            github:
+                "#"
+
+        }
+
+    };
 
 
 
-/* =====================================================
-   CLOSE PROJECT
-===================================================== */
+    /* =================================================
+       MODAL ELEMENTS
+    ================================================== */
 
-function closeProject() {
+    const modal =
+        document.getElementById(
+            "projectModal"
+        );
+
+    const modalOverlay =
+        document.getElementById(
+            "modalOverlay"
+        );
+
+    const modalClose =
+        document.getElementById(
+            "modalClose"
+        );
+
+    const modalNumber =
+        document.getElementById(
+            "modalNumber"
+        );
+
+    const modalCategory =
+        document.getElementById(
+            "modalCategory"
+        );
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+    const modalDescription =
+        document.getElementById(
+            "modalDescription"
+        );
+
+    const modalStatus =
+        document.getElementById(
+            "modalStatus"
+        );
+
+    const modalTech =
+        document.getElementById(
+            "modalTech"
+        );
+
+    const modalTags =
+        document.getElementById(
+            "modalTags"
+        );
+
+    const modalDemo =
+        document.getElementById(
+            "modalDemo"
+        );
+
+    const modalGithub =
+        document.getElementById(
+            "modalGithub"
+        );
+
+    const modalImageText =
+        document.getElementById(
+            "modalImageText"
+        );
 
 
-    projectModal.classList.remove(
-        "active"
-    );
+
+    /* =================================================
+       OPEN PROJECT
+    ================================================== */
+
+    const projectCards =
+        document.querySelectorAll(
+            ".project-card"
+        );
 
 
-    projectModal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+    function openProject(projectId) {
+
+        const project =
+            projects[projectId];
 
 
-    document.body.classList.remove(
-        "modal-open"
-    );
+        if (!project) {
 
-
-}
-
-
-
-/* =====================================================
-   PROJECT CARD CLICK
-===================================================== */
-
-const projectCards =
-    document.querySelectorAll(
-        ".project-card"
-    );
-
-
-projectCards.forEach(card => {
-
-
-    card.addEventListener(
-        "click",
-        event => {
-
-
-            /*
-             Jika suatu saat card
-             memiliki link internal,
-             jangan buka modal ketika
-             link tersebut diklik.
-            */
-
-            if (
-                event.target.closest("a")
-            ) {
-
-                return;
-
-            }
-
-
-            const projectId =
-                card.dataset.project;
-
-
-            openProject(
+            console.warn(
+                "Project tidak ditemukan:",
                 projectId
             );
 
-
-        }
-    );
-
-
-});
-
-
-
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
-
-projectModalClose.addEventListener(
-    "click",
-    closeProject
-);
-
-
-
-/* =====================================================
-   CLOSE CLICK OUTSIDE
-===================================================== */
-
-projectModalOverlay.addEventListener(
-    "click",
-    closeProject
-);
-
-
-
-/* =====================================================
-   CLOSE WITH ESC
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-
-        if (
-            event.key === "Escape" &&
-            projectModal.classList.contains(
-                "active"
-            )
-        ) {
-
-            closeProject();
+            return;
 
         }
 
-    }
-);
+
+        modalNumber.textContent =
+            project.number;
 
 
-
-/* =====================================================
-   YEAR
-===================================================== */
-
-const year =
-    document.getElementById(
-        "year"
-    );
+        modalCategory.textContent =
+            project.category;
 
 
-year.textContent =
-    new Date().getFullYear();
+        modalTitle.textContent =
+            project.title;
 
 
-
-/* =====================================================
-   HERO VISUAL PARALLAX
-===================================================== */
-
-const heroVisual =
-    document.querySelector(
-        ".hero-visual"
-    );
+        modalDescription.textContent =
+            project.description;
 
 
-if (heroVisual) {
+        modalStatus.textContent =
+            project.status;
 
 
-    heroVisual.addEventListener(
-        "mousemove",
-        event => {
+        modalTech.textContent =
+            project.technology;
 
 
-            const rect =
-                heroVisual.getBoundingClientRect();
+        modalImageText.textContent =
+            project.imageText;
 
 
-            const x =
-                event.clientX -
-                rect.left;
+        /* TAGS */
+
+        modalTags.innerHTML =
+            "";
 
 
-            const y =
-                event.clientY -
-                rect.top;
+        project.tags.forEach(
+            tag => {
 
-
-            const rotateX =
-                ((y / rect.height) - .5)
-                * -4;
-
-
-            const rotateY =
-                ((x / rect.width) - .5)
-                * 4;
-
-
-            heroVisual.style.transform =
-                `perspective(1000px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)`;
-
-
-        }
-    );
-
-
-    heroVisual.addEventListener(
-        "mouseleave",
-        () => {
-
-
-            heroVisual.style.transform =
-                "perspective(1000px) rotateX(0deg) rotateY(0deg)";
-
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   SMOOTH ANCHOR
-===================================================== */
-
-document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
-    .forEach(link => {
-
-
-        link.addEventListener(
-            "click",
-            event => {
-
-
-                const targetId =
-                    link.getAttribute(
-                        "href"
+                const element =
+                    document.createElement(
+                        "span"
                     );
 
+                element.textContent =
+                    tag;
 
-                if (
-                    targetId === "#"
-                ) {
-
-                    return;
-
-                }
-
-
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-
-                if (!target) {
-
-                    return;
-
-                }
-
-
-                event.preventDefault();
-
-
-                target.scrollIntoView({
-                    behavior: "smooth"
-                });
-
+                modalTags.appendChild(
+                    element
+                );
 
             }
         );
 
 
-    });
+        /* LINKS */
+
+        modalDemo.href =
+            project.demo;
+
+
+        modalGithub.href =
+            project.github;
+
+
+        /* OPEN */
+
+        modal.classList.add(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "modal-open"
+        );
+
+    }
+
+
+
+    /* =================================================
+       PROJECT CARD CLICK
+    ================================================== */
+
+    projectCards.forEach(
+        card => {
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    const projectId =
+                        card.dataset.project;
+
+                    openProject(
+                        projectId
+                    );
+
+                }
+            );
+
+
+            /* Keyboard */
+
+            card.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        const projectId =
+                            card.dataset.project;
+
+                        openProject(
+                            projectId
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* =================================================
+       CLOSE MODAL
+    ================================================== */
+
+    function closeModal() {
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+    }
+
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modalOverlay.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+
+    /* =================================================
+       ESCAPE
+    ================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                modal.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+});
