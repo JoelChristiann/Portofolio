@@ -2,22 +2,29 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
         content="Joel Christian — AI, Machine Learning, Computer Vision, Data Science & Web Development."
     >
 
-    <meta name="theme-color" content="#0a0f0c">
+    <meta
+        name="author"
+        content="Joel Christian"
+    >
 
     <title>Joel Christian — AI & Technology</title>
 
 
     <!-- =====================================================
-         FONT
+         GOOGLE FONTS
     ====================================================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,6 +64,9 @@
 
     <div class="nav-inner">
 
+
+        <!-- LOGO -->
+
         <a
             href="#beranda"
             class="brand"
@@ -64,6 +74,8 @@
             Joel.
         </a>
 
+
+        <!-- DESKTOP NAVIGATION -->
 
         <nav class="nav-links">
 
@@ -86,19 +98,30 @@
         </nav>
 
 
+        <!-- CTA -->
+
         <a
             href="#kontak"
             class="nav-cta"
         >
+
             Let's talk
-            <span>↗</span>
+
+            <span>
+                ↗
+            </span>
+
         </a>
 
+
+        <!-- MOBILE MENU -->
 
         <button
             class="menu-toggle"
             id="menuToggle"
-            aria-label="Menu"
+            aria-label="Open menu"
+            aria-expanded="false"
+            type="button"
         >
 
             <span></span>
@@ -108,6 +131,8 @@
 
     </div>
 
+
+    <!-- MOBILE NAV -->
 
     <div
         class="mobile-nav"
@@ -135,6 +160,10 @@
 </header>
 
 
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
@@ -164,7 +193,9 @@
         </div>
 
 
-        <h1 class="hero-title reveal-title">
+        <!-- HERO TITLE -->
+
+        <h1 class="hero-title">
 
             I turn ideas into
 
@@ -217,25 +248,25 @@
 
             <!-- ORBIT -->
 
-            <div class="planet-system">
+            <div class="hero-orbit orbit-a"></div>
 
-                <div class="planet-orbit orbit-a"></div>
+            <div class="hero-orbit orbit-b"></div>
 
-                <div class="planet-orbit orbit-b"></div>
-
-                <div class="planet-orbit orbit-c"></div>
+            <div class="hero-orbit orbit-c"></div>
 
 
-                <div class="hero-center">
+            <!-- CENTER JC -->
 
-                    <span>
-                        JC
-                    </span>
+            <div class="hero-center">
 
-                </div>
+                <span>
+                    JC
+                </span>
 
             </div>
 
+
+            <!-- FLOATING LABEL -->
 
             <div class="floating-label label-ai">
                 AI
@@ -437,14 +468,13 @@
 
             <p>
 
-                Klik project untuk melihat
-                detail pekerjaan, teknologi,
-                dan link project.
+                Proyek bukan hanya hasil akhir,
+                tetapi cara saya menguji kemampuan
+                dan memahami teknologi.
 
             </p>
 
         </div>
-
 
 
         <!-- =================================================
@@ -454,12 +484,16 @@
         <div class="project-grid">
 
 
-            <!-- PROJECT 01 -->
+            <!-- =================================================
+                 PROJECT 01
+            ================================================== -->
 
             <article
                 class="project-card"
                 data-project="ai"
                 tabindex="0"
+                role="button"
+                aria-label="Open AI Research project"
             >
 
                 <div class="project-number">
@@ -493,9 +527,11 @@
                         ARTIFICIAL INTELLIGENCE
                     </small>
 
+
                     <h3>
                         AI Research
                     </h3>
+
 
                     <p>
 
@@ -522,18 +558,27 @@
 
                     </div>
 
+
+                    <div class="project-open">
+                        View project ↗
+                    </div>
+
                 </div>
 
             </article>
 
 
 
-            <!-- PROJECT 02 -->
+            <!-- =================================================
+                 PROJECT 02
+            ================================================== -->
 
             <article
                 class="project-card"
-                data-project="village"
+                data-project="desa"
                 tabindex="0"
+                role="button"
+                aria-label="Open Digital Village project"
             >
 
                 <div class="project-number">
@@ -544,6 +589,7 @@
                 <div class="project-image project-web">
 
                     <div class="mock-browser">
+
 
                         <div class="browser-header">
 
@@ -573,9 +619,11 @@
                         WEB DEVELOPMENT
                     </small>
 
+
                     <h3>
                         Digital Village
                     </h3>
+
 
                     <p>
 
@@ -601,18 +649,27 @@
 
                     </div>
 
+
+                    <div class="project-open">
+                        View project ↗
+                    </div>
+
                 </div>
 
             </article>
 
 
 
-            <!-- PROJECT 03 -->
+            <!-- =================================================
+                 PROJECT 03
+            ================================================== -->
 
             <article
                 class="project-card"
                 data-project="data"
                 tabindex="0"
+                role="button"
+                aria-label="Open Data Analytics project"
             >
 
                 <div class="project-number">
@@ -642,9 +699,11 @@
                         DATA SCIENCE
                     </small>
 
+
                     <h3>
                         Data Analytics
                     </h3>
+
 
                     <p>
 
@@ -670,18 +729,27 @@
 
                     </div>
 
+
+                    <div class="project-open">
+                        View project ↗
+                    </div>
+
                 </div>
 
             </article>
 
 
 
-            <!-- PROJECT 04 -->
+            <!-- =================================================
+                 PROJECT 04
+            ================================================== -->
 
             <article
                 class="project-card"
                 data-project="trading"
                 tabindex="0"
+                role="button"
+                aria-label="Open XAUUSD Trading EA project"
             >
 
                 <div class="project-number">
@@ -691,9 +759,11 @@
 
                 <div class="project-image project-trading">
 
+
                     <svg
                         viewBox="0 0 500 220"
                         preserveAspectRatio="none"
+                        aria-hidden="true"
                     >
 
                         <polyline
@@ -726,9 +796,11 @@
                         ALGORITHMIC TRADING
                     </small>
 
+
                     <h3>
                         XAUUSD Trading EA
                     </h3>
+
 
                     <p>
 
@@ -755,6 +827,11 @@
 
                     </div>
 
+
+                    <div class="project-open">
+                        View project ↗
+                    </div>
+
                 </div>
 
             </article>
@@ -765,6 +842,147 @@
     </div>
 
 </section>
+
+
+
+<!-- =====================================================
+     PROJECT MODAL
+===================================================== -->
+
+<div
+    class="project-modal"
+    id="projectModal"
+    aria-hidden="true"
+>
+
+
+    <!-- OVERLAY -->
+
+    <div
+        class="project-modal-overlay"
+        id="projectModalOverlay"
+    ></div>
+
+
+    <!-- MODAL -->
+
+    <div
+        class="project-modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+    >
+
+
+        <!-- CLOSE -->
+
+        <button
+            type="button"
+            class="project-modal-close"
+            id="projectModalClose"
+            aria-label="Close project"
+        >
+            ×
+        </button>
+
+
+        <!-- NUMBER -->
+
+        <div
+            class="project-modal-number"
+            id="modalNumber"
+        >
+            01
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <small id="modalCategory">
+            ARTIFICIAL INTELLIGENCE
+        </small>
+
+
+        <!-- TITLE -->
+
+        <h2 id="modalTitle">
+            AI Research
+        </h2>
+
+
+        <!-- DESCRIPTION -->
+
+        <p id="modalDescription">
+
+            Eksplorasi Machine Learning untuk
+            menyelesaikan permasalahan dunia nyata.
+
+        </p>
+
+
+        <!-- TAGS -->
+
+        <div
+            class="project-modal-tags"
+            id="modalTags"
+        ></div>
+
+
+        <!-- PROJECT INFO -->
+
+        <div class="project-modal-info">
+
+
+            <div>
+
+                <span>
+                    STATUS
+                </span>
+
+                <strong id="modalStatus">
+                    In Progress
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    TECHNOLOGY
+                </span>
+
+                <strong id="modalTechnology">
+                    Python · Machine Learning
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- PROJECT LINK -->
+
+        <a
+            href="#"
+            class="project-modal-button"
+            id="modalLink"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            View Project
+
+            <span>
+                ↗
+            </span>
+
+        </a>
+
+    </div>
+
+</div>
 
 
 
@@ -898,15 +1116,19 @@
         <div class="skills-cards">
 
 
+            <!-- AI -->
+
             <div class="skill-card">
 
                 <span class="skill-icon">
                     AI
                 </span>
 
+
                 <h3>
                     Artificial Intelligence
                 </h3>
+
 
                 <p>
 
@@ -914,6 +1136,7 @@
                     deep learning, dan model development.
 
                 </p>
+
 
                 <div class="skill-tags">
 
@@ -934,15 +1157,19 @@
             </div>
 
 
+            <!-- COMPUTER VISION -->
+
             <div class="skill-card">
 
                 <span class="skill-icon">
                     CV
                 </span>
 
+
                 <h3>
                     Computer Vision
                 </h3>
+
 
                 <p>
 
@@ -950,6 +1177,7 @@
                     object detection, dan visual analysis.
 
                 </p>
+
 
                 <div class="skill-tags">
 
@@ -970,15 +1198,19 @@
             </div>
 
 
+            <!-- DATA SCIENCE -->
+
             <div class="skill-card">
 
                 <span class="skill-icon">
                     DS
                 </span>
 
+
                 <h3>
                     Data Science
                 </h3>
+
 
                 <p>
 
@@ -986,6 +1218,7 @@
                     visualization, dan statistical thinking.
 
                 </p>
+
 
                 <div class="skill-tags">
 
@@ -1006,15 +1239,19 @@
             </div>
 
 
+            <!-- WEB -->
+
             <div class="skill-card">
 
                 <span class="skill-icon">
                     WEB
                 </span>
 
+
                 <h3>
                     Web Development
                 </h3>
+
 
                 <p>
 
@@ -1022,6 +1259,7 @@
                     responsive dan interactive.
 
                 </p>
+
 
                 <div class="skill-tags">
 
@@ -1060,6 +1298,7 @@
 
         <div class="metrics-heading">
 
+
             <div
                 class="section-label typing-title"
                 data-text="CURRENT JOURNEY"
@@ -1075,6 +1314,7 @@
 
 
         <div class="metrics-grid">
+
 
             <div>
 
@@ -1127,6 +1367,7 @@
 
             </div>
 
+
         </div>
 
     </div>
@@ -1152,10 +1393,12 @@
 
         <div class="faq-heading">
 
+
             <h2
                 class="large-title typing-title"
                 data-text="Got questions?"
             ></h2>
+
 
             <p>
                 Beberapa hal yang sedang saya eksplorasi.
@@ -1167,9 +1410,14 @@
         <div class="faq-list">
 
 
+            <!-- FAQ 01 -->
+
             <div class="faq-item">
 
-                <button class="faq-question">
+                <button
+                    type="button"
+                    class="faq-question"
+                >
 
                     Apa fokus utama saya?
 
@@ -1195,9 +1443,14 @@
             </div>
 
 
+            <!-- FAQ 02 -->
+
             <div class="faq-item">
 
-                <button class="faq-question">
+                <button
+                    type="button"
+                    class="faq-question"
+                >
 
                     Mengapa tertarik pada AI?
 
@@ -1223,9 +1476,14 @@
             </div>
 
 
+            <!-- FAQ 03 -->
+
             <div class="faq-item">
 
-                <button class="faq-question">
+                <button
+                    type="button"
+                    class="faq-question"
+                >
 
                     Apakah saya menerima kolaborasi?
 
@@ -1251,9 +1509,14 @@
             </div>
 
 
+            <!-- FAQ 04 -->
+
             <div class="faq-item">
 
-                <button class="faq-question">
+                <button
+                    type="button"
+                    class="faq-question"
+                >
 
                     Apa tujuan saya?
 
@@ -1277,6 +1540,7 @@
                 </div>
 
             </div>
+
 
         </div>
 
@@ -1322,6 +1586,8 @@
         </p>
 
 
+        <!-- EMAIL -->
+
         <a
             href="mailto:joelchristiann05@gmail.com"
             class="cta-button"
@@ -1340,7 +1606,6 @@
 </section>
 
 
-
 </main>
 
 
@@ -1354,7 +1619,10 @@
     <div class="container footer-main">
 
 
+        <!-- FOOTER BRAND -->
+
         <div class="footer-brand">
+
 
             <a
                 href="#beranda"
@@ -1374,23 +1642,29 @@
         </div>
 
 
+        <!-- NAVIGATION -->
+
         <div class="footer-column">
 
             <small>
                 NAVIGATION
             </small>
 
+
             <a href="#beranda">
                 Home
             </a>
+
 
             <a href="#tentang">
                 About
             </a>
 
+
             <a href="#proyek">
                 Projects
             </a>
+
 
             <a href="#keahlian">
                 Skills
@@ -1399,15 +1673,19 @@
         </div>
 
 
+        <!-- CONNECT -->
+
         <div class="footer-column">
 
             <small>
                 CONNECT
             </small>
 
+
             <a href="#kontak">
                 Contact
             </a>
+
 
             <a
                 href="https://github.com/"
@@ -1417,6 +1695,7 @@
                 GitHub
             </a>
 
+
             <a
                 href="#"
                 target="_blank"
@@ -1424,6 +1703,7 @@
             >
                 LinkedIn
             </a>
+
 
             <a
                 href="#"
@@ -1439,178 +1719,32 @@
     </div>
 
 
+    <!-- FOOTER BOTTOM -->
+
     <div class="container footer-bottom">
 
+
         <span>
-            © <span id="year"></span> Joel Christian.
+
+            ©
+
+            <span id="year">
+                2026
+            </span>
+
+            Joel Christian.
+
         </span>
+
 
         <span>
             Built with curiosity.
         </span>
 
+
     </div>
 
 </footer>
-
-
-
-<!-- =====================================================
-     PROJECT MODAL
-===================================================== -->
-
-<div
-    class="project-modal"
-    id="projectModal"
-    aria-hidden="true"
->
-
-
-    <div
-        class="project-modal-overlay"
-        id="modalOverlay"
-    ></div>
-
-
-    <div
-        class="project-modal-content"
-        role="dialog"
-        aria-modal="true"
-    >
-
-
-        <button
-            class="project-modal-close"
-            id="modalClose"
-            aria-label="Close project"
-        >
-            ×
-        </button>
-
-
-        <div
-            class="modal-image"
-            id="modalImage"
-        >
-
-            <div class="modal-image-placeholder">
-
-                <span id="modalImageText">
-                    PROJECT
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="modal-number"
-            id="modalNumber"
-        >
-            01
-        </div>
-
-
-        <div
-            class="modal-category"
-            id="modalCategory"
-        >
-            ARTIFICIAL INTELLIGENCE
-        </div>
-
-
-        <h2 id="modalTitle">
-            AI Research
-        </h2>
-
-
-        <p id="modalDescription">
-            Eksplorasi Machine Learning untuk
-            menyelesaikan permasalahan dunia nyata.
-        </p>
-
-
-        <div class="modal-info">
-
-
-            <div>
-
-                <span>
-                    STATUS
-                </span>
-
-                <strong id="modalStatus">
-                    In Progress
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    TECHNOLOGY
-                </span>
-
-                <strong id="modalTech">
-                    Python · Machine Learning
-                </strong>
-
-            </div>
-
-
-        </div>
-
-
-        <div
-            class="modal-tags"
-            id="modalTags"
-        ></div>
-
-
-        <div class="modal-actions">
-
-
-            <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="modal-button primary"
-                id="modalDemo"
-            >
-
-                View Project
-
-                <span>
-                    ↗
-                </span>
-
-            </a>
-
-
-            <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="modal-button secondary"
-                id="modalGithub"
-            >
-
-                GitHub
-
-                <span>
-                    ↗
-                </span>
-
-            </a>
-
-
-        </div>
-
-    </div>
-
-</div>
 
 
 
