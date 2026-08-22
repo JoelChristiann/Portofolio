@@ -731,3 +731,230 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
+
+const projectData = {
+
+    ai: {
+
+        number: "01",
+
+        category: "ARTIFICIAL INTELLIGENCE",
+
+        title: "AI Research",
+
+        description:
+            "Eksplorasi Machine Learning untuk menyelesaikan permasalahan dunia nyata. Proyek ini menjadi bagian dari proses saya memahami bagaimana model AI dapat digunakan untuk menganalisis data dan menghasilkan solusi.",
+
+        tags: [
+            "Python",
+            "Machine Learning",
+            "Artificial Intelligence"
+        ],
+
+        status: "In Progress",
+
+        technology:
+            "Python · ML · AI",
+
+        link: "#"
+
+    },
+
+
+    desa: {
+
+        number: "02",
+
+        category: "WEB DEVELOPMENT",
+
+        title: "Digital Village",
+
+        description:
+            "Website informasi desa yang dirancang dengan pendekatan modern, responsive, dan mudah digunakan masyarakat. Website ini dibuat untuk menyajikan informasi desa secara lebih terstruktur dan digital.",
+
+        tags: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Responsive Design"
+        ],
+
+        status: "Completed",
+
+        technology:
+            "HTML · CSS · JavaScript",
+
+        link: "#"
+
+    },
+
+
+    data: {
+
+        number: "03",
+
+        category: "DATA SCIENCE",
+
+        title: "Data Analytics",
+
+        description:
+            "Eksperimen pengolahan data untuk menemukan pola, insight, dan informasi yang dapat digunakan sebagai dasar pengambilan keputusan.",
+
+        tags: [
+            "Python",
+            "Pandas",
+            "NumPy",
+            "SQL"
+        ],
+
+        status: "In Progress",
+
+        technology:
+            "Python · Pandas · SQL",
+
+        link: "#"
+
+    },
+
+
+    trading: {
+
+        number: "04",
+
+        category: "ALGORITHMIC TRADING",
+
+        title: "XAUUSD Trading EA",
+
+        description:
+            "Eksperimen Expert Advisor untuk MetaTrader 5 menggunakan MQL5. Sistem dikembangkan untuk menguji strategi trading secara sistematis melalui backtest dan evaluasi performa.",
+
+        tags: [
+            "MQL5",
+            "MetaTrader 5",
+            "XAUUSD",
+            "Algorithmic Trading"
+        ],
+
+        status: "Experimental",
+
+        technology:
+            "MQL5 · MT5",
+
+        link: "#"
+
+    }
+
+};
+
+
+
+function openProject(projectName) {
+
+    const project = projectData[projectName];
+
+    if (!project) return;
+
+
+    document.getElementById("modalNumber").textContent =
+        project.number;
+
+
+    document.getElementById("modalCategory").textContent =
+        project.category;
+
+
+    document.getElementById("modalTitle").textContent =
+        project.title;
+
+
+    document.getElementById("modalDescription").textContent =
+        project.description;
+
+
+    document.getElementById("modalStatus").textContent =
+        project.status;
+
+
+    document.getElementById("modalTechnology").textContent =
+        project.technology;
+
+
+    document.getElementById("modalLink").href =
+        project.link;
+
+
+    const tagsContainer =
+        document.getElementById("modalTags");
+
+
+    tagsContainer.innerHTML = "";
+
+
+    project.tags.forEach(function(tag) {
+
+        const span =
+            document.createElement("span");
+
+        span.textContent = tag;
+
+        tagsContainer.appendChild(span);
+
+    });
+
+
+    const modal =
+        document.getElementById("projectModal");
+
+
+    modal.classList.add("active");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+
+function closeProject() {
+
+    const modal =
+        document.getElementById("projectModal");
+
+
+    modal.classList.remove("active");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.style.overflow = "";
+
+}
+
+
+
+/* ESC untuk menutup */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeProject();
+
+        }
+
+    }
+);
