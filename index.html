@@ -2,6 +2,7 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -14,9 +15,18 @@
         content="Joel Christian — AI, Machine Learning, Computer Vision, Data Science & Web Development."
     >
 
+    <meta
+        name="theme-color"
+        content="#0a0d0b"
+    >
+
     <title>Joel Christian — AI & Technology</title>
 
-    <!-- FONT -->
+
+    <!-- =========================
+         GOOGLE FONT
+    ========================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
@@ -30,10 +40,16 @@
         rel="stylesheet"
     >
 
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
     <link
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
 
 
@@ -44,9 +60,13 @@
      NAVBAR
 ===================================================== -->
 
-<header class="navbar">
+<header
+    class="navbar"
+    id="navbar"
+>
 
     <div class="nav-inner">
+
 
         <a
             href="#beranda"
@@ -81,22 +101,29 @@
             href="#kontak"
             class="nav-cta"
         >
+
             Let's talk
+
             <span>↗</span>
+
         </a>
 
 
         <button
             class="menu-toggle"
             id="menuToggle"
-            aria-label="Menu"
+            aria-label="Open menu"
         >
+
             <span></span>
             <span></span>
+
         </button>
 
     </div>
 
+
+    <!-- MOBILE NAV -->
 
     <div
         class="mobile-nav"
@@ -153,7 +180,7 @@
         </div>
 
 
-        <h1 class="hero-title">
+        <h1 class="hero-title reveal-title">
 
             I turn ideas into
 
@@ -197,13 +224,14 @@
 
         <!-- =================================================
              HERO VISUAL
-             JC PLANET ORBIT
         ================================================== -->
 
         <div class="hero-visual">
 
             <div class="hero-visual-grid"></div>
 
+
+            <!-- ORBIT -->
 
             <div class="hero-orbit orbit-a"></div>
 
@@ -212,45 +240,18 @@
             <div class="hero-orbit orbit-c"></div>
 
 
-            <!-- JC PLANET -->
+            <!-- PLANET / JC -->
 
             <div class="hero-center">
 
-                <!-- ORBIT 1 -->
-
-                <div class="jc-orbit jc-orbit-1">
-
-                    <span class="jc-orbit-dot"></span>
-
-                </div>
-
-
-                <!-- ORBIT 2 -->
-
-                <div class="jc-orbit jc-orbit-2">
-
-                    <span class="jc-orbit-dot"></span>
-
-                </div>
-
-
-                <!-- ORBIT 3 -->
-
-                <div class="jc-orbit jc-orbit-3">
-
-                    <span class="jc-orbit-dot"></span>
-
-                </div>
-
-
-                <!-- JC -->
-
-                <span class="jc-text">
+                <span>
                     JC
                 </span>
 
             </div>
 
+
+            <!-- FLOATING LABEL -->
 
             <div class="floating-label label-ai">
                 AI
@@ -277,7 +278,7 @@
 
 
 <!-- =====================================================
-     INTRO / TICKER
+     TICKER
 ===================================================== -->
 
 <section class="ticker-section">
@@ -293,46 +294,25 @@
 
             <div class="ticker-track">
 
-                <span>
-                    ARTIFICIAL INTELLIGENCE
-                </span>
-
+                <span>ARTIFICIAL INTELLIGENCE</span>
                 <i>✦</i>
 
-                <span>
-                    MACHINE LEARNING
-                </span>
-
+                <span>MACHINE LEARNING</span>
                 <i>✦</i>
 
-                <span>
-                    COMPUTER VISION
-                </span>
-
+                <span>COMPUTER VISION</span>
                 <i>✦</i>
 
-                <span>
-                    DATA SCIENCE
-                </span>
-
+                <span>DATA SCIENCE</span>
                 <i>✦</i>
 
-                <span>
-                    WEB DEVELOPMENT
-                </span>
-
+                <span>WEB DEVELOPMENT</span>
                 <i>✦</i>
 
-                <span>
-                    ARTIFICIAL INTELLIGENCE
-                </span>
-
+                <span>ARTIFICIAL INTELLIGENCE</span>
                 <i>✦</i>
 
-                <span>
-                    MACHINE LEARNING
-                </span>
-
+                <span>MACHINE LEARNING</span>
                 <i>✦</i>
 
             </div>
@@ -464,9 +444,14 @@
         <div class="project-grid">
 
 
-            <!-- PROJECT 01 -->
+            <!-- =================================================
+                 PROJECT 01
+            ================================================== -->
 
-            <article class="project-card">
+            <article
+                class="project-card"
+                data-project="ai"
+            >
 
                 <div class="project-number">
                     01
@@ -499,9 +484,11 @@
                         ARTIFICIAL INTELLIGENCE
                     </small>
 
+
                     <h3>
                         AI Research
                     </h3>
+
 
                     <p>
 
@@ -514,17 +501,9 @@
 
                     <div class="tags">
 
-                        <span>
-                            Python
-                        </span>
-
-                        <span>
-                            ML
-                        </span>
-
-                        <span>
-                            AI
-                        </span>
+                        <span>Python</span>
+                        <span>ML</span>
+                        <span>AI</span>
 
                     </div>
 
@@ -534,9 +513,14 @@
 
 
 
-            <!-- PROJECT 02 -->
+            <!-- =================================================
+                 PROJECT 02
+            ================================================== -->
 
-            <article class="project-card">
+            <article
+                class="project-card"
+                data-project="village"
+            >
 
                 <div class="project-number">
                     02
@@ -575,9 +559,11 @@
                         WEB DEVELOPMENT
                     </small>
 
+
                     <h3>
                         Digital Village
                     </h3>
+
 
                     <p>
 
@@ -589,17 +575,9 @@
 
                     <div class="tags">
 
-                        <span>
-                            HTML
-                        </span>
-
-                        <span>
-                            CSS
-                        </span>
-
-                        <span>
-                            JavaScript
-                        </span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
 
                     </div>
 
@@ -609,9 +587,14 @@
 
 
 
-            <!-- PROJECT 03 -->
+            <!-- =================================================
+                 PROJECT 03
+            ================================================== -->
 
-            <article class="project-card">
+            <article
+                class="project-card"
+                data-project="data"
+            >
 
                 <div class="project-number">
                     03
@@ -640,9 +623,11 @@
                         DATA SCIENCE
                     </small>
 
+
                     <h3>
                         Data Analytics
                     </h3>
+
 
                     <p>
 
@@ -654,17 +639,9 @@
 
                     <div class="tags">
 
-                        <span>
-                            Python
-                        </span>
-
-                        <span>
-                            Pandas
-                        </span>
-
-                        <span>
-                            SQL
-                        </span>
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>SQL</span>
 
                     </div>
 
@@ -674,9 +651,14 @@
 
 
 
-            <!-- PROJECT 04 -->
+            <!-- =================================================
+                 PROJECT 04
+            ================================================== -->
 
-            <article class="project-card">
+            <article
+                class="project-card"
+                data-project="trading"
+            >
 
                 <div class="project-number">
                     04
@@ -720,9 +702,11 @@
                         ALGORITHMIC TRADING
                     </small>
 
+
                     <h3>
                         XAUUSD Trading EA
                     </h3>
+
 
                     <p>
 
@@ -735,23 +719,16 @@
 
                     <div class="tags">
 
-                        <span>
-                            MQL5
-                        </span>
-
-                        <span>
-                            MT5
-                        </span>
-
-                        <span>
-                            Trading
-                        </span>
+                        <span>MQL5</span>
+                        <span>MT5</span>
+                        <span>Trading</span>
 
                     </div>
 
                 </div>
 
             </article>
+
 
         </div>
 
@@ -910,17 +887,9 @@
 
                 <div class="skill-tags">
 
-                    <span>
-                        Python
-                    </span>
-
-                    <span>
-                        TensorFlow
-                    </span>
-
-                    <span>
-                        PyTorch
-                    </span>
+                    <span>Python</span>
+                    <span>TensorFlow</span>
+                    <span>PyTorch</span>
 
                 </div>
 
@@ -946,17 +915,9 @@
 
                 <div class="skill-tags">
 
-                    <span>
-                        OpenCV
-                    </span>
-
-                    <span>
-                        YOLO
-                    </span>
-
-                    <span>
-                        CNN
-                    </span>
+                    <span>OpenCV</span>
+                    <span>YOLO</span>
+                    <span>CNN</span>
 
                 </div>
 
@@ -982,17 +943,9 @@
 
                 <div class="skill-tags">
 
-                    <span>
-                        Pandas
-                    </span>
-
-                    <span>
-                        NumPy
-                    </span>
-
-                    <span>
-                        SQL
-                    </span>
+                    <span>Pandas</span>
+                    <span>NumPy</span>
+                    <span>SQL</span>
 
                 </div>
 
@@ -1018,17 +971,9 @@
 
                 <div class="skill-tags">
 
-                    <span>
-                        HTML
-                    </span>
-
-                    <span>
-                        CSS
-                    </span>
-
-                    <span>
-                        JavaScript
-                    </span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
 
                 </div>
 
@@ -1068,6 +1013,7 @@
 
 
         <div class="metrics-grid">
+
 
             <div>
 
@@ -1120,6 +1066,7 @@
 
             </div>
 
+
         </div>
 
     </div>
@@ -1150,6 +1097,7 @@
                 data-text="Got questions?"
             ></h2>
 
+
             <p>
                 Beberapa hal yang sedang saya eksplorasi.
             </p>
@@ -1166,9 +1114,7 @@
 
                     Apa fokus utama saya?
 
-                    <span>
-                        +
-                    </span>
+                    <span>+</span>
 
                 </button>
 
@@ -1188,16 +1134,13 @@
             </div>
 
 
-
             <div class="faq-item">
 
                 <button class="faq-question">
 
                     Mengapa tertarik pada AI?
 
-                    <span>
-                        +
-                    </span>
+                    <span>+</span>
 
                 </button>
 
@@ -1217,16 +1160,13 @@
             </div>
 
 
-
             <div class="faq-item">
 
                 <button class="faq-question">
 
                     Apakah saya menerima kolaborasi?
 
-                    <span>
-                        +
-                    </span>
+                    <span>+</span>
 
                 </button>
 
@@ -1246,16 +1186,13 @@
             </div>
 
 
-
             <div class="faq-item">
 
                 <button class="faq-question">
 
                     Apa tujuan saya?
 
-                    <span>
-                        +
-                    </span>
+                    <span>+</span>
 
                 </button>
 
@@ -1274,6 +1211,7 @@
 
             </div>
 
+
         </div>
 
     </div>
@@ -1283,7 +1221,7 @@
 
 
 <!-- =====================================================
-     CONTACT CTA
+     CONTACT
 ===================================================== -->
 
 <section
@@ -1295,6 +1233,7 @@
 
 
     <div class="cta-content">
+
 
         <div
             class="section-label typing-title"
@@ -1318,7 +1257,7 @@
 
 
         <a
-            href="mailto:joelchristiann05@gmail.com"
+            href="mailto:joelchristiann05@gmail.com?subject=Project%20Collaboration&body=Halo%20Joel,%0A%0ASaya%20tertarik%20untuk%20berkolaborasi."
             class="cta-button"
         >
 
@@ -1334,6 +1273,136 @@
 
 </section>
 
+
+
+<!-- =====================================================
+     PROJECT MODAL
+===================================================== -->
+
+<div
+    class="project-modal"
+    id="projectModal"
+    aria-hidden="true"
+>
+
+
+    <div class="project-modal-overlay"></div>
+
+
+    <div class="project-modal-content">
+
+
+        <button
+            class="project-modal-close"
+            id="projectModalClose"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div
+            class="project-modal-number"
+            id="modalNumber"
+        >
+            01
+        </div>
+
+
+        <div
+            class="project-modal-category"
+            id="modalCategory"
+        >
+            ARTIFICIAL INTELLIGENCE
+        </div>
+
+
+        <h2 id="modalTitle">
+            AI Research
+        </h2>
+
+
+        <p id="modalDescription">
+            Eksplorasi Machine Learning untuk
+            menyelesaikan permasalahan dunia nyata.
+        </p>
+
+
+        <div class="project-modal-info">
+
+
+            <div>
+
+                <span>
+                    TECHNOLOGY
+                </span>
+
+
+                <div
+                    class="modal-tags"
+                    id="modalTags"
+                ></div>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    STATUS
+                </span>
+
+
+                <strong id="modalStatus">
+                    In Progress
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="project-modal-actions">
+
+
+            <a
+                href="#"
+                id="modalGithub"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                GitHub
+
+                <span>
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                id="modalDemo"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                View Project
+
+                <span>
+                    ↗
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</div>
 
 
 </main>
@@ -1404,15 +1473,31 @@
                 Contact
             </a>
 
-            <a href="#">
+            <!-- GANTI LINK INI -->
+
+            <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 GitHub
             </a>
 
-            <a href="#">
+
+            <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 LinkedIn
             </a>
 
-            <a href="#">
+
+            <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 Instagram
             </a>
 
@@ -1425,8 +1510,13 @@
     <div class="container footer-bottom">
 
         <span>
-            © <span id="year"></span> Joel Christian.
+
+            ©
+            <span id="year"></span>
+            Joel Christian.
+
         </span>
+
 
         <span>
             Built with curiosity.
@@ -1438,7 +1528,12 @@
 
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script src="script.js"></script>
+
 
 </body>
 
