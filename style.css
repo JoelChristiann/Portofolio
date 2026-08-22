@@ -69,148 +69,100 @@ button {
 
 .navbar {
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
-
     z-index: 100;
 
-    background:
-        rgba(5,7,5,0.78);
+    background: rgba(5,7,5,0.78);
 
-    backdrop-filter:
-        blur(18px);
+    backdrop-filter: blur(18px);
 
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .nav-inner {
-
     height: 78px;
 
-    width:
-        min(1180px, calc(100% - 48px));
+    width: min(1180px, calc(100% - 48px));
 
     margin: auto;
 
     display: flex;
-
     align-items: center;
-
-    justify-content:
-        space-between;
+    justify-content: space-between;
 }
 
 .brand {
+    font-family: "Space Grotesk", sans-serif;
 
-    font-family:
-        "Space Grotesk",
-        sans-serif;
+    font-size: 25px;
 
-    font-size:
-        25px;
+    font-weight: 700;
 
-    font-weight:
-        700;
-
-    letter-spacing:
-        -1px;
+    letter-spacing: -1px;
 }
 
 .nav-links {
+    display: flex;
 
-    display:
-        flex;
+    gap: 36px;
 
-    gap:
-        36px;
+    color: #9ba29d;
 
-    color:
-        #9ba29d;
-
-    font-size:
-        14px;
+    font-size: 14px;
 }
 
 .nav-links a:hover {
-    color:
-        var(--green);
+    color: var(--green);
 }
 
 .nav-cta {
+    display: flex;
 
-    display:
-        flex;
+    gap: 10px;
 
-    gap:
-        10px;
+    align-items: center;
 
-    align-items:
-        center;
-
-    padding:
-        11px 17px;
+    padding: 11px 17px;
 
     border:
         1px solid
         rgba(255,255,255,0.12);
 
-    border-radius:
-        100px;
+    border-radius: 100px;
 
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
 .nav-cta:hover {
-
-    border-color:
-        var(--green);
-
-    color:
-        var(--green);
+    border-color: var(--green);
+    color: var(--green);
 }
 
 .menu-toggle {
+    display: none;
 
-    display:
-        none;
+    border: 0;
 
-    border:
-        0;
+    background: transparent;
 
-    background:
-        transparent;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 }
 
 .menu-toggle span {
+    display: block;
 
-    display:
-        block;
+    width: 25px;
+    height: 1px;
 
-    width:
-        25px;
+    margin: 6px;
 
-    height:
-        1px;
-
-    margin:
-        6px;
-
-    background:
-        white;
+    background: white;
 }
 
 .mobile-nav {
-    display:
-        none;
+    display: none;
 }
 
 
@@ -219,99 +171,64 @@ button {
 ===================================================== */
 
 .hero {
+    min-height: 100vh;
 
-    min-height:
-        100vh;
+    padding-top: 150px;
+    padding-bottom: 70px;
 
-    padding-top:
-        150px;
+    position: relative;
 
-    padding-bottom:
-        70px;
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
+    overflow: hidden;
 }
 
 .hero::before {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    width: 650px;
+    height: 650px;
 
-    width:
-        650px;
-
-    height:
-        650px;
-
-    right:
-        -250px;
-
-    top:
-        100px;
+    right: -250px;
+    top: 100px;
 
     background:
         rgba(20,255,100,0.04);
 
-    filter:
-        blur(120px);
+    filter: blur(120px);
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 }
 
 .hero-top {
-    margin-bottom:
-        30px;
+    margin-bottom: 30px;
 }
 
 .available {
+    display: inline-flex;
 
-    display:
-        inline-flex;
+    align-items: center;
 
-    align-items:
-        center;
+    gap: 10px;
 
-    gap:
-        10px;
+    font-family: "Space Grotesk", sans-serif;
 
-    font-family:
-        "Space Grotesk",
-        sans-serif;
+    font-size: 11px;
 
-    font-size:
-        11px;
+    letter-spacing: 1.5px;
 
-    letter-spacing:
-        1.5px;
-
-    color:
-        #9ca59e;
+    color: #9ca59e;
 }
 
 .available-dot {
+    width: 7px;
+    height: 7px;
 
-    width:
-        7px;
+    border-radius: 50%;
 
-    height:
-        7px;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--green);
+    background: var(--green);
 
     box-shadow:
         0 0 12px
@@ -319,9 +236,7 @@ button {
 }
 
 .hero-title {
-
-    max-width:
-        950px;
+    max-width: 950px;
 
     font-family:
         "Space Grotesk",
@@ -330,23 +245,17 @@ button {
     font-size:
         clamp(50px,8vw,105px);
 
-    line-height:
-        0.94;
+    line-height: 0.94;
 
-    letter-spacing:
-        -5px;
+    letter-spacing: -5px;
 
-    font-weight:
-        600;
+    font-weight: 600;
 }
 
 .hero-title span {
+    display: block;
 
-    display:
-        block;
-
-    color:
-        var(--green);
+    color: var(--green);
 
     text-shadow:
         0 0 35px
@@ -354,146 +263,95 @@ button {
 }
 
 .hero-bottom {
+    display: flex;
 
-    display:
-        flex;
+    justify-content: space-between;
 
-    justify-content:
-        space-between;
+    align-items: end;
 
-    align-items:
-        end;
-
-    margin-top:
-        55px;
+    margin-top: 55px;
 }
 
 .hero-description {
+    max-width: 470px;
 
-    max-width:
-        470px;
+    color: var(--muted);
 
-    color:
-        var(--muted);
+    line-height: 1.8;
 
-    line-height:
-        1.8;
-
-    font-size:
-        16px;
+    font-size: 16px;
 }
 
 .round-button {
+    width: 95px;
+    height: 95px;
 
-    width:
-        95px;
-
-    height:
-        95px;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     border:
         1px solid
         rgba(56,255,114,0.35);
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    gap:
-        5px;
+    gap: 5px;
 
-    color:
-        var(--green);
+    color: var(--green);
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    transition:
-        0.3s;
+    transition: 0.3s;
 }
 
 .round-button strong {
-    font-size:
-        18px;
+    font-size: 18px;
 }
 
 .round-button:hover {
+    background: var(--green);
 
-    background:
-        var(--green);
+    color: #041006;
 
-    color:
-        #041006;
-
-    transform:
-        rotate(-10deg);
+    transform: rotate(-10deg);
 }
 
 
 /* =====================================================
-   HERO VISUAL / 3D SPACE
+   HERO VISUAL
 ===================================================== */
 
 .hero-visual {
+    position: relative;
 
-    position:
-        relative;
+    width: 100%;
 
-    width:
-        100%;
+    height: 520px;
 
-    height:
-        520px;
+    margin-top: 55px;
 
-    margin-top:
-        55px;
+    display: flex;
 
-    display:
-        flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    overflow:
-        hidden;
-
-    perspective:
-        1200px;
-
-    perspective-origin:
-        center center;
-
-    transform-style:
-        preserve-3d;
-
-    isolation:
-        isolate;
+    overflow: hidden;
 }
 
 
-/* GRID */
+/* =====================================================
+   GRID
+===================================================== */
 
 .hero-visual-grid {
+    position: absolute;
 
-    position:
-        absolute;
-
-    inset:
-        0;
+    inset: 0;
 
     background-image:
 
@@ -508,8 +366,7 @@ button {
             transparent 1px
         );
 
-    background-size:
-        45px 45px;
+    background-size: 45px 45px;
 
     mask-image:
         radial-gradient(
@@ -518,11 +375,7 @@ button {
             transparent 70%
         );
 
-    pointer-events:
-        none;
-
-    z-index:
-        1;
+    pointer-events: none;
 }
 
 
@@ -531,50 +384,32 @@ button {
 ===================================================== */
 
 .hero-center {
+    position: absolute;
 
-    position:
-        absolute;
+    width: 130px;
+    height: 130px;
 
-    left:
-        50%;
-
-    top:
-        50%;
-
-    width:
-        130px;
-
-    height:
-        130px;
+    left: 50%;
+    top: 50%;
 
     transform:
         translate(-50%,-50%);
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:
-        center;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
 
         radial-gradient(
             circle at 35% 30%,
-
             #e4ffe9 0%,
-
             #8cffae 15%,
-
             #38ff72 38%,
-
             #13c950 67%,
-
             #087d32 100%
         );
 
@@ -596,11 +431,7 @@ button {
         0 0 160px
         rgba(56,255,114,0.16);
 
-    z-index:
-        20;
-
-    transform-style:
-        preserve-3d;
+    z-index: 30;
 
     animation:
         jcPulse 3s
@@ -609,22 +440,17 @@ button {
 }
 
 .hero-center span {
-
-    color:
-        #001b08;
+    color: #001b08;
 
     font-family:
         "Space Grotesk",
         sans-serif;
 
-    font-size:
-        34px;
+    font-size: 34px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
-    letter-spacing:
-        -2px;
+    letter-spacing: -2px;
 
     text-shadow:
         0 1px 8px
@@ -632,18 +458,13 @@ button {
 }
 
 .hero-center::before {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    inset: -25px;
 
-    inset:
-        -25px;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
         rgba(56,255,114,0.08);
@@ -651,23 +472,17 @@ button {
     filter:
         blur(20px);
 
-    z-index:
-        -1;
+    z-index: -1;
 }
 
 .hero-center::after {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    inset: -42px;
 
-    inset:
-        -42px;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     border:
         1px solid
@@ -676,52 +491,36 @@ button {
     box-shadow:
         0 0 40px
         rgba(56,255,114,0.14);
-
-    animation:
-        solarGlow 4s
-        ease-in-out
-        infinite;
 }
 
 
 /* =====================================================
-   3D PLANET SYSTEM
+   SINGLE ORBIT
 ===================================================== */
 
-.planet-system {
+.orbit-system {
+    position: absolute;
 
-    position:
-        absolute;
+    left: 50%;
+    top: 50%;
 
-    left:
-        50%;
+    width: 500px;
+    height: 270px;
 
-    top:
-        50%;
+    transform:
+        translate(-50%,-50%);
 
-    width:
-        var(--orbit-width);
+    transform-origin: center;
 
-    height:
-        var(--orbit-height);
+    animation:
+        mainOrbit
+        18s
+        linear
+        infinite;
 
-    margin-left:
-        calc(var(--orbit-width) / -2);
+    z-index: 20;
 
-    margin-top:
-        calc(var(--orbit-height) / -2);
-
-    transform-style:
-        preserve-3d;
-
-    pointer-events:
-        none;
-
-    will-change:
-        transform;
-
-    z-index:
-        30;
+    pointer-events: none;
 }
 
 
@@ -730,141 +529,43 @@ button {
 ===================================================== */
 
 .orbit-ring {
+    position: absolute;
 
-    position:
-        absolute;
-
-    inset:
-        0;
+    inset: 0;
 
     border:
         1px solid
-        rgba(70,255,130,0.16);
+        rgba(70,255,130,0.18);
 
-    border-radius:
-        50%;
-
-    transform-style:
-        preserve-3d;
-
-    pointer-events:
-        none;
+    border-radius: 50%;
 }
 
 
 /* =====================================================
-   ORBIT SIZES
+   ORBIT LABEL
 ===================================================== */
 
-.orbit-system-1 {
+.orbit-label {
+    position: absolute;
 
-    --orbit-width:
-        230px;
+    min-width: 48px;
+    height: 30px;
 
-    --orbit-height:
-        120px;
+    padding: 0 12px;
 
-    animation:
-        orbitSystem1
-        7s
-        linear
-        infinite;
-}
+    display: flex;
 
+    align-items: center;
+    justify-content: center;
 
-.orbit-system-2 {
-
-    --orbit-width:
-        330px;
-
-    --orbit-height:
-        175px;
-
-    animation:
-        orbitSystem2
-        11s
-        linear
-        infinite;
-}
-
-
-.orbit-system-3 {
-
-    --orbit-width:
-        440px;
-
-    --orbit-height:
-        235px;
-
-    animation:
-        orbitSystem3
-        15s
-        linear
-        infinite;
-}
-
-
-.orbit-system-4 {
-
-    --orbit-width:
-        550px;
-
-    --orbit-height:
-        290px;
-
-    animation:
-        orbitSystem4
-        20s
-        linear
-        infinite;
-}
-
-
-/* =====================================================
-   PLANETS
-===================================================== */
-
-.planet {
-
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    top:
-        0;
-
-    transform:
-        translate(-50%,-50%);
-
-    min-width:
-        48px;
-
-    height:
-        30px;
-
-    padding:
-        0 12px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        999px;
+    border-radius: 999px;
 
     background:
-        #050805;
+        rgba(3,12,6,0.95);
 
     border:
         1px solid
-        rgba(56,255,114,0.55);
+        rgba(56,255,114,0.45);
 
     color:
         var(--green-light);
@@ -873,277 +574,218 @@ button {
         "Space Grotesk",
         sans-serif;
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
-    letter-spacing:
-        1px;
+    letter-spacing: 1px;
 
-    white-space:
-        nowrap;
-
-    transform-style:
-        preserve-3d;
-
-    backface-visibility:
-        visible;
+    white-space: nowrap;
 
     box-shadow:
-
         0 0 12px
-        rgba(56,255,114,0.22),
+        rgba(56,255,114,0.18);
 
-        0 0 25px
-        rgba(56,255,114,0.08);
-}
-
-
-/* PLANET DOT */
-
-.planet::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        5px;
-
-    height:
-        5px;
-
-    left:
-        -3px;
-
-    top:
-        50%;
-
-    transform:
-        translateY(-50%);
-
-    border-radius:
-        50%;
-
-    background:
-        var(--green);
-
-    box-shadow:
-
-        0 0 8px
-        var(--green),
-
-        0 0 18px
-        rgba(56,255,114,0.8);
+    z-index: 25;
 }
 
 
 /* =====================================================
-   TRUE 3D ORBIT ANIMATION
+   POSISI PLANET
 ===================================================== */
 
-@keyframes orbitSystem1 {
 
-    0% {
+/*
+   AI = ATAS
+*/
 
-        transform:
-            translateZ(-120px)
-            rotateX(68deg)
-            rotateZ(0deg);
+.orbit-ai {
 
-    }
+    left: 50%;
+    top: 0;
 
-    25% {
+    transform:
+        translate(-50%,-50%);
 
-        transform:
-            translateZ(0px)
-            rotateX(68deg)
-            rotateZ(90deg);
-
-    }
-
-    50% {
-
-        transform:
-            translateZ(120px)
-            rotateX(68deg)
-            rotateZ(180deg);
-
-    }
-
-    75% {
-
-        transform:
-            translateZ(0px)
-            rotateX(68deg)
-            rotateZ(270deg);
-
-    }
-
-    100% {
-
-        transform:
-            translateZ(-120px)
-            rotateX(68deg)
-            rotateZ(360deg);
-
-    }
+    animation:
+        counterTop
+        18s
+        linear
+        infinite;
 }
 
 
-@keyframes orbitSystem2 {
+/*
+   WEB = KANAN
+*/
 
-    0% {
+.orbit-web {
 
-        transform:
-            translateZ(120px)
-            rotateX(64deg)
-            rotateZ(0deg);
+    right: 0;
+    top: 50%;
 
-    }
+    transform:
+        translate(50%,-50%);
 
-    25% {
-
-        transform:
-            translateZ(0px)
-            rotateX(64deg)
-            rotateZ(90deg);
-
-    }
-
-    50% {
-
-        transform:
-            translateZ(-120px)
-            rotateX(64deg)
-            rotateZ(180deg);
-
-    }
-
-    75% {
-
-        transform:
-            translateZ(0px)
-            rotateX(64deg)
-            rotateZ(270deg);
-
-    }
-
-    100% {
-
-        transform:
-            translateZ(120px)
-            rotateX(64deg)
-            rotateZ(360deg);
-
-    }
+    animation:
+        counterRight
+        18s
+        linear
+        infinite;
 }
 
 
-@keyframes orbitSystem3 {
+/*
+   CV = BAWAH
+*/
 
-    0% {
+.orbit-cv {
 
-        transform:
-            translateZ(-150px)
-            rotateX(72deg)
-            rotateZ(45deg);
+    left: 50%;
+    bottom: 0;
 
-    }
+    transform:
+        translate(-50%,50%);
 
-    25% {
-
-        transform:
-            translateZ(0px)
-            rotateX(72deg)
-            rotateZ(135deg);
-
-    }
-
-    50% {
-
-        transform:
-            translateZ(150px)
-            rotateX(72deg)
-            rotateZ(225deg);
-
-    }
-
-    75% {
-
-        transform:
-            translateZ(0px)
-            rotateX(72deg)
-            rotateZ(315deg);
-
-    }
-
-    100% {
-
-        transform:
-            translateZ(-150px)
-            rotateX(72deg)
-            rotateZ(405deg);
-
-    }
+    animation:
+        counterBottom
+        18s
+        linear
+        infinite;
 }
 
 
-@keyframes orbitSystem4 {
+/*
+   DATA = KIRI
+*/
 
-    0% {
+.orbit-data {
+
+    left: 0;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    animation:
+        counterLeft
+        18s
+        linear
+        infinite;
+}
+
+
+/* =====================================================
+   MAIN ORBIT ROTATION
+===================================================== */
+
+@keyframes mainOrbit {
+
+    from {
 
         transform:
-            translateZ(150px)
-            rotateX(66deg)
-            rotateZ(135deg);
+            translate(-50%,-50%)
+            rotate(0deg);
 
     }
 
-    25% {
+    to {
 
         transform:
-            translateZ(0px)
-            rotateX(66deg)
-            rotateZ(225deg);
-
-    }
-
-    50% {
-
-        transform:
-            translateZ(-150px)
-            rotateX(66deg)
-            rotateZ(315deg);
-
-    }
-
-    75% {
-
-        transform:
-            translateZ(0px)
-            rotateX(66deg)
-            rotateZ(405deg);
-
-    }
-
-    100% {
-
-        transform:
-            translateZ(150px)
-            rotateX(66deg)
-            rotateZ(495deg);
+            translate(-50%,-50%)
+            rotate(360deg);
 
     }
 }
 
 
 /* =====================================================
-   JC ANIMATION
+   COUNTER ROTATION
+   Agar tulisan tetap tegak
+===================================================== */
+
+@keyframes counterTop {
+
+    from {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(-360deg);
+
+    }
+}
+
+
+@keyframes counterRight {
+
+    from {
+
+        transform:
+            translate(50%,-50%)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(50%,-50%)
+            rotate(-360deg);
+
+    }
+}
+
+
+@keyframes counterBottom {
+
+    from {
+
+        transform:
+            translate(-50%,50%)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(-50%,50%)
+            rotate(-360deg);
+
+    }
+}
+
+
+@keyframes counterLeft {
+
+    from {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(-360deg);
+
+    }
+}
+
+
+/* =====================================================
+   JC PULSE
 ===================================================== */
 
 @keyframes jcPulse {
@@ -1167,26 +809,87 @@ button {
 }
 
 
-@keyframes solarGlow {
+/* =====================================================
+   TICKER
+===================================================== */
 
-    0%,
-    100% {
+.ticker-section {
 
-        opacity:
-            0.4;
+    padding: 35px 0;
+
+    border-top:
+        1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
+    overflow: hidden;
+}
+
+.ticker-label {
+
+    font-size: 10px;
+
+    color: #69716b;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 18px;
+}
+
+.ticker {
+
+    overflow: hidden;
+
+    white-space: nowrap;
+}
+
+.ticker-track {
+
+    display: inline-flex;
+
+    gap: 28px;
+
+    align-items: center;
+
+    animation:
+        tickerMove
+        25s
+        linear
+        infinite;
+}
+
+.ticker-track span {
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size: 22px;
+
+    color: #b7beb9;
+}
+
+.ticker-track i {
+
+    color: var(--green);
+
+    font-style: normal;
+}
+
+@keyframes tickerMove {
+
+    from {
 
         transform:
-            scale(0.96);
+            translateX(0);
 
     }
 
-    50% {
-
-        opacity:
-            1;
+    to {
 
         transform:
-            scale(1.04);
+            translateX(-50%);
 
     }
 }
@@ -1198,29 +901,22 @@ button {
 
 .typing-title {
 
-    position:
-        relative;
+    position: relative;
 
-    min-height:
-        1em;
+    min-height: 1em;
 }
 
 .typing-title.typing-active::after {
 
-    content:
-        "";
+    content: "";
 
-    display:
-        inline-block;
+    display: inline-block;
 
-    width:
-        2px;
+    width: 2px;
 
-    height:
-        0.9em;
+    height: 0.9em;
 
-    margin-left:
-        5px;
+    margin-left: 5px;
 
     background:
         var(--green);
@@ -1239,109 +935,12 @@ button {
 
     0%,
     50% {
-        opacity:
-            1;
+        opacity: 1;
     }
 
     51%,
     100% {
-        opacity:
-            0;
-    }
-}
-
-
-/* =====================================================
-   TICKER
-===================================================== */
-
-.ticker-section {
-
-    padding:
-        35px 0;
-
-    border-top:
-        1px solid var(--border);
-
-    border-bottom:
-        1px solid var(--border);
-
-    overflow:
-        hidden;
-}
-
-.ticker-label {
-
-    font-size:
-        10px;
-
-    color:
-        #69716b;
-
-    letter-spacing:
-        2px;
-
-    margin-bottom:
-        18px;
-}
-
-.ticker {
-
-    overflow:
-        hidden;
-
-    white-space:
-        nowrap;
-}
-
-.ticker-track {
-
-    display:
-        inline-flex;
-
-    gap:
-        28px;
-
-    align-items:
-        center;
-
-    animation:
-        tickerMove
-        25s linear infinite;
-}
-
-.ticker-track span {
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size:
-        22px;
-
-    color:
-        #b7beb9;
-}
-
-.ticker-track i {
-
-    color:
-        var(--green);
-
-    font-style:
-        normal;
-}
-
-@keyframes tickerMove {
-
-    from {
-        transform:
-            translateX(0);
-    }
-
-    to {
-        transform:
-            translateX(-50%);
+        opacity: 0;
     }
 }
 
@@ -1351,9 +950,7 @@ button {
 ===================================================== */
 
 .section-padding {
-
-    padding:
-        130px 0;
+    padding: 130px 0;
 }
 
 .section-label {
@@ -1362,23 +959,19 @@ button {
         "Space Grotesk",
         sans-serif;
 
-    font-size:
-        11px;
+    font-size: 11px;
 
     color:
         var(--green);
 
-    letter-spacing:
-        2px;
+    letter-spacing: 2px;
 
-    margin-bottom:
-        30px;
+    margin-bottom: 30px;
 }
 
 .large-title {
 
-    max-width:
-        850px;
+    max-width: 850px;
 
     font-family:
         "Space Grotesk",
@@ -1387,14 +980,11 @@ button {
     font-size:
         clamp(40px,5vw,72px);
 
-    line-height:
-        1;
+    line-height: 1;
 
-    letter-spacing:
-        -3px;
+    letter-spacing: -3px;
 
-    font-weight:
-        500;
+    font-weight: 500;
 }
 
 
@@ -1403,39 +993,30 @@ button {
 ===================================================== */
 
 .about-heading {
-
-    margin-bottom:
-        70px;
+    margin-bottom: 70px;
 }
 
 .about-grid {
 
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
         1fr 1fr;
 
-    gap:
-        70px;
+    gap: 70px;
 }
 
 .about-text {
 
-    max-width:
-        500px;
+    max-width: 500px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
-    line-height:
-        1.8;
+    line-height: 1.8;
 }
 
 .about-text p {
-
-    margin-bottom:
-        25px;
+    margin-bottom: 25px;
 }
 
 .text-link {
@@ -1670,6 +1251,7 @@ button {
         78%;
 }
 
+
 .project-web {
 
     background:
@@ -1755,19 +1337,17 @@ button {
 }
 
 .browser-content div:nth-child(1) {
-    width:
-        80%;
+    width: 80%;
 }
 
 .browser-content div:nth-child(2) {
-    width:
-        60%;
+    width: 60%;
 }
 
 .browser-content div:nth-child(3) {
-    width:
-        90%;
+    width: 90%;
 }
+
 
 .project-data {
 
@@ -1808,34 +1388,29 @@ button {
 }
 
 .data-bars span:nth-child(1) {
-    height:
-        35%;
+    height: 35%;
 }
 
 .data-bars span:nth-child(2) {
-    height:
-        55%;
+    height: 55%;
 }
 
 .data-bars span:nth-child(3) {
-    height:
-        45%;
+    height: 45%;
 }
 
 .data-bars span:nth-child(4) {
-    height:
-        80%;
+    height: 80%;
 }
 
 .data-bars span:nth-child(5) {
-    height:
-        65%;
+    height: 65%;
 }
 
 .data-bars span:nth-child(6) {
-    height:
-        95%;
+    height: 95%;
 }
+
 
 .project-trading {
 
@@ -1873,6 +1448,7 @@ button {
             rgba(56,255,114,0.5)
         );
 }
+
 
 .project-body {
 
@@ -2050,6 +1626,7 @@ button {
         45px;
 
     background:
+
         linear-gradient(
             145deg,
             #0d140f,
@@ -2079,7 +1656,8 @@ button {
         0.3s ease;
 }
 
-.project-modal.active .modal-content {
+.project-modal.active
+.modal-content {
 
     transform:
         translateY(0)
@@ -2337,7 +1915,8 @@ button {
         25px;
 
     border-top:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 }
 
 .process-item > span {
@@ -2402,7 +1981,8 @@ button {
         var(--card);
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     transition:
         0.3s;
@@ -2656,13 +2236,16 @@ button {
         25px;
 }
 
-.faq-item.active .faq-answer {
+.faq-item.active
+.faq-answer {
 
     max-height:
         200px;
 }
 
-.faq-item.active .faq-question span {
+.faq-item.active
+.faq-question
+span {
 
     transform:
         rotate(45deg);
@@ -2997,18 +2580,21 @@ footer {
     }
 
 
-    /* 3D VISUAL */
+    /* ORBIT MOBILE */
 
     .hero-visual {
 
         height:
             410px;
+    }
 
-        margin-top:
-            35px;
+    .orbit-system {
 
-        perspective:
-            900px;
+        width:
+            390px;
+
+        height:
+            210px;
     }
 
     .hero-center {
@@ -3026,44 +2612,7 @@ footer {
             26px;
     }
 
-
-    .orbit-system-1 {
-
-        --orbit-width:
-            170px;
-
-        --orbit-height:
-            90px;
-    }
-
-    .orbit-system-2 {
-
-        --orbit-width:
-            245px;
-
-        --orbit-height:
-            130px;
-    }
-
-    .orbit-system-3 {
-
-        --orbit-width:
-            320px;
-
-        --orbit-height:
-            170px;
-    }
-
-    .orbit-system-4 {
-
-        --orbit-width:
-            390px;
-
-        --orbit-height:
-            205px;
-    }
-
-    .planet {
+    .orbit-label {
 
         min-width:
             42px;
