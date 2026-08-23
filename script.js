@@ -21,21 +21,33 @@ const mobileNav =
 
 if (menuToggle && mobileNav) {
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener(
+        "click",
+        () => {
 
-        mobileNav.classList.toggle("active");
+            mobileNav.classList.toggle(
+                "active"
+            );
 
-    });
+        }
+    );
 
-    mobileNav.querySelectorAll("a").forEach(link => {
+    mobileNav
+        .querySelectorAll("a")
+        .forEach(link => {
 
-        link.addEventListener("click", () => {
+            link.addEventListener(
+                "click",
+                () => {
 
-            mobileNav.classList.remove("active");
+                    mobileNav.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
 
         });
-
-    });
 
 }
 
@@ -60,7 +72,9 @@ if (yearElement) {
 ===================================================== */
 
 const typingElements =
-    document.querySelectorAll(".typing-title");
+    document.querySelectorAll(
+        ".typing-title"
+    );
 
 if (typingElements.length > 0) {
 
@@ -79,7 +93,8 @@ if (typingElements.length > 0) {
                         entry.target;
 
                     if (
-                        element.dataset.typed === "true"
+                        element.dataset.typed ===
+                        "true"
                     ) {
                         return;
                     }
@@ -88,9 +103,11 @@ if (typingElements.length > 0) {
                         "true";
 
                     const text =
-                        element.dataset.text || "";
+                        element.dataset.text ||
+                        "";
 
-                    element.textContent = "";
+                    element.textContent =
+                        "";
 
                     element.classList.add(
                         "typing-active"
@@ -100,7 +117,10 @@ if (typingElements.length > 0) {
 
                     function typeCharacter() {
 
-                        if (index < text.length) {
+                        if (
+                            index <
+                            text.length
+                        ) {
 
                             element.textContent +=
                                 text.charAt(index);
@@ -124,7 +144,9 @@ if (typingElements.length > 0) {
 
                     typeCharacter();
 
-                    observer.unobserve(element);
+                    observer.unobserve(
+                        element
+                    );
 
                 });
 
@@ -136,11 +158,15 @@ if (typingElements.length > 0) {
 
         );
 
-    typingElements.forEach(element => {
+    typingElements.forEach(
+        element => {
 
-        typingObserver.observe(element);
+            typingObserver.observe(
+                element
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -150,40 +176,54 @@ if (typingElements.length > 0) {
 ===================================================== */
 
 const faqQuestions =
-    document.querySelectorAll(".faq-question");
+    document.querySelectorAll(
+        ".faq-question"
+    );
 
-faqQuestions.forEach(question => {
+faqQuestions.forEach(
+    question => {
 
-    question.addEventListener("click", () => {
+        question.addEventListener(
+            "click",
+            () => {
 
-        const currentItem =
-            question.closest(".faq-item");
-
-        if (!currentItem) {
-            return;
-        }
-
-        document
-            .querySelectorAll(".faq-item")
-            .forEach(item => {
-
-                if (item !== currentItem) {
-
-                    item.classList.remove(
-                        "active"
+                const currentItem =
+                    question.closest(
+                        ".faq-item"
                     );
 
+                if (!currentItem) {
+                    return;
                 }
 
-            });
+                document
+                    .querySelectorAll(
+                        ".faq-item"
+                    )
+                    .forEach(item => {
 
-        currentItem.classList.toggle(
-            "active"
+                        if (
+                            item !==
+                            currentItem
+                        ) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+
+                    });
+
+                currentItem.classList.toggle(
+                    "active"
+                );
+
+            }
         );
 
-    });
-
-});
+    }
+);
 
 
 /* =====================================================
@@ -194,9 +234,11 @@ const projectData = {
 
     ai: {
 
-        category: "ARTIFICIAL INTELLIGENCE",
+        category:
+            "ARTIFICIAL INTELLIGENCE",
 
-        title: "AI Research",
+        title:
+            "AI Research",
 
         description:
             "Eksplorasi Artificial Intelligence dan Machine Learning untuk menyelesaikan permasalahan dunia nyata.",
@@ -212,15 +254,18 @@ const projectData = {
             "NumPy"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
     web: {
 
-        category: "WEB DEVELOPMENT",
+        category:
+            "WEB DEVELOPMENT",
 
-        title: "Digital Village",
+        title:
+            "Digital Village",
 
         description:
             "Website informasi desa dengan desain modern, responsive, dan mudah digunakan masyarakat.",
@@ -236,15 +281,18 @@ const projectData = {
             "GitHub Pages"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
     data: {
 
-        category: "DATA SCIENCE",
+        category:
+            "DATA SCIENCE",
 
-        title: "Data Analytics",
+        title:
+            "Data Analytics",
 
         description:
             "Eksplorasi pengolahan data untuk menghasilkan insight melalui analisis dan visualisasi.",
@@ -260,15 +308,18 @@ const projectData = {
             "Data Visualization"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     },
 
     trading: {
 
-        category: "ALGORITHMIC TRADING",
+        category:
+            "ALGORITHMIC TRADING",
 
-        title: "XAUUSD Trading EA",
+        title:
+            "XAUUSD Trading EA",
 
         description:
             "Eksperimen Expert Advisor untuk XAUUSD menggunakan MQL5 dan MetaTrader 5.",
@@ -286,7 +337,8 @@ const projectData = {
             "Backtesting"
         ],
 
-        link: "#"
+        link:
+            "#"
 
     }
 
@@ -298,39 +350,62 @@ const projectData = {
 ===================================================== */
 
 const projectModal =
-    document.getElementById("projectModal");
+    document.getElementById(
+        "projectModal"
+    );
 
 const modalOverlay =
-    document.getElementById("modalOverlay");
+    document.getElementById(
+        "modalOverlay"
+    );
 
 const modalClose =
-    document.getElementById("modalClose");
+    document.getElementById(
+        "modalClose"
+    );
 
 const modalCategory =
-    document.getElementById("modalCategory");
+    document.getElementById(
+        "modalCategory"
+    );
 
 const modalTitle =
-    document.getElementById("modalTitle");
+    document.getElementById(
+        "modalTitle"
+    );
 
 const modalDescription =
-    document.getElementById("modalDescription");
+    document.getElementById(
+        "modalDescription"
+    );
 
 const modalDetails =
-    document.getElementById("modalDetails");
+    document.getElementById(
+        "modalDetails"
+    );
 
 const modalTags =
-    document.getElementById("modalTags");
+    document.getElementById(
+        "modalTags"
+    );
 
 const modalProjectLink =
-    document.getElementById("modalProjectLink");
+    document.getElementById(
+        "modalProjectLink"
+    );
 
 
-function openProject(projectId) {
+function openProject(
+    projectId
+) {
 
     const project =
         projectData[projectId];
 
-    if (!project || !projectModal) {
+    if (
+        !project ||
+        !projectModal
+    ) {
         return;
     }
 
@@ -364,21 +439,27 @@ function openProject(projectId) {
 
     if (modalTags) {
 
-        modalTags.innerHTML = "";
+        modalTags.innerHTML =
+            "";
 
-        project.technologies.forEach(
-            technology => {
+        project.technologies
+            .forEach(
+                technology => {
 
-                const tag =
-                    document.createElement("span");
+                    const tag =
+                        document.createElement(
+                            "span"
+                        );
 
-                tag.textContent =
-                    technology;
+                    tag.textContent =
+                        technology;
 
-                modalTags.appendChild(tag);
+                    modalTags.appendChild(
+                        tag
+                    );
 
-            }
-        );
+                }
+            );
 
     }
 
@@ -433,7 +514,9 @@ function closeProject() {
 
 
 document
-    .querySelectorAll(".project-card")
+    .querySelectorAll(
+        ".project-card"
+    )
     .forEach(card => {
 
         card.addEventListener(
@@ -479,7 +562,6 @@ if (modalClose) {
 
 }
 
-
 if (modalOverlay) {
 
     modalOverlay.addEventListener(
@@ -488,7 +570,6 @@ if (modalOverlay) {
     );
 
 }
-
 
 document.addEventListener(
     "keydown",
@@ -524,6 +605,21 @@ const robotStatus =
         "robot-status"
     );
 
+const robotLoading =
+    document.getElementById(
+        "robot-loading"
+    );
+
+const robotSpeech =
+    document.getElementById(
+        "robotSpeech"
+    );
+
+const speechText =
+    document.getElementById(
+        "speechText"
+    );
+
 
 if (!robotContainer) {
 
@@ -536,7 +632,7 @@ if (!robotContainer) {
 
     /* =================================================
        SCENE
-    ================================================= */
+    ================================================== */
 
     const scene =
         new THREE.Scene();
@@ -544,7 +640,7 @@ if (!robotContainer) {
 
     /* =================================================
        CAMERA
-    ================================================= */
+    ================================================== */
 
     let containerWidth =
         Math.max(
@@ -576,21 +672,23 @@ if (!robotContainer) {
 
     camera.position.set(
         0,
-        0.2,
+        0.15,
         5
     );
 
 
     /* =================================================
        RENDERER
-    ================================================= */
+    ================================================== */
 
     const renderer =
         new THREE.WebGLRenderer({
 
-            antialias: true,
+            antialias:
+                true,
 
-            alpha: true,
+            alpha:
+                true,
 
             powerPreference:
                 "high-performance"
@@ -639,15 +737,13 @@ if (!robotContainer) {
 
     /* =================================================
        LIGHTING
-    ================================================= */
+    ================================================== */
 
     const ambientLight =
         new THREE.HemisphereLight(
-
             0xffffff,
             0x303833,
             3.0
-
         );
 
     scene.add(
@@ -657,10 +753,8 @@ if (!robotContainer) {
 
     const keyLight =
         new THREE.DirectionalLight(
-
             0xffffff,
             4.5
-
         );
 
     keyLight.position.set(
@@ -676,12 +770,10 @@ if (!robotContainer) {
 
     const frontLight =
         new THREE.PointLight(
-
             0xffffff,
             4.2,
             15,
             2
-
         );
 
     frontLight.position.set(
@@ -697,12 +789,10 @@ if (!robotContainer) {
 
     const leftLight =
         new THREE.PointLight(
-
             0xffffff,
             3.5,
             14,
             2
-
         );
 
     leftLight.position.set(
@@ -718,12 +808,10 @@ if (!robotContainer) {
 
     const rightLight =
         new THREE.PointLight(
-
             0xd9ffe6,
             2.4,
             12,
             2
-
         );
 
     rightLight.position.set(
@@ -739,12 +827,10 @@ if (!robotContainer) {
 
     const greenRim =
         new THREE.PointLight(
-
             0x39ff73,
             2.7,
             14,
             2
-
         );
 
     greenRim.position.set(
@@ -760,12 +846,10 @@ if (!robotContainer) {
 
     const greenBack =
         new THREE.PointLight(
-
             0x65ff94,
             1.2,
             12,
             2
-
         );
 
     greenBack.position.set(
@@ -781,86 +865,99 @@ if (!robotContainer) {
 
     /* =================================================
        ROBOT VARIABLES
-    ================================================= */
+    ================================================== */
 
-    let robot = null;
+    let robot =
+        null;
 
-    let head = null;
+    let head =
+        null;
 
-    let originalHeadRotation = null;
+    let originalHeadRotation =
+        null;
 
-    let robotFace = null;
+    let robotFace =
+        null;
 
-    let faceEyes = [];
+    let faceEyes =
+        [];
 
-    let faceEyeGlows = [];
+    let faceEyeGlows =
+        [];
 
-    let faceMouth = null;
+    let faceMouth =
+        null;
 
-    let faceMouthDots = [];
+    let faceMouthDots =
+        [];
 
-    let faceLight = null;
-
-    let baseRobotY = 0;
-
-    let baseRobotZ = 0;
-
-    let baseRobotRotationY = 0;
-
-    let baseRobotRotationZ = 0;
+    let faceLight =
+        null;
 
 
     /* =================================================
-       ARM VARIABLES
-    ================================================= */
+       HAND VARIABLES
+    ================================================== */
 
-    let rightArm = null;
+    let rightArm =
+        null;
 
-    let originalRightArmRotation = null;
+    let rightHand =
+        null;
 
-    let rightHand = null;
+    let originalRightArmRotation =
+        null;
 
-    let originalRightHandRotation = null;
+    let originalRightHandRotation =
+        null;
+
+    let armRaised =
+        false;
+
+
+    /* =================================================
+       ROBOT BASE
+    ================================================== */
+
+    let baseRobotY =
+        0;
+
+    let baseRobotZ =
+        0;
+
+    let baseRobotRotationY =
+        0;
+
+    let baseRobotRotationZ =
+        0;
 
 
     /* =================================================
        LOADING ZOOM
-    ================================================= */
+    ================================================== */
 
-    let normalCameraZ = 5;
+    let loadingScale =
+        1.0;
 
-    let loadingZoomActive = false;
+    let loadingAnimation =
+        true;
 
-    let loadingZoomProgress = 0;
+    let loadingStartTime =
+        performance.now();
 
-    const loadingZoomDuration = 1.8;
-
-
-    /* =================================================
-       SPEECH
-    ================================================= */
-
-    let speechBubble = null;
-
-    let speechText = null;
-
-    let speechActive = false;
-
-    let speechTimer = 0;
-
-    const speechDuration = 5.2;
+    const loadingDuration =
+        1800;
 
 
     /* =================================================
        POINTER
-    ================================================= */
+    ================================================== */
 
     const pointer =
         new THREE.Vector2(
             0,
             0
         );
-
 
     const smoothPointer =
         new THREE.Vector2(
@@ -871,7 +968,7 @@ if (!robotContainer) {
 
     /* =================================================
        HEAD MOTION
-    ================================================= */
+    ================================================== */
 
     const targetHead =
         new THREE.Vector3(
@@ -879,7 +976,6 @@ if (!robotContainer) {
             0,
             0
         );
-
 
     const currentHead =
         new THREE.Vector3(
@@ -891,37 +987,58 @@ if (!robotContainer) {
 
     /* =================================================
        TIME
-    ================================================= */
+    ================================================== */
 
     const clock =
         new THREE.Clock();
 
-
-    let time = 0;
+    let time =
+        0;
 
 
     /* =================================================
        BLINK
-    ================================================= */
+    ================================================== */
 
-    let blinkTimer = 0;
+    let blinkTimer =
+        0;
 
     let nextBlink =
         3 +
         Math.random() * 4;
 
-    let blinking = false;
+    let blinking =
+        false;
 
-    let blinkProgress = 0;
+    let blinkProgress =
+        0;
+
+
+    /* =================================================
+       SPEECH
+    ================================================== */
+
+    const speechMessage =
+        "HELLO, WELCOME TO MY WEBSITE.";
+
+    let speechStarted =
+        false;
+
+    let speechIndex =
+        0;
+
+    let speechTimer =
+        null;
 
 
     /* =================================================
        FIND HEAD
-    ================================================= */
+    ================================================== */
 
     function findHead(root) {
 
-        let found = null;
+        let found =
+            null;
 
         const names = [
 
@@ -936,35 +1053,37 @@ if (!robotContainer) {
         ];
 
 
-        root.traverse(object => {
+        root.traverse(
+            object => {
 
-            if (found) {
-                return;
-            }
+                if (found) {
+                    return;
+                }
 
-            const name =
-                (
-                    object.name ||
-                    ""
-                )
-                .trim()
-                .toLowerCase();
-
-
-            if (
-                names
-                    .map(n =>
-                        n.toLowerCase()
+                const name =
+                    (
+                        object.name ||
+                        ""
                     )
-                    .includes(name)
-            ) {
+                    .trim()
+                    .toLowerCase();
 
-                found =
-                    object;
+                if (
+                    names
+                        .map(
+                            n =>
+                                n.toLowerCase()
+                        )
+                        .includes(name)
+                ) {
+
+                    found =
+                        object;
+
+                }
 
             }
-
-        });
+        );
 
 
         return found;
@@ -973,67 +1092,71 @@ if (!robotContainer) {
 
 
     /* =================================================
-       FIND ARM
-    ================================================= */
+       FIND OBJECT
+    ================================================== */
 
-    function findRightArm(root) {
+    function findObjectByNames(
+        root,
+        names
+    ) {
 
-        let found = null;
+        let found =
+            null;
 
-        const exactNames = [
-
-            "rightarm",
-            "right_arm",
-            "right arm",
-            "r_arm",
-            "arm_r",
-            "upperarm_r",
-            "upperarmright",
-            "rightupperarm",
-            "rightshoulder",
-            "right shoulder"
-
-        ];
-
-
-        root.traverse(object => {
-
-            if (found) {
-                return;
-            }
-
-            const name =
-                (
-                    object.name ||
-                    ""
-                )
-                .trim()
-                .toLowerCase()
-                .replace(
-                    /[\s-]+/g,
-                    ""
-                );
+        const normalized =
+            names.map(
+                name =>
+                    name
+                        .toLowerCase()
+                        .replace(
+                            /[\s_-]/g,
+                            ""
+                        )
+            );
 
 
-            if (
-                exactNames
-                    .map(n =>
-                        n
-                            .toLowerCase()
-                            .replace(
-                                /[\s-]+/g,
-                                ""
-                            )
+        root.traverse(
+            object => {
+
+                if (found) {
+                    return;
+                }
+
+                const objectName =
+                    (
+                        object.name ||
+                        ""
                     )
-                    .includes(name)
-            ) {
+                    .toLowerCase()
+                    .replace(
+                        /[\s_-]/g,
+                        ""
+                    );
 
-                found =
-                    object;
+
+                for (
+                    const searchName
+                    of normalized
+                ) {
+
+                    if (
+                        objectName
+                            .includes(
+                                searchName
+                            )
+                    ) {
+
+                        found =
+                            object;
+
+                        return;
+
+                    }
+
+                }
 
             }
-
-        });
+        );
 
 
         return found;
@@ -1042,260 +1165,309 @@ if (!robotContainer) {
 
 
     /* =================================================
-       FIND RIGHT HAND
-    ================================================= */
+       FIND RIGHT ARM
+    ================================================== */
 
-    function findRightHand(root) {
+    function findRightArm() {
 
-        let found = null;
+        if (!robot) {
+            return;
+        }
 
-        const names = [
-
-            "righthand",
-            "right_hand",
-            "right hand",
-            "hand_r",
-            "handright",
-            "r_hand"
-
-        ];
-
-
-        root.traverse(object => {
-
-            if (found) {
-                return;
-            }
-
-            const name =
-                (
-                    object.name ||
-                    ""
-                )
-                .trim()
-                .toLowerCase()
-                .replace(
-                    /[\s-]+/g,
-                    ""
-                );
+        rightArm =
+            findObjectByNames(
+                robot,
+                [
+                    "rightarm",
+                    "armright",
+                    "rarm",
+                    "rightupperarm",
+                    "upperarmright",
+                    "arm_r",
+                    "shoulderright"
+                ]
+            );
 
 
-            if (
-                names
-                    .map(n =>
-                        n
-                            .toLowerCase()
-                            .replace(
-                                /[\s-]+/g,
-                                ""
-                            )
-                    )
-                    .includes(name)
-            ) {
-
-                found =
-                    object;
-
-            }
-
-        });
+        rightHand =
+            findObjectByNames(
+                robot,
+                [
+                    "righthand",
+                    "handright",
+                    "rhand",
+                    "hand_r"
+                ]
+            );
 
 
-        return found;
+        if (rightArm) {
+
+            originalRightArmRotation =
+                rightArm.rotation.clone();
+
+            console.log(
+                "Right arm ditemukan:",
+                rightArm.name
+            );
+
+        } else {
+
+            console.warn(
+                "Right arm tidak ditemukan di GLB."
+            );
+
+        }
+
+
+        if (rightHand) {
+
+            originalRightHandRotation =
+                rightHand.rotation.clone();
+
+            console.log(
+                "Right hand ditemukan:",
+                rightHand.name
+            );
+
+        }
 
     }
 
 
     /* =================================================
        MATERIAL
-    ================================================= */
+    ================================================== */
 
-    function styleRobotMaterials(root) {
+    function styleRobotMaterials(
+        root
+    ) {
 
-        root.traverse(object => {
+        root.traverse(
+            object => {
 
-            if (!object.isMesh) {
-                return;
-            }
-
-
-            const materials =
-                Array.isArray(
-                    object.material
-                )
-                    ? object.material
-                    : [object.material];
-
-
-            materials.forEach(material => {
-
-                if (!material) {
+                if (!object.isMesh) {
                     return;
                 }
 
 
-                const name =
-                    (
-                        (
-                            material.name ||
-                            ""
-                        ) +
-                        " " +
-                        (
-                            object.name ||
-                            ""
-                        )
+                const materials =
+                    Array.isArray(
+                        object.material
                     )
-                    .toLowerCase();
+                        ? object.material
+                        : [
+                            object.material
+                        ];
 
 
-                if (
-                    name.includes("green") ||
-                    name.includes("led") ||
-                    name.includes("glow") ||
-                    name.includes("neon") ||
-                    name.includes("emission")
-                ) {
+                materials.forEach(
+                    material => {
 
-                    if (material.color) {
+                        if (!material) {
+                            return;
+                        }
 
-                        material.color.set(
-                            "#65ff91"
-                        );
+
+                        const name =
+                            (
+                                (
+                                    material.name ||
+                                    ""
+                                ) +
+                                " " +
+                                (
+                                    object.name ||
+                                    ""
+                                )
+                            )
+                            .toLowerCase();
+
+
+                        /* GREEN */
+
+                        if (
+                            name.includes(
+                                "green"
+                            ) ||
+                            name.includes(
+                                "led"
+                            ) ||
+                            name.includes(
+                                "glow"
+                            ) ||
+                            name.includes(
+                                "neon"
+                            ) ||
+                            name.includes(
+                                "emission"
+                            )
+                        ) {
+
+                            if (
+                                material.color
+                            ) {
+
+                                material.color.set(
+                                    "#65ff91"
+                                );
+
+                            }
+
+
+                            if (
+                                "emissive"
+                                in material
+                            ) {
+
+                                material.emissive.set(
+                                    "#42ff7a"
+                                );
+
+                                material.emissiveIntensity =
+                                    1.4;
+
+                            }
+
+
+                            if (
+                                "metalness"
+                                in material
+                            ) {
+
+                                material.metalness =
+                                    0.35;
+
+                            }
+
+
+                            if (
+                                "roughness"
+                                in material
+                            ) {
+
+                                material.roughness =
+                                    0.2;
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /* SILVER */
+
+                        if (
+                            name.includes(
+                                "silver"
+                            ) ||
+                            name.includes(
+                                "chrome"
+                            ) ||
+                            name.includes(
+                                "white"
+                            )
+                        ) {
+
+                            if (
+                                material.color
+                            ) {
+
+                                material.color.set(
+                                    "#d4ddd8"
+                                );
+
+                            }
+
+
+                            if (
+                                "metalness"
+                                in material
+                            ) {
+
+                                material.metalness =
+                                    0.7;
+
+                            }
+
+
+                            if (
+                                "roughness"
+                                in material
+                            ) {
+
+                                material.roughness =
+                                    0.22;
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /* MAIN */
+
+                        if (
+                            material.color
+                        ) {
+
+                            material.color.set(
+                                "#3a413e"
+                            );
+
+                        }
+
+
+                        if (
+                            "metalness"
+                            in material
+                        ) {
+
+                            material.metalness =
+                                0.62;
+
+                        }
+
+
+                        if (
+                            "roughness"
+                            in material
+                        ) {
+
+                            material.roughness =
+                                0.28;
+
+                        }
+
+
+                        if (
+                            "envMapIntensity"
+                            in material
+                        ) {
+
+                            material.envMapIntensity =
+                                1.4;
+
+                        }
 
                     }
+                );
 
-                    if (
-                        "emissive"
-                        in material
-                    ) {
-
-                        material.emissive.set(
-                            "#42ff7a"
-                        );
-
-                        material.emissiveIntensity =
-                            1.4;
-
-                    }
-
-                    if (
-                        "metalness"
-                        in material
-                    ) {
-
-                        material.metalness =
-                            0.35;
-
-                    }
-
-                    if (
-                        "roughness"
-                        in material
-                    ) {
-
-                        material.roughness =
-                            0.2;
-
-                    }
-
-                    return;
-
-                }
-
-
-                if (
-                    name.includes("silver") ||
-                    name.includes("chrome") ||
-                    name.includes("white")
-                ) {
-
-                    if (material.color) {
-
-                        material.color.set(
-                            "#d4ddd8"
-                        );
-
-                    }
-
-                    if (
-                        "metalness"
-                        in material
-                    ) {
-
-                        material.metalness =
-                            0.7;
-
-                    }
-
-                    if (
-                        "roughness"
-                        in material
-                    ) {
-
-                        material.roughness =
-                            0.22;
-
-                    }
-
-                    return;
-
-                }
-
-
-                if (material.color) {
-
-                    material.color.set(
-                        "#3a413e"
-                    );
-
-                }
-
-
-                if (
-                    "metalness"
-                    in material
-                ) {
-
-                    material.metalness =
-                        0.62;
-
-                }
-
-
-                if (
-                    "roughness"
-                    in material
-                ) {
-
-                    material.roughness =
-                        0.28;
-
-                }
-
-
-                if (
-                    "envMapIntensity"
-                    in material
-                ) {
-
-                    material.envMapIntensity =
-                        1.4;
-
-                }
-
-            });
-
-        });
+            }
+        );
 
     }
 
 
     /* =================================================
        FRAME ROBOT
-    ================================================= */
+    ================================================== */
 
-    function frameRobot(object) {
+    function frameRobot(
+        object
+    ) {
 
         const box =
             new THREE.Box3()
@@ -1333,18 +1505,27 @@ if (!robotContainer) {
         }
 
 
+        /*
+           CENTER MODEL
+        */
+
         object.position.sub(
             center
         );
 
 
         /*
-           Sedikit lebih kecil
-           agar seluruh badan aman.
+           IMPORTANT
+
+           Ukuran normal robot.
+           Tidak menggunakan camera zoom
+           saat loading.
+
+           Jadi badan tidak terpotong.
         */
 
         const desiredSize =
-            4.5;
+            4.25;
 
 
         const scale =
@@ -1356,6 +1537,10 @@ if (!robotContainer) {
             scale
         );
 
+
+        /*
+           CAMERA
+        */
 
         const fov =
             THREE.MathUtils.degToRad(
@@ -1374,21 +1559,25 @@ if (!robotContainer) {
 
         camera.position.set(
             0,
-            0.2,
-            distance
+            0.15,
+            distance * 1.12
         );
 
 
         camera.lookAt(
             0,
-            0.15,
+            0.05,
             0
         );
 
 
+        /*
+           POSITION
+        */
+
         object.position.set(
             0,
-            -0.95,
+            -0.75,
             0
         );
 
@@ -1396,173 +1585,36 @@ if (!robotContainer) {
         baseRobotY =
             object.position.y;
 
-
         baseRobotZ =
             object.position.z;
-
 
         baseRobotRotationY =
             object.rotation.y;
 
-
         baseRobotRotationZ =
             object.rotation.z;
 
-    }
 
+        /*
+           START BIG
 
-    /* =================================================
-       CREATE SPEECH BUBBLE
-    ================================================= */
+           1.55 = 155%
+           lalu mengecil ke 100%.
+        */
 
-    function createSpeechBubble() {
-
-        speechBubble =
-            document.createElement(
-                "div"
-            );
-
-        speechBubble.className =
-            "robot-speech";
-
-
-        speechBubble.innerHTML = `
-            <div class="robot-speech-label">
-                AI SYSTEM
-            </div>
-
-            <div
-                class="robot-speech-text"
-                id="robotSpeechText"
-            ></div>
-        `;
-
-
-        robotContainer.appendChild(
-            speechBubble
+        object.scale.setScalar(
+            scale * 1.55
         );
 
-
-        speechText =
-            speechBubble.querySelector(
-                "#robotSpeechText"
-            );
-
-
-        speechBubble.style.opacity =
-            "0";
-
-        speechBubble.style.transform =
-            "translate(-50%, 10px) scale(.92)";
+        loadingScale =
+            1.55;
 
     }
 
 
     /* =================================================
-       SHOW SPEECH
-    ================================================= */
-
-    function showSpeech() {
-
-        if (!speechBubble) {
-            return;
-        }
-
-
-        speechActive =
-            true;
-
-        speechTimer =
-            0;
-
-
-        speechBubble.style.opacity =
-            "1";
-
-        speechBubble.style.transform =
-            "translate(-50%, 0) scale(1)";
-
-
-        const message =
-            "HELLO, WELCOME TO MY WEBSITE";
-
-
-        if (speechText) {
-
-            speechText.textContent =
-                "";
-
-            let index = 0;
-
-
-            function typeSpeech() {
-
-                if (
-                    !speechActive
-                ) {
-
-                    return;
-
-                }
-
-
-                if (
-                    index <
-                    message.length
-                ) {
-
-                    speechText.textContent +=
-                        message.charAt(
-                            index
-                        );
-
-                    index++;
-
-
-                    setTimeout(
-                        typeSpeech,
-                        48
-                    );
-
-                }
-
-            }
-
-
-            typeSpeech();
-
-        }
-
-    }
-
-
-    /* =================================================
-       HIDE SPEECH
-    ================================================= */
-
-    function hideSpeech() {
-
-        if (!speechBubble) {
-            return;
-        }
-
-
-        speechActive =
-            false;
-
-
-        speechBubble.style.opacity =
-            "0";
-
-        speechBubble.style.transform =
-            "translate(-50%, 10px) scale(.92)";
-
-    }
-
-
-    /* =================================================
-       CREATE FACE
-    ================================================= */
+       CREATE ROBOT FACE
+    ================================================== */
 
     function createRobotFace() {
 
@@ -1580,9 +1632,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           PANEL
-        ============================================= */
+        /* PANEL */
 
         const panelGeometry =
             new THREE.BoxGeometry(
@@ -1632,9 +1682,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           EYES
-        ============================================= */
+        /* EYES */
 
         const eyeGeometry =
             new THREE.SphereGeometry(
@@ -1710,9 +1758,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           GLOW
-        ============================================= */
+        /* EYE GLOW */
 
         const glowGeometry =
             new THREE.SphereGeometry(
@@ -1784,9 +1830,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           MOUTH
-        ============================================= */
+        /* MOUTH */
 
         const mouthGeometry =
             new THREE.BoxGeometry(
@@ -1824,9 +1868,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           MOUTH DOTS
-        ============================================= */
+        /* MOUTH DOTS */
 
         const dotGeometry =
             new THREE.SphereGeometry(
@@ -1868,9 +1910,7 @@ if (!robotContainer) {
         }
 
 
-        /* =============================================
-           FACE LIGHT
-        ============================================= */
+        /* FACE LIGHT */
 
         faceLight =
             new THREE.PointLight(
@@ -1896,8 +1936,261 @@ if (!robotContainer) {
 
 
     /* =================================================
+       SPEECH SYSTEM
+    ================================================== */
+
+    function startRobotSpeech() {
+
+        if (
+            speechStarted ||
+            !robotSpeech ||
+            !speechText
+        ) {
+            return;
+        }
+
+
+        speechStarted =
+            true;
+
+
+        speechIndex =
+            0;
+
+
+        speechText.textContent =
+            "";
+
+
+        robotSpeech.classList.add(
+            "active"
+        );
+
+
+        /*
+           Mulai mengangkat tangan
+        */
+
+        armRaised =
+            true;
+
+
+        /*
+           Typing text
+        */
+
+        speechTimer =
+            setInterval(
+                () => {
+
+                    if (
+                        speechIndex <
+                        speechMessage.length
+                    ) {
+
+                        speechText.textContent +=
+                            speechMessage.charAt(
+                                speechIndex
+                            );
+
+                        speechIndex++;
+
+                    } else {
+
+                        clearInterval(
+                            speechTimer
+                        );
+
+                        speechTimer =
+                            null;
+
+
+                        /*
+                           Tunggu sebentar,
+                           lalu tetap tampil.
+                        */
+
+                        setTimeout(
+                            () => {
+
+                                if (
+                                    robotSpeech
+                                ) {
+
+                                    robotSpeech.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+
+                                armRaised =
+                                    false;
+
+                            },
+                            3500
+                        );
+
+                    }
+
+                },
+                55
+            );
+
+    }
+
+
+    /* =================================================
+       LOADING ANIMATION
+    ================================================== */
+
+    function updateLoadingAnimation() {
+
+        if (
+            !robot ||
+            !loadingAnimation
+        ) {
+            return;
+        }
+
+
+        const elapsed =
+            performance.now() -
+            loadingStartTime;
+
+
+        const progress =
+            Math.min(
+                elapsed /
+                loadingDuration,
+                1
+            );
+
+
+        /*
+           Ease out cubic.
+
+           Awalnya besar,
+           kemudian mengecil
+           secara smooth.
+        */
+
+        const ease =
+            1 -
+            Math.pow(
+                1 - progress,
+                3
+            );
+
+
+        loadingScale =
+            THREE.MathUtils.lerp(
+                1.55,
+                1.0,
+                ease
+            );
+
+
+        /*
+           Scale hanya model.
+
+           Camera tetap.
+           Jadi robot tidak
+           terpotong.
+        */
+
+        const baseScale =
+            robot.userData.baseScale ||
+            1;
+
+
+        robot.scale.setScalar(
+            baseScale *
+            loadingScale
+        );
+
+
+        /*
+           Sedikit fade status
+        */
+
+        if (
+            progress >= 0.75 &&
+            robotStatus
+        ) {
+
+            robotStatus.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        if (
+            progress >= 1
+        ) {
+
+            loadingAnimation =
+                false;
+
+            loadingScale =
+                1;
+
+
+            robot.scale.setScalar(
+                baseScale
+            );
+
+
+            if (robotLoading) {
+
+                robotLoading.classList.add(
+                    "hidden"
+                );
+
+            }
+
+
+            if (robotStatus) {
+
+                robotStatus.textContent =
+                    "READY — MOVE CURSOR";
+
+                robotStatus.classList.remove(
+                    "hidden"
+                );
+
+                setTimeout(
+                    () => {
+
+                        robotStatus.classList.add(
+                            "hidden"
+                        );
+
+                    },
+                    1200
+                );
+
+            }
+
+
+            /*
+               Speech dimulai
+               setelah robot selesai loading.
+            */
+
+            setTimeout(
+                startRobotSpeech,
+                650
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
        LOAD GLB
-    ================================================= */
+    ================================================== */
 
     const loader =
         new GLTFLoader();
@@ -1939,129 +2232,54 @@ if (!robotContainer) {
                 originalHeadRotation =
                     head.rotation.clone();
 
-
                 createRobotFace();
-
-            }
-
-
-            /* =========================================
-               FIND ARM
-            ========================================= */
-
-            rightArm =
-                findRightArm(
-                    robot
-                );
-
-
-            if (rightArm) {
-
-                originalRightArmRotation =
-                    rightArm.rotation.clone();
-
-                console.log(
-                    "Right arm ditemukan:",
-                    rightArm.name
-                );
 
             } else {
 
                 console.warn(
-                    "Right arm tidak ditemukan."
+                    "Head robot tidak ditemukan."
                 );
 
             }
 
-
-            /* =========================================
-               FIND HAND
-            ========================================= */
-
-            rightHand =
-                findRightHand(
-                    robot
-                );
-
-
-            if (rightHand) {
-
-                originalRightHandRotation =
-                    rightHand.rotation.clone();
-
-                console.log(
-                    "Right hand ditemukan:",
-                    rightHand.name
-                );
-
-            }
-
-
-            /* =========================================
-               FRAME
-            ========================================= */
 
             frameRobot(
                 robot
             );
 
 
-            /* =========================================
-               LOADING ZOOM
-            ========================================= */
+            /*
+               Simpan scale normal.
 
-            normalCameraZ =
-                camera.position.z;
+               Ini penting untuk
+               loading zoom.
+            */
 
-
-            camera.position.z =
-                normalCameraZ * 0.58;
-
-
-            loadingZoomActive =
-                true;
-
-
-            loadingZoomProgress =
-                0;
-
-
-            /* =========================================
-               SPEECH
-            ========================================= */
-
-            createSpeechBubble();
+            robot.userData.baseScale =
+                robot.scale.x /
+                1.55;
 
 
             /*
-               Tunggu sedikit agar robot
-               selesai melakukan zoom.
+               Cari tangan.
             */
 
-            setTimeout(() => {
+            findRightArm();
 
-                showSpeech();
 
-            }, 1900);
-
+            /*
+               Status.
+            */
 
             if (robotStatus) {
 
                 robotStatus.textContent =
-                    "READY — MOVE CURSOR";
-
-
-                setTimeout(() => {
-
-                    robotStatus.classList.add(
-                        "hidden"
-                    );
-
-                }, 1000);
+                    "ROBOT ONLINE";
 
             }
 
         },
+
 
         progress => {
 
@@ -2095,6 +2313,7 @@ if (!robotContainer) {
 
         },
 
+
         error => {
 
             console.error(
@@ -2110,6 +2329,14 @@ if (!robotContainer) {
 
             }
 
+
+            if (robotLoading) {
+
+                robotLoading.textContent =
+                    "ROBOT FAILED";
+
+            }
+
         }
 
     );
@@ -2117,7 +2344,7 @@ if (!robotContainer) {
 
     /* =================================================
        POINTER
-    ================================================= */
+    ================================================== */
 
     window.addEventListener(
         "pointermove",
@@ -2144,7 +2371,7 @@ if (!robotContainer) {
 
     /* =================================================
        ANIMATION
-    ================================================= */
+    ================================================== */
 
     function animate() {
 
@@ -2165,74 +2392,21 @@ if (!robotContainer) {
 
 
         /* =============================================
-           LOADING ZOOM OUT
-        ============================================= */
+           LOADING
+        ============================================== */
 
-        if (loadingZoomActive) {
-
-            loadingZoomProgress +=
-                delta /
-                loadingZoomDuration;
-
-
-            const progress =
-                Math.min(
-                    loadingZoomProgress,
-                    1
-                );
-
-
-            const eased =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            const startZ =
-                normalCameraZ * 0.58;
-
-
-            camera.position.z =
-                THREE.MathUtils.lerp(
-                    startZ,
-                    normalCameraZ,
-                    eased
-                );
-
-
-            camera.lookAt(
-                0,
-                0.15,
-                0
-            );
-
-
-            if (
-                progress >= 1
-            ) {
-
-                loadingZoomActive =
-                    false;
-
-
-                camera.position.z =
-                    normalCameraZ;
-
-            }
-
-        }
+        updateLoadingAnimation();
 
 
         /* =============================================
-           CURSOR SMOOTHING
-        ============================================= */
+           CURSOR
+        ============================================== */
 
         const cursorSmooth =
             1 -
             Math.exp(
-                -2.8 * delta
+                -2.8 *
+                delta
             );
 
 
@@ -2244,7 +2418,7 @@ if (!robotContainer) {
 
         /* =============================================
            BODY
-        ============================================= */
+        ============================================== */
 
         if (robot) {
 
@@ -2262,14 +2436,16 @@ if (!robotContainer) {
 
             robot.position.y =
                 baseRobotY +
-                breathe * 0.025;
+                breathe *
+                0.025;
 
 
             robot.position.z =
                 baseRobotZ +
                 Math.sin(
                     time * 0.7
-                ) * 0.008;
+                ) *
+                0.008;
 
 
             const cursorBodyRotation =
@@ -2284,7 +2460,7 @@ if (!robotContainer) {
                 cursorBodyRotation +
                 sway *
                 THREE.MathUtils.degToRad(
-                    1.0
+                    1
                 );
 
 
@@ -2302,7 +2478,7 @@ if (!robotContainer) {
 
         /* =============================================
            HEAD
-        ============================================= */
+        ============================================== */
 
         if (
             head &&
@@ -2344,7 +2520,8 @@ if (!robotContainer) {
             const headSmooth =
                 1 -
                 Math.exp(
-                    -3.8 * delta
+                    -3.8 *
+                    delta
                 );
 
 
@@ -2385,79 +2562,52 @@ if (!robotContainer) {
 
 
         /* =============================================
-           SPEECH TIMER
-        ============================================= */
-
-        if (speechActive) {
-
-            speechTimer +=
-                delta;
-
-
-            if (
-                speechTimer >=
-                speechDuration
-            ) {
-
-                hideSpeech();
-
-            }
-
-        }
-
-
-        /* =============================================
-           RIGHT ARM TALKING
-        ============================================= */
+           RIGHT ARM
+        ============================================== */
 
         if (
             rightArm &&
             originalRightArmRotation
         ) {
 
-            let targetRotation =
-                originalRightArmRotation.z;
+            const targetArmX =
+                armRaised
+                    ? THREE.MathUtils.degToRad(
+                        -35
+                    )
+                    : 0;
 
 
-            if (speechActive) {
-
-                /*
-                   Angkat tangan kanan.
-                   Jika arah rotasinya terbalik
-                   pada model GLB, nilainya
-                   bisa diubah menjadi negatif.
-                */
-
-                const wave =
-                    Math.sin(
-                        time * 4
-                    ) *
-                    THREE.MathUtils.degToRad(
-                        4
-                    );
-
-
-                targetRotation =
-                    originalRightArmRotation.z +
-                    THREE.MathUtils.degToRad(
-                        48
-                    ) +
-                    wave;
-
-            }
+            const targetArmZ =
+                armRaised
+                    ? THREE.MathUtils.degToRad(
+                        -18
+                    )
+                    : 0;
 
 
             const armSmooth =
                 1 -
                 Math.exp(
-                    -5 * delta
+                    -4.5 *
+                    delta
+                );
+
+
+            rightArm.rotation.x =
+                THREE.MathUtils.lerp(
+                    rightArm.rotation.x,
+                    originalRightArmRotation.x +
+                    targetArmX,
+                    armSmooth
                 );
 
 
             rightArm.rotation.z =
                 THREE.MathUtils.lerp(
                     rightArm.rotation.z,
-                    targetRotation,
+                    originalRightArmRotation.z +
+                    targetArmZ,
                     armSmooth
                 );
 
@@ -2466,42 +2616,34 @@ if (!robotContainer) {
 
         /* =============================================
            RIGHT HAND
-        ============================================= */
+        ============================================== */
 
         if (
             rightHand &&
             originalRightHandRotation
         ) {
 
-            let targetHandRotation =
-                originalRightHandRotation.z;
-
-
-            if (speechActive) {
-
-                targetHandRotation =
-                    originalRightHandRotation.z +
-                    Math.sin(
-                        time * 3
-                    ) *
-                    THREE.MathUtils.degToRad(
-                        10
-                    );
-
-            }
+            const targetHandZ =
+                armRaised
+                    ? THREE.MathUtils.degToRad(
+                        -10
+                    )
+                    : 0;
 
 
             const handSmooth =
                 1 -
                 Math.exp(
-                    -5 * delta
+                    -4 *
+                    delta
                 );
 
 
             rightHand.rotation.z =
                 THREE.MathUtils.lerp(
                     rightHand.rotation.z,
-                    targetHandRotation,
+                    originalRightHandRotation.z +
+                    targetHandZ,
                     handSmooth
                 );
 
@@ -2510,34 +2652,33 @@ if (!robotContainer) {
 
         /* =============================================
            EYES
-        ============================================= */
+        ============================================== */
 
         if (
             faceEyes.length > 0
         ) {
 
-            let eyePulse;
+            /*
+               Saat bicara:
+               jauh lebih terang.
+            */
+
+            const talkingIntensity =
+                armRaised
+                    ? 7.0
+                    : 3.0;
 
 
-            if (speechActive) {
-
-                eyePulse =
-                    7.0 +
-                    Math.sin(
-                        time * 7
-                    ) *
-                    1.2;
-
-            } else {
-
-                eyePulse =
-                    3.0 +
-                    Math.sin(
-                        time * 1.4
-                    ) *
-                    0.45;
-
-            }
+            const eyePulse =
+                talkingIntensity +
+                Math.sin(
+                    time * 4
+                ) *
+                (
+                    armRaised
+                        ? 1.2
+                        : .45
+                );
 
 
             faceEyes.forEach(
@@ -2559,28 +2700,19 @@ if (!robotContainer) {
             );
 
 
-            let glowPulse;
+            const glowPulse =
+                armRaised
+                    ? 0.16 +
+                        Math.sin(
+                            time * 4
+                        ) *
+                        0.07
 
-
-            if (speechActive) {
-
-                glowPulse =
-                    0.22 +
-                    Math.sin(
-                        time * 5
-                    ) *
-                    0.08;
-
-            } else {
-
-                glowPulse =
-                    0.06 +
-                    Math.sin(
-                        time * 1.3
-                    ) *
-                    0.025;
-
-            }
+                    : 0.06 +
+                        Math.sin(
+                            time * 1.3
+                        ) *
+                        0.025;
 
 
             faceEyeGlows.forEach(
@@ -2597,7 +2729,7 @@ if (!robotContainer) {
 
         /* =============================================
            BLINK
-        ============================================= */
+        ============================================== */
 
         blinkTimer +=
             delta;
@@ -2605,7 +2737,8 @@ if (!robotContainer) {
 
         if (
             !blinking &&
-            blinkTimer >= nextBlink
+            blinkTimer >=
+            nextBlink
         ) {
 
             blinking =
@@ -2666,7 +2799,8 @@ if (!robotContainer) {
 
                 nextBlink =
                     3 +
-                    Math.random() * 5;
+                    Math.random() *
+                    5;
 
 
                 faceEyes.forEach(
@@ -2685,18 +2819,23 @@ if (!robotContainer) {
 
         /* =============================================
            MOUTH
-        ============================================= */
+        ============================================== */
 
         if (faceMouth) {
 
-            if (speechActive) {
+            if (armRaised) {
+
+                /*
+                   Mulut lebih besar
+                   saat bicara.
+                */
 
                 faceMouth.scale.x =
-                    1.1 +
+                    1.15 +
                     Math.sin(
-                        time * 8
+                        time * 12
                     ) *
-                    0.22;
+                    0.18;
 
             } else {
 
@@ -2715,14 +2854,14 @@ if (!robotContainer) {
         faceMouthDots.forEach(
             dot => {
 
-                if (speechActive) {
+                if (armRaised) {
 
                     dot.scale.setScalar(
-                        1.25 +
+                        1.15 +
                         Math.sin(
-                            time * 8
+                            time * 12
                         ) *
-                        0.18
+                        0.15
                     );
 
                 } else {
@@ -2743,36 +2882,31 @@ if (!robotContainer) {
 
         /* =============================================
            FACE LIGHT
-        ============================================= */
+        ============================================== */
 
         if (faceLight) {
 
-            if (speechActive) {
+            faceLight.intensity =
+                armRaised
 
-                faceLight.intensity =
-                    2.0 +
-                    Math.sin(
-                        time * 6
-                    ) *
-                    0.45;
+                    ? 1.8 +
+                        Math.sin(
+                            time * 5
+                        ) *
+                        0.5
 
-            } else {
-
-                faceLight.intensity =
-                    0.65 +
-                    Math.sin(
-                        time * 1.4
-                    ) *
-                    0.12;
-
-            }
+                    : 0.65 +
+                        Math.sin(
+                            time * 1.4
+                        ) *
+                        0.12;
 
         }
 
 
         /* =============================================
            LIGHT MOVEMENT
-        ============================================= */
+        ============================================== */
 
         const lightPulse =
             Math.sin(
@@ -2782,84 +2916,31 @@ if (!robotContainer) {
 
         greenRim.intensity =
             2.6 +
-            lightPulse * 0.5;
+            lightPulse *
+            0.5;
 
 
         greenBack.intensity =
             1.15 +
-            lightPulse * 0.2;
+            lightPulse *
+            0.2;
 
 
         frontLight.intensity =
             4.1 +
-            lightPulse * 0.2;
+            lightPulse *
+            0.2;
 
 
         leftLight.intensity =
             3.4 +
-            lightPulse * 0.15;
-
-
-        /* =============================================
-           UPDATE SPEECH POSITION
-        ============================================= */
-
-        if (
-            speechBubble &&
-            robot
-        ) {
-
-            const robotWorld =
-                new THREE.Vector3(
-                    0,
-                    1.1,
-                    0
-                );
-
-
-            robot.localToWorld(
-                robotWorld
-            );
-
-
-            const projected =
-                robotWorld.clone()
-                    .project(
-                        camera
-                    );
-
-
-            const x =
-                (
-                    projected.x *
-                    0.5 +
-                    0.5
-                ) *
-                robotContainer.clientWidth;
-
-
-            const y =
-                (
-                    -projected.y *
-                    0.5 +
-                    0.5
-                ) *
-                robotContainer.clientHeight;
-
-
-            speechBubble.style.left =
-                `${x}px`;
-
-
-            speechBubble.style.top =
-                `${y}px`;
-
-        }
+            lightPulse *
+            0.15;
 
 
         /* =============================================
            RENDER
-        ============================================= */
+        ============================================== */
 
         renderer.render(
             scene,
@@ -2874,7 +2955,7 @@ if (!robotContainer) {
 
     /* =================================================
        RESIZE
-    ================================================= */
+    ================================================== */
 
     window.addEventListener(
         "resize",
