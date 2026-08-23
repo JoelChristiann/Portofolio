@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Joel Christian — AI, Data Science, Computer Vision and Web Development."
+    >
+
+    <title>
+        Joel Christian — AI & Digital Intelligence
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+         ===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- =====================================================
+         THREE.JS IMPORT MAP
+         ===================================================== -->
+
+    <script type="importmap">
+
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+        }
+    }
+
+    </script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <a
+            href="#home"
+            class="brand"
+        >
+            JOELCHRISTIANN
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#projects">
+                Projects
+            </a>
+
+            <a href="#process">
+                Process
+            </a>
+
+            <a href="#skills">
+                Skills
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
+
+        </div>
+
+
+        <a
+            href="#contact"
+            class="nav-cta"
+        >
+            Let's Talk
+        </a>
+
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open menu"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+
+    <!-- MOBILE NAV -->
+
+    <div
+        class="mobile-nav"
+        id="mobileNav"
+    >
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#projects">
+            Projects
+        </a>
+
+        <a href="#process">
+            Process
+        </a>
+
+        <a href="#skills">
+            Skills
+        </a>
+
+        <a href="#faq">
+            FAQ
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<main id="home">
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="available">
+
+                <span></span>
+
+                AVAILABLE FOR PROJECTS
+
+            </div>
+
+
+            <!-- =================================================
+                 TYPING #1
+                 ================================================= -->
+
+            <h1
+                class="hero-title typing-title"
+                data-text="Building digital intelligence."
+            ></h1>
+
+
+            <div class="hero-bottom">
+
+                <p class="hero-description">
+
+                    I build technology to solve
+                    real-world problems through
+                    artificial intelligence, data,
+                    computer vision and modern web
+                    development.
+
+                </p>
+
+
+                <a
+                    href="#projects"
+                    class="round-button"
+                >
+
+                    <span>
+                        Explore
+                    </span>
+
+                    <span>
+                        ↓
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 ROBOT VISUAL
+                 ================================================= -->
+
+            <div class="hero-visual">
+
+                <div class="hero-grid"></div>
+
+
+                <div class="background-name">
+                    JOEL
+                </div>
+
+
+                <!-- ROBOT -->
+
+                <div
+                    class="robot-container"
+                    id="robot-container"
+                ></div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="robot-loading"
+                    id="robot-loading"
+                >
+                    LOADING AI...
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div
+                    class="robot-status"
+                    id="robot-status"
+                >
+                    INITIALIZING SYSTEM
+                </div>
+
+
+                <!-- SPEECH -->
+
+                <div
+                    class="robot-speech"
+                    id="robotSpeech"
+                >
+
+                    <div class="speech-line"></div>
+
+                    <div
+                        class="speech-text"
+                        id="speechText"
+                    ></div>
+
+                    <span class="speech-cursor"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         ABOUT
+         ======================================================= -->
+
+    <section
+        class="section-padding"
+        id="about"
+    >
+
+        <div class="container">
+
+            <div class="section-label">
+                01 — ABOUT
+            </div>
+
+
+            <!-- TYPING #2 -->
+
+            <h2
+                class="large-title typing-title about-heading"
+                data-text="I build technology to solve real-world problems."
+            ></h2>
+
+
+            <div class="about-grid">
+
+                <div>
+
+                    <p class="about-text">
+
+                        I am Joel Christian, an Informatics
+                        student interested in Artificial
+                        Intelligence, Data Science,
+                        Computer Vision and Deep Learning.
+
+                    </p>
+
+                    <p class="about-text">
+
+                        My approach is simple: understand
+                        the problem, work with the data,
+                        build the system and turn the
+                        result into something useful.
+
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p class="about-text">
+
+                        I am particularly interested in
+                        applying intelligent systems to
+                        real-world problems in technology,
+                        agriculture and society.
+
+                    </p>
+
+                    <a
+                        href="#projects"
+                        class="text-link"
+                    >
+                        View selected work →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         PROJECTS
+         ======================================================= -->
+
+    <section
+        class="section-padding"
+        id="projects"
+    >
+
+        <div class="container">
+
+            <div class="section-label">
+                02 — SELECTED WORK
+            </div>
+
+
+            <!-- TYPING #3 -->
+
+            <h2
+                class="large-title typing-title"
+                data-text="Selected experiments."
+            ></h2>
+
+
+            <div class="section-heading-row">
+
+                <p>
+
+                    A collection of experiments,
+                    research ideas and digital products
+                    built around AI, data, computer vision
+                    and web technology.
+
+                </p>
+
+            </div>
+
+
+            <!-- PROJECT GRID -->
+
+            <div class="project-grid">
+
+
+                <!-- AI -->
+
+                <article
+                    class="project-card"
+                    data-project="ai"
+                    tabindex="0"
+                    role="button"
+                >
+
+                    <span class="project-number">
+                        01
+                    </span>
+
+
+                    <div
+                        class="project-image project-ai"
+                    >
+
+                        <div class="ai-network">
+
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+
+                        </div>
+
+
+                        <span>
+                            AI
+                        </span>
+
+                    </div>
+
+
+                    <div class="project-body">
+
+                        <small>
+                            ARTIFICIAL INTELLIGENCE
+                        </small>
+
+                        <h3>
+                            AI Research
+                        </h3>
+
+                        <p>
+
+                            Eksplorasi Artificial Intelligence
+                            dan Machine Learning untuk
+                            menyelesaikan permasalahan
+                            dunia nyata.
+
+                        </p>
+
+
+                        <div class="tags">
+
+                            <span>
+                                Python
+                            </span>
+
+                            <span>
+                                Machine Learning
+                            </span>
+
+                            <span>
+                                Deep Learning
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-view">
+                            View project →
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- DATA -->
+
+                <article
+                    class="project-card"
+                    data-project="data"
+                    tabindex="0"
+                    role="button"
+                >
+
+                    <span class="project-number">
+                        02
+                    </span>
+
+
+                    <div
+                        class="project-image project-data"
+                    >
+
+                        <div class="data-bars">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-body">
+
+                        <small>
+                            DATA SCIENCE
+                        </small>
+
+                        <h3>
+                            Data Analytics
+                        </h3>
+
+                        <p>
+
+                            Eksplorasi data untuk menemukan
+                            pola, insight dan informasi
+                            melalui analisis.
+
+                        </p>
+
+
+                        <div class="tags">
+
+                            <span>
+                                Python
+                            </span>
+
+                            <span>
+                                Pandas
+                            </span>
+
+                            <span>
+                                SQL
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-view">
+                            View project →
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- COMPUTER VISION -->
+
+                <article
+                    class="project-card"
+                    data-project="cv"
+                    tabindex="0"
+                    role="button"
+                >
+
+                    <span class="project-number">
+                        03
+                    </span>
+
+
+                    <div
+                        class="project-image project-cv"
+                    >
+
+                        <div class="scan-box">
+
+                            <div
+                                class="scan-corner top-left"
+                            ></div>
+
+                            <div
+                                class="scan-corner top-right"
+                            ></div>
+
+                            <div
+                                class="scan-corner bottom-left"
+                            ></div>
+
+                            <div
+                                class="scan-corner bottom-right"
+                            ></div>
+
+                            <div class="cv-eye">
+                                ◉
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-body">
+
+                        <small>
+                            COMPUTER VISION
+                        </small>
+
+                        <h3>
+                            Vision Systems
+                        </h3>
+
+                        <p>
+
+                            Eksperimen Computer Vision
+                            dan Deep Learning untuk
+                            memahami objek dan pola visual.
+
+                        </p>
+
+
+                        <div class="tags">
+
+                            <span>
+                                OpenCV
+                            </span>
+
+                            <span>
+                                PyTorch
+                            </span>
+
+                            <span>
+                                Deep Learning
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-view">
+                            View project →
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- WEB -->
+
+                <article
+                    class="project-card"
+                    data-project="web"
+                    tabindex="0"
+                    role="button"
+                >
+
+                    <span class="project-number">
+                        04
+                    </span>
+
+
+                    <div
+                        class="project-image project-web"
+                    >
+
+                        <div class="mock-browser">
+
+                            <div class="browser-header">
+
+                                <i></i>
+                                <i></i>
+                                <i></i>
+
+                            </div>
+
+
+                            <div class="browser-content">
+
+                                <div></div>
+                                <div></div>
+                                <div></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-body">
+
+                        <small>
+                            WEB DEVELOPMENT
+                        </small>
+
+                        <h3>
+                            Digital Village
+                        </h3>
+
+                        <p>
+
+                            Website informasi desa dengan
+                            desain modern, responsive dan
+                            mudah digunakan.
+
+                        </p>
+
+
+                        <div class="tags">
+
+                            <span>
+                                HTML
+                            </span>
+
+                            <span>
+                                CSS
+                            </span>
+
+                            <span>
+                                JavaScript
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-view">
+                            View project →
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         PROCESS
+         ======================================================= -->
+
+    <section
+        class="section-padding"
+        id="process"
+    >
+
+        <div class="container">
+
+            <div class="section-label">
+                03 — PROCESS
+            </div>
+
+
+            <!-- TYPING #4 -->
+
+            <h2
+                class="large-title typing-title"
+                data-text="From idea to implementation."
+            ></h2>
+
+
+            <div class="process-grid">
+
+                <div class="process-item">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Understand
+                    </h3>
+
+                    <p>
+
+                        Memahami masalah,
+                        kebutuhan dan tujuan
+                        sebelum membuat solusi.
+
+                    </p>
+
+                </div>
+
+
+                <div class="process-item">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Build
+                    </h3>
+
+                    <p>
+
+                        Mengubah ide menjadi
+                        prototype, model atau
+                        aplikasi yang dapat digunakan.
+
+                    </p>
+
+                </div>
+
+
+                <div class="process-item">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Improve
+                    </h3>
+
+                    <p>
+
+                        Menguji hasil, membaca
+                        data dan terus meningkatkan
+                        sistem.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         SKILLS
+         ======================================================= -->
+
+    <section
+        class="section-padding"
+        id="skills"
+    >
+
+        <div class="container">
+
+            <div class="section-label">
+                04 — TECHNOLOGIES
+            </div>
+
+
+            <!-- TYPING #5 -->
+
+            <h2
+                class="large-title typing-title"
+                data-text="Technologies I work with."
+            ></h2>
+
+
+            <div class="skills-cards">
+
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        AI
+                    </div>
+
+                    <h3>
+                        Artificial Intelligence
+                    </h3>
+
+                    <p>
+
+                        Machine Learning,
+                        Deep Learning,
+                        intelligent systems
+                        and experimentation.
+
+                    </p>
+
+
+                    <div class="skill-tags">
+
+                        <span>
+                            Python
+                        </span>
+
+                        <span>
+                            TensorFlow
+                        </span>
+
+                        <span>
+                            PyTorch
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        DS
+                    </div>
+
+                    <h3>
+                        Data Science
+                    </h3>
+
+                    <p>
+
+                        Data analysis, data cleaning,
+                        visualization and extracting
+                        meaningful insights.
+
+                    </p>
+
+
+                    <div class="skill-tags">
+
+                        <span>
+                            Pandas
+                        </span>
+
+                        <span>
+                            NumPy
+                        </span>
+
+                        <span>
+                            SQL
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        CV
+                    </div>
+
+                    <h3>
+                        Computer Vision
+                    </h3>
+
+                    <p>
+
+                        Image processing,
+                        classification, detection
+                        and visual intelligence.
+
+                    </p>
+
+
+                    <div class="skill-tags">
+
+                        <span>
+                            OpenCV
+                        </span>
+
+                        <span>
+                            PyTorch
+                        </span>
+
+                        <span>
+                            YOLO
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        WEB
+                    </div>
+
+                    <h3>
+                        Web Development
+                    </h3>
+
+                    <p>
+
+                        Responsive interfaces,
+                        interactive websites
+                        and digital experiences.
+
+                    </p>
+
+
+                    <div class="skill-tags">
+
+                        <span>
+                            HTML
+                        </span>
+
+                        <span>
+                            CSS
+                        </span>
+
+                        <span>
+                            JavaScript
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         METRICS
+         ======================================================= -->
+
+    <section class="metrics">
+
+        <div class="container">
+
+            <div class="metrics-grid">
+
+                <div>
+
+                    <strong>
+                        04
+                    </strong>
+
+                    <span>
+                        Core Areas
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        AI
+                    </strong>
+
+                    <span>
+                        Main Focus
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        CV
+                    </strong>
+
+                    <span>
+                        Vision Research
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        ∞
+                    </strong>
+
+                    <span>
+                        Experiments
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         FAQ
+         ======================================================= -->
+
+    <section
+        class="section-padding"
+        id="faq"
+    >
+
+        <div class="container">
+
+            <div class="section-label">
+                05 — FAQ
+            </div>
+
+
+            <!-- TYPING #6 -->
+
+            <div class="faq-heading">
+
+                <h2
+                    class="large-title typing-title"
+                    data-text="Frequently asked."
+                ></h2>
+
+
+                <p>
+
+                    A few answers about my work,
+                    interests and approach.
+
+                </p>
+
+            </div>
+
+
+            <div class="faq-list">
+
+
+                <div class="faq-item">
+
+                    <button
+                        class="faq-question"
+                        type="button"
+                    >
+
+                        What are you currently
+                        interested in?
+
+                        <span>
+                            +
+                        </span>
+
+                    </button>
+
+
+                    <div class="faq-answer">
+
+                        <p>
+
+                            Artificial Intelligence,
+                            Computer Vision, Deep Learning,
+                            Data Science and technology
+                            applied to real-world problems.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button
+                        class="faq-question"
+                        type="button"
+                    >
+
+                        What kind of projects
+                        do you build?
+
+                        <span>
+                            +
+                        </span>
+
+                    </button>
+
+
+                    <div class="faq-answer">
+
+                        <p>
+
+                            AI experiments, data analysis,
+                            computer vision systems and
+                            modern web applications.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button
+                        class="faq-question"
+                        type="button"
+                    >
+
+                        Are you available
+                        for collaboration?
+
+                        <span>
+                            +
+                        </span>
+
+                    </button>
+
+
+                    <div class="faq-answer">
+
+                        <p>
+
+                            Yes. For interesting technical
+                            projects, research and digital
+                            products.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button
+                        class="faq-question"
+                        type="button"
+                    >
+
+                        What is your approach
+                        to technology?
+
+                        <span>
+                            +
+                        </span>
+
+                    </button>
+
+
+                    <div class="faq-answer">
+
+                        <p>
+
+                            Technology should not exist
+                            just because it is technically
+                            interesting. It should solve
+                            a meaningful problem.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         CTA
+         ======================================================= -->
+
+    <section
+        class="cta"
+        id="contact"
+    >
+
+        <div class="cta-grid"></div>
+
+
+        <div class="cta-content">
+
+
+            <!-- TYPING #7 -->
+
+            <h2
+                class="cta-title typing-title"
+                data-text="Let's build something intelligent."
+            ></h2>
+
+
+            <p>
+
+                Have an idea, research problem
+                or digital product in mind?
+
+                Let's turn it into something real.
+
+            </p>
+
+
+            <a
+                href="mailto:your@email.com"
+                class="cta-button"
+            >
+
+                Start a conversation →
+
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="brand">
+                    JOEL
+                </div>
+
+                <p>
+
+                    Building digital intelligence
+                    through AI, data, computer vision
+                    and web technology.
+
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <small>
+                    NAVIGATION
+                </small>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#projects">
+                    Projects
+                </a>
+
+                <a href="#skills">
+                    Skills
+                </a>
+
+                <a href="#faq">
+                    FAQ
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <small>
+                    CONNECT
+                </small>
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    LinkedIn
+                </a>
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Instagram
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © <span id="year"></span>
+                Joel Christian
+            </span>
+
+            <span>
+                Built with intelligence.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     PROJECT MODAL
+     ========================================================= -->
+
+<div
+    class="project-modal"
+    id="projectModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-overlay"
+        id="modalOverlay"
+    ></div>
+
+
+    <div class="modal-content">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            type="button"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div
+            class="modal-category"
+            id="modalCategory"
+        ></div>
+
+
+        <h2
+            id="modalTitle"
+        ></h2>
+
+
+        <p
+            class="modal-description"
+            id="modalDescription"
+        ></p>
+
+
+        <div class="modal-section">
+
+            <span>
+                ABOUT PROJECT
+            </span>
+
+            <p
+                id="modalDetails"
+            ></p>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <span>
+                TECHNOLOGIES
+            </span>
+
+            <div
+                class="modal-tags"
+                id="modalTags"
+            ></div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <a
+                href="#"
+                class="modal-button"
+                id="modalProjectLink"
+                target="_blank"
+                rel="noopener"
+            >
+                View Project →
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script
+    type="module"
+    src="script.js"
+></script>
+
+
+</body>
+</html>
