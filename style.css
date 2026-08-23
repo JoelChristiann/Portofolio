@@ -3834,3 +3834,34 @@ footer {
 .robot-status {
     z-index: 90 !important;
 }
+
+/* ============================================================
+   FINAL ROBOT POSITION
+   Turunkan robot sedikit — tetap terlihat setengah badan
+   ============================================================ */
+
+@media (min-width: 769px) {
+
+    .robot-container canvas {
+        transform: translateY(70px) !important;
+    }
+
+}
+
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .robot-container canvas {
+        transform: translateY(55px) !important;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .robot-container canvas {
+        transform: translateY(45px) !important;
+    }
+
+}
