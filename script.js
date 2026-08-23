@@ -1,6 +1,6 @@
 /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
-   ROBOT STATIC BODY + HEAD/SHOULDER LOOK AT CURSOR
+   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT CURSOR + MOBILE
    ============================================================ */
 
 import * as THREE from "three";
@@ -115,6 +115,7 @@ let scene;
 let camera;
 let renderer;
 let robot;
+let clock;
 
 
 /* ============================================================
@@ -140,7 +141,7 @@ let shoulderRightOriginalRotation = null;
 
 
 /* ============================================================
-   MOUSE
+   MOUSE / TOUCH
    ============================================================ */
 
 const mouseTarget =
@@ -151,21 +152,124 @@ const mouseCurrent =
 
 
 /* ============================================================
-   MOUSE MOVE
+   UPDATE LOOK POSITION
+   ============================================================ */
+
+function updateLookPosition(
+    clientX,
+    clientY
+) {
+
+    mouseTarget.x =
+        (clientX /
+            window.innerWidth) * 2 - 1;
+
+    mouseTarget.y =
+        -(clientY /
+            window.innerHeight) * 2 + 1;
+
+}
+
+
+/* ============================================================
+   DESKTOP MOUSE
    ============================================================ */
 
 window.addEventListener(
     "mousemove",
     event => {
 
-        mouseTarget.x =
-            (event.clientX /
-                window.innerWidth) * 2 - 1;
+        updateLookPosition(
+            event.clientX,
+            event.clientY
+        );
 
-        mouseTarget.y =
-            -(event.clientY /
-                window.innerHeight) * 2 + 1;
+    },
+    {
+        passive: true
+    }
+);
 
+
+/* ============================================================
+   MOBILE TOUCH START
+   ============================================================ */
+
+window.addEventListener(
+    "touchstart",
+    event => {
+
+        if (
+            !event.touches ||
+            event.touches.length === 0
+        ) {
+            return;
+        }
+
+        const touch =
+            event.touches[0];
+
+        updateLookPosition(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* ============================================================
+   MOBILE TOUCH MOVE
+   ============================================================ */
+
+window.addEventListener(
+    "touchmove",
+    event => {
+
+        if (
+            !event.touches ||
+            event.touches.length === 0
+        ) {
+            return;
+        }
+
+        const touch =
+            event.touches[0];
+
+        updateLookPosition(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* ============================================================
+   MOBILE TOUCH END
+   ============================================================ */
+
+window.addEventListener(
+    "touchend",
+    () => {
+
+        /*
+           Jangan langsung mengembalikan robot
+           ke tengah.
+
+           Robot tetap melihat posisi terakhir
+           sentuhan pengguna.
+        */
+
+    },
+    {
+        passive: true
     }
 );
 
@@ -188,6 +292,9 @@ function initRobot() {
     scene =
         new THREE.Scene();
 
+    clock =
+        new THREE.Clock();
+
 
     /* ========================================================
        CAMERA
@@ -204,14 +311,12 @@ function initRobot() {
 
 
     /*
-       CAMERA LOCKED
+       CAMERA FIXED.
 
        Tidak menggunakan OrbitControls.
-       Tidak bisa:
-       - drag
-       - rotate
-       - zoom
-       - pan
+       Tidak bisa drag.
+       Tidak bisa rotate.
+       Tidak bisa zoom.
     */
 
     camera.position.set(
@@ -219,7 +324,6 @@ function initRobot() {
         1.1,
         5.8
     );
-
 
     camera.lookAt(
         0,
@@ -266,8 +370,8 @@ function initRobot() {
 
 
     /*
-       Canvas tidak mempunyai
-       kontrol kamera.
+       Canvas tidak memiliki OrbitControls.
+       Jadi sentuhan tidak memutar kamera.
     */
 
     renderer.domElement.style.cursor =
@@ -304,17 +408,14 @@ function initRobot() {
             3.2
         );
 
-
     keyLight.position.set(
         3,
         5,
         5
     );
 
-
     keyLight.castShadow =
         true;
-
 
     scene.add(
         keyLight
@@ -327,13 +428,11 @@ function initRobot() {
             1.8
         );
 
-
     fillLight.position.set(
         -4,
         2,
         3
     );
-
 
     scene.add(
         fillLight
@@ -346,13 +445,11 @@ function initRobot() {
             2.2
         );
 
-
     rimLight.position.set(
         0,
         4,
         -5
     );
-
 
     scene.add(
         rimLight
@@ -392,15 +489,9 @@ function initRobot() {
                     object.castShadow =
                         true;
 
-
                     object.receiveShadow =
                         true;
 
-
-                    /*
-                       MATERIAL ASLI GLB
-                       TIDAK DIGANTI
-                    */
 
                     if (object.material) {
 
@@ -626,7 +717,11 @@ function initRobot() {
             );
 
             console.log(
-                "Robot body movement: DISABLED"
+                "Desktop mouse: ENABLED"
+            );
+
+            console.log(
+                "Mobile touch: ENABLED"
             );
 
             console.log(
@@ -635,7 +730,7 @@ function initRobot() {
 
 
             /* =================================================
-               ADD ROBOT TO SCENE
+               ADD ROBOT
                ================================================= */
 
             scene.add(
@@ -742,7 +837,7 @@ function initRobot() {
 
 
 /* ============================================================
-   ROBOT LOOK AT CURSOR
+   ROBOT LOOK AT CURSOR / TOUCH
    ============================================================ */
 
 function updateRobotLookAt() {
@@ -753,25 +848,25 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH MOUSE
+       SMOOTH MOVEMENT
        ======================================================== */
 
     mouseCurrent.x +=
         (
             mouseTarget.x -
             mouseCurrent.x
-        ) * 0.08;
+        ) * 0.10;
 
 
     mouseCurrent.y +=
         (
             mouseTarget.y -
             mouseCurrent.y
-        ) * 0.08;
+        ) * 0.10;
 
 
     /* ========================================================
-       HEAD LOOK AT
+       HEAD
        ======================================================== */
 
     if (
@@ -780,10 +875,10 @@ function updateRobotLookAt() {
     ) {
 
         /*
-           Horizontal movement.
+           HEAD YAW
 
-           Cursor kiri  -> kepala kiri
-           Cursor kanan -> kepala kanan
+           Kiri  = kepala ke kiri
+           Kanan = kepala ke kanan
         */
 
         const yaw =
@@ -795,10 +890,10 @@ function updateRobotLookAt() {
 
 
         /*
-           Vertical movement.
+           HEAD PITCH
 
-           Cursor atas  -> kepala sedikit naik
-           Cursor bawah -> kepala sedikit turun
+           Atas  = kepala sedikit naik
+           Bawah = kepala sedikit turun
         */
 
         const pitch =
@@ -818,10 +913,6 @@ function updateRobotLookAt() {
             headOriginalRotation.y +
             yaw;
 
-
-        /*
-           Jangan membuat kepala miring.
-        */
 
         head.rotation.z =
             headOriginalRotation.z;
@@ -899,7 +990,6 @@ function updateRobotLookAt() {
 
 /* ============================================================
    ANIMATION
-   BODY ROBOT TIDAK BERGERAK
    ============================================================ */
 
 function animate() {
@@ -909,8 +999,27 @@ function animate() {
     );
 
 
+    const elapsed =
+        clock.getElapsedTime();
+
+
     /* ========================================================
-       LOOK AT CURSOR
+       FLOATING
+       ======================================================== */
+
+    if (robot) {
+
+        robot.position.y =
+            -1.15 +
+            Math.sin(
+                elapsed * 1.2
+            ) * 0.025;
+
+    }
+
+
+    /* ========================================================
+       LOOK AT
        ======================================================== */
 
     updateRobotLookAt();
@@ -1544,10 +1653,6 @@ function closeProject() {
 }
 
 
-/* ============================================================
-   PROJECT CARD EVENTS
-   ============================================================ */
-
 document
     .querySelectorAll(
         ".project-card"
@@ -1593,10 +1698,6 @@ document
         }
     );
 
-
-/* ============================================================
-   MODAL CLOSE
-   ============================================================ */
 
 if (modalClose) {
 
