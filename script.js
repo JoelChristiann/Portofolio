@@ -1,6 +1,7 @@
 /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
-   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT CURSOR + MOBILE
+   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT
+   MOUSE + TOUCH MOBILE
    ============================================================ */
 
 import * as THREE from "three";
@@ -17,10 +18,10 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   ORIENTASI ROBOT
+   Orientasi dasar robot.
 
    Jika robot menghadap belakang:
-   ubah menjadi Math.PI
+   Math.PI
 
    Pilihan:
    0
@@ -123,9 +124,7 @@ let clock;
    ============================================================ */
 
 let head = null;
-
 let shoulderLeft = null;
-
 let shoulderRight = null;
 
 
@@ -134,15 +133,21 @@ let shoulderRight = null;
    ============================================================ */
 
 let headOriginalRotation = null;
-
 let shoulderLeftOriginalRotation = null;
-
 let shoulderRightOriginalRotation = null;
 
 
 /* ============================================================
-   MOUSE / TOUCH
+   POINTER
    ============================================================ */
+
+/*
+   mouseTarget:
+   posisi cursor / jari yang dituju robot.
+
+   mouseCurrent:
+   posisi aktual yang digunakan animasi.
+*/
 
 const mouseTarget =
     new THREE.Vector2(0, 0);
@@ -152,10 +157,17 @@ const mouseCurrent =
 
 
 /* ============================================================
-   UPDATE LOOK POSITION
+   POINTER ACTIVE STATE
    ============================================================ */
 
-function updateLookPosition(
+let pointerInsideRobot = false;
+
+
+/* ============================================================
+   UPDATE POINTER POSITION
+   ============================================================ */
+
+function updatePointerPosition(
     clientX,
     clientY
 ) {
@@ -172,14 +184,24 @@ function updateLookPosition(
 
 
 /* ============================================================
-   DESKTOP MOUSE
+   DESKTOP + MOBILE POINTER
    ============================================================ */
 
+/*
+   pointermove bekerja untuk:
+
+   - Mouse
+   - Touch
+   - Stylus
+
+   Jadi tidak perlu lagi mousemove khusus.
+*/
+
 window.addEventListener(
-    "mousemove",
+    "pointermove",
     event => {
 
-        updateLookPosition(
+        updatePointerPosition(
             event.clientX,
             event.clientY
         );
@@ -192,26 +214,21 @@ window.addEventListener(
 
 
 /* ============================================================
-   MOBILE TOUCH START
+   POINTER DOWN
    ============================================================ */
 
+/*
+   Saat jari pertama kali menyentuh layar,
+   robot langsung melihat titik sentuhan.
+*/
+
 window.addEventListener(
-    "touchstart",
+    "pointerdown",
     event => {
 
-        if (
-            !event.touches ||
-            event.touches.length === 0
-        ) {
-            return;
-        }
-
-        const touch =
-            event.touches[0];
-
-        updateLookPosition(
-            touch.clientX,
-            touch.clientY
+        updatePointerPosition(
+            event.clientX,
+            event.clientY
         );
 
     },
@@ -222,56 +239,37 @@ window.addEventListener(
 
 
 /* ============================================================
-   MOBILE TOUCH MOVE
+   POINTER ENTER ROBOT AREA
    ============================================================ */
 
-window.addEventListener(
-    "touchmove",
-    event => {
+if (robotContainer) {
 
-        if (
-            !event.touches ||
-            event.touches.length === 0
-        ) {
-            return;
+    robotContainer.addEventListener(
+        "pointerenter",
+        () => {
+
+            pointerInsideRobot = true;
+
+        },
+        {
+            passive: true
         }
-
-        const touch =
-            event.touches[0];
-
-        updateLookPosition(
-            touch.clientX,
-            touch.clientY
-        );
-
-    },
-    {
-        passive: true
-    }
-);
+    );
 
 
-/* ============================================================
-   MOBILE TOUCH END
-   ============================================================ */
+    robotContainer.addEventListener(
+        "pointerleave",
+        () => {
 
-window.addEventListener(
-    "touchend",
-    () => {
+            pointerInsideRobot = false;
 
-        /*
-           Jangan langsung mengembalikan robot
-           ke tengah.
+        },
+        {
+            passive: true
+        }
+    );
 
-           Robot tetap melihat posisi terakhir
-           sentuhan pengguna.
-        */
-
-    },
-    {
-        passive: true
-    }
-);
+}
 
 
 /* ============================================================
@@ -311,7 +309,7 @@ function initRobot() {
 
 
     /*
-       CAMERA FIXED.
+       CAMERA DIKUNCI.
 
        Tidak menggunakan OrbitControls.
        Tidak bisa drag.
@@ -324,6 +322,7 @@ function initRobot() {
         1.1,
         5.8
     );
+
 
     camera.lookAt(
         0,
@@ -370,15 +369,17 @@ function initRobot() {
 
 
     /*
-       Canvas tidak memiliki OrbitControls.
-       Jadi sentuhan tidak memutar kamera.
+       Tidak menggunakan OrbitControls.
+
+       touchAction auto membuat halaman tetap
+       bisa menerima gesture touch normal.
     */
 
     renderer.domElement.style.cursor =
         "default";
 
     renderer.domElement.style.touchAction =
-        "none";
+        "auto";
 
 
     robotContainer.appendChild(
@@ -468,6 +469,11 @@ function initRobot() {
 
         MODEL_URL,
 
+
+        /* ====================================================
+           SUCCESS
+           ==================================================== */
+
         function (gltf) {
 
             robot =
@@ -513,11 +519,19 @@ function initRobot() {
                                     material.isMeshPhysicalMaterial
                                 ) {
 
+                                    /*
+                                       Material asli GLB
+                                       tetap dipertahankan.
+                                    */
+
                                     material.roughness =
                                         0.30;
 
                                     material.metalness =
                                         0.12;
+
+                                    material.needsUpdate =
+                                        true;
 
                                 }
 
@@ -717,11 +731,11 @@ function initRobot() {
             );
 
             console.log(
-                "Desktop mouse: ENABLED"
+                "Pointer tracking: ENABLED"
             );
 
             console.log(
-                "Mobile touch: ENABLED"
+                "Mouse + Touch: ENABLED"
             );
 
             console.log(
@@ -848,21 +862,21 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH MOVEMENT
+       SMOOTH POINTER
        ======================================================== */
 
     mouseCurrent.x +=
         (
             mouseTarget.x -
             mouseCurrent.x
-        ) * 0.10;
+        ) * 0.12;
 
 
     mouseCurrent.y +=
         (
             mouseTarget.y -
             mouseCurrent.y
-        ) * 0.10;
+        ) * 0.12;
 
 
     /* ========================================================
@@ -875,32 +889,24 @@ function updateRobotLookAt() {
     ) {
 
         /*
-           HEAD YAW
+           YAW = kiri / kanan
 
-           Kiri  = kepala ke kiri
-           Kanan = kepala ke kanan
+           Pitch = atas / bawah
         */
 
         const yaw =
             THREE.MathUtils.clamp(
-                mouseCurrent.x * 0.38,
-                -0.38,
-                0.38
+                mouseCurrent.x * 0.55,
+                -0.55,
+                0.55
             );
 
 
-        /*
-           HEAD PITCH
-
-           Atas  = kepala sedikit naik
-           Bawah = kepala sedikit turun
-        */
-
         const pitch =
             THREE.MathUtils.clamp(
-                mouseCurrent.y * 0.20,
-                -0.20,
-                0.20
+                mouseCurrent.y * 0.30,
+                -0.30,
+                0.30
             );
 
 
@@ -1019,7 +1025,7 @@ function animate() {
 
 
     /* ========================================================
-       LOOK AT
+       LOOK AT POINTER
        ======================================================== */
 
     updateRobotLookAt();
@@ -1066,6 +1072,14 @@ function resizeRobot() {
 
     const height =
         robotContainer.clientHeight;
+
+
+    if (
+        width === 0 ||
+        height === 0
+    ) {
+        return;
+    }
 
 
     camera.aspect =
