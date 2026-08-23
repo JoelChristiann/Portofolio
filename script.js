@@ -56,13 +56,6 @@ if (yearElement) {
 
 
 /* =====================================================
-   TALKING STATE
-===================================================== */
-
-let speaking = false;
-
-
-/* =====================================================
    TYPING EFFECT
 ===================================================== */
 
@@ -103,16 +96,7 @@ if (typingElements.length > 0) {
                         "typing-active"
                     );
 
-
-                    /* =================================
-                       ROBOT MULAI BERBICARA
-                    ================================= */
-
-                    speaking = true;
-
-
                     let index = 0;
-
 
                     function typeCharacter() {
 
@@ -134,17 +118,9 @@ if (typingElements.length > 0) {
                                 "typing-active"
                             );
 
-
-                            /* =========================
-                               ROBOT SELESAI BERBICARA
-                            ========================= */
-
-                            speaking = false;
-
                         }
 
                     }
-
 
                     typeCharacter();
 
@@ -159,7 +135,6 @@ if (typingElements.length > 0) {
             }
 
         );
-
 
     typingElements.forEach(element => {
 
@@ -241,7 +216,6 @@ const projectData = {
 
     },
 
-
     web: {
 
         category: "WEB DEVELOPMENT",
@@ -266,7 +240,6 @@ const projectData = {
 
     },
 
-
     data: {
 
         category: "DATA SCIENCE",
@@ -290,7 +263,6 @@ const projectData = {
         link: "#"
 
     },
-
 
     trading: {
 
@@ -362,14 +334,12 @@ function openProject(projectId) {
         return;
     }
 
-
     if (modalCategory) {
 
         modalCategory.textContent =
             project.category;
 
     }
-
 
     if (modalTitle) {
 
@@ -378,14 +348,12 @@ function openProject(projectId) {
 
     }
 
-
     if (modalDescription) {
 
         modalDescription.textContent =
             project.description;
 
     }
-
 
     if (modalDetails) {
 
@@ -394,11 +362,9 @@ function openProject(projectId) {
 
     }
 
-
     if (modalTags) {
 
         modalTags.innerHTML = "";
-
 
         project.technologies.forEach(
             technology => {
@@ -416,7 +382,6 @@ function openProject(projectId) {
 
     }
 
-
     if (modalProjectLink) {
 
         modalProjectLink.href =
@@ -429,17 +394,12 @@ function openProject(projectId) {
 
     }
 
-
-    projectModal.classList.add(
-        "active"
-    );
-
+    projectModal.classList.add("active");
 
     projectModal.setAttribute(
         "aria-hidden",
         "false"
     );
-
 
     document.body.classList.add(
         "modal-open"
@@ -454,17 +414,14 @@ function closeProject() {
         return;
     }
 
-
     projectModal.classList.remove(
         "active"
     );
-
 
     projectModal.setAttribute(
         "aria-hidden",
         "true"
     );
-
 
     document.body.classList.remove(
         "modal-open"
@@ -477,7 +434,6 @@ document
     .querySelectorAll(".project-card")
     .forEach(card => {
 
-
         card.addEventListener(
             "click",
             () => {
@@ -488,7 +444,6 @@ document
 
             }
         );
-
 
         card.addEventListener(
             "keydown",
@@ -615,10 +570,20 @@ if (!robotContainer) {
         );
 
 
+    /*
+       Posisi kamera awal.
+       Nanti akan berubah ketika robot selesai loading.
+    */
+
+    const loadingCameraZ = 7.5;
+
+    const normalCameraZ = 4.8;
+
+
     camera.position.set(
         0,
-        0.15,
-        5
+        0.2,
+        loadingCameraZ
     );
 
 
@@ -830,26 +795,6 @@ if (!robotContainer) {
 
     let originalHeadRotation = null;
 
-
-    /* =================================================
-       ARM VARIABLES
-    ================================================== */
-
-    let rightArm = null;
-
-    let leftArm = null;
-
-    let originalRightArmRotation = null;
-
-    let originalLeftArmRotation = null;
-
-    let armGestureProgress = 0;
-
-
-    /* =================================================
-       FACE VARIABLES
-    ================================================== */
-
     let robotFace = null;
 
     let faceEyes = [];
@@ -862,11 +807,6 @@ if (!robotContainer) {
 
     let faceLight = null;
 
-
-    /* =================================================
-       BASE ROBOT TRANSFORM
-    ================================================== */
-
     let baseRobotY = 0;
 
     let baseRobotZ = 0;
@@ -874,6 +814,17 @@ if (!robotContainer) {
     let baseRobotRotationY = 0;
 
     let baseRobotRotationZ = 0;
+
+
+    /* =================================================
+       LOADING STATE
+    ================================================== */
+
+    let robotLoaded = false;
+
+    let loadingProgress = 0;
+
+    let cameraZoomFinished = false;
 
 
     /* =================================================
@@ -949,7 +900,6 @@ if (!robotContainer) {
 
         let found = null;
 
-
         const names = [
 
             "head",
@@ -968,7 +918,6 @@ if (!robotContainer) {
             if (found) {
                 return;
             }
-
 
             const name =
                 (
@@ -996,182 +945,6 @@ if (!robotContainer) {
 
 
         return found;
-
-    }
-
-
-    /* =================================================
-       FIND ARM
-    ================================================== */
-
-    function findArm(
-        root,
-        side = "right"
-    ) {
-
-        let found = null;
-
-
-        const rightNames = [
-
-            "rightarm",
-            "right_arm",
-            "right-arm",
-            "arm_r",
-            "arm.r",
-            "upperarm_r",
-            "upperarm.r",
-            "rightupperarm",
-            "right hand",
-            "righthand",
-            "hand_r",
-            "hand.r",
-            "mixamorigrightarm",
-            "mixamorig:RightArm",
-            "RightArm"
-
-        ];
-
-
-        const leftNames = [
-
-            "leftarm",
-            "left_arm",
-            "left-arm",
-            "arm_l",
-            "arm.l",
-            "upperarm_l",
-            "upperarm.l",
-            "leftupperarm",
-            "left hand",
-            "lefthand",
-            "hand_l",
-            "hand.l",
-            "mixamorigleftarm",
-            "mixamorig:LeftArm",
-            "LeftArm"
-
-        ];
-
-
-        const names =
-            side === "right"
-                ? rightNames
-                : leftNames;
-
-
-        root.traverse(object => {
-
-            if (found) {
-                return;
-            }
-
-
-            const rawName =
-                (
-                    object.name ||
-                    ""
-                )
-                .trim()
-                .toLowerCase();
-
-
-            const normalizedName =
-                rawName
-                    .replace(
-                        /[\s_-]/g,
-                        ""
-                    );
-
-
-            const exactMatch =
-                names.some(name => {
-
-                    const normalizedTarget =
-                        name
-                            .toLowerCase()
-                            .replace(
-                                /[\s_-]/g,
-                                ""
-                            );
-
-                    return (
-                        rawName ===
-                        name.toLowerCase()
-                    ) ||
-                    (
-                        normalizedName ===
-                        normalizedTarget
-                    );
-
-                });
-
-
-            const containsArm =
-                normalizedName.includes(
-                    side + "arm"
-                );
-
-
-            const containsUpperArm =
-                normalizedName.includes(
-                    side + "upperarm"
-                );
-
-
-            if (
-                exactMatch ||
-                containsArm ||
-                containsUpperArm
-            ) {
-
-                found =
-                    object;
-
-
-                console.log(
-                    `${side} arm ditemukan:`,
-                    object.name
-                );
-
-            }
-
-        });
-
-
-        return found;
-
-    }
-
-
-    /* =================================================
-       DEBUG ARM NAMES
-    ================================================== */
-
-    function printRobotParts(root) {
-
-        console.log(
-            "===== ROBOT OBJECTS ====="
-        );
-
-
-        root.traverse(object => {
-
-            if (object.name) {
-
-                console.log(
-                    object.name,
-                    object.type
-                );
-
-            }
-
-        });
-
-
-        console.log(
-            "========================="
-        );
 
     }
 
@@ -1239,7 +1012,6 @@ if (!robotContainer) {
 
                     }
 
-
                     if (
                         "emissive"
                         in material
@@ -1254,7 +1026,6 @@ if (!robotContainer) {
 
                     }
 
-
                     if (
                         "metalness"
                         in material
@@ -1265,7 +1036,6 @@ if (!robotContainer) {
 
                     }
 
-
                     if (
                         "roughness"
                         in material
@@ -1275,7 +1045,6 @@ if (!robotContainer) {
                             0.2;
 
                     }
-
 
                     return;
 
@@ -1300,7 +1069,6 @@ if (!robotContainer) {
 
                     }
 
-
                     if (
                         "metalness"
                         in material
@@ -1311,7 +1079,6 @@ if (!robotContainer) {
 
                     }
 
-
                     if (
                         "roughness"
                         in material
@@ -1321,7 +1088,6 @@ if (!robotContainer) {
                             0.22;
 
                     }
-
 
                     return;
 
@@ -1441,25 +1207,16 @@ if (!robotContainer) {
         );
 
 
-        const fov =
-            THREE.MathUtils.degToRad(
-                camera.fov
-            );
-
-
-        const distance =
-            (
-                desiredSize / 2
-            ) /
-            Math.tan(
-                fov / 2
-            );
-
+        /*
+           Jangan langsung menentukan
+           camera final di sini.
+           Kita simpan target normal.
+        */
 
         camera.position.set(
             0,
             0.2,
-            distance * 0.86
+            loadingCameraZ
         );
 
 
@@ -1831,139 +1588,148 @@ if (!robotContainer) {
 
 
     /* =================================================
-       ARM TALK GESTURE
+       ROBOT STATUS
     ================================================== */
 
-    function updateArmGesture(delta) {
+    function setRobotStatus(text) {
+
+        if (!robotStatus) {
+            return;
+        }
+
+        robotStatus.textContent =
+            text;
+
+        /*
+           Pastikan status tidak tersembunyi.
+        */
+
+        robotStatus.classList.remove(
+            "hidden"
+        );
+
+        robotStatus.style.opacity =
+            "1";
+
+    }
+
+
+    /* =================================================
+       LOADING TEXT ANIMATION
+    ================================================== */
+
+    let loadingDots = 0;
+
+    let loadingTextTimer = 0;
+
+
+    function updateLoadingText(delta) {
+
+        if (robotLoaded) {
+            return;
+        }
+
+        loadingTextTimer +=
+            delta;
 
         if (
-            !rightArm ||
-            !originalRightArmRotation
+            loadingTextTimer >= 0.45
         ) {
+
+            loadingTextTimer = 0;
+
+            loadingDots =
+                (loadingDots + 1) % 4;
+
+            const dots =
+                ".".repeat(
+                    loadingDots
+                );
+
+            setRobotStatus(
+                `LOADING ROBOT ${loadingProgress}%${dots}`
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       CAMERA ZOOM
+    ================================================== */
+
+    function updateCameraZoom(delta) {
+
+        if (!robotLoaded) {
+
+            /*
+               Selama loading kamera
+               tetap jauh.
+            */
+
+            camera.position.z =
+                THREE.MathUtils.lerp(
+                    camera.position.z,
+                    loadingCameraZ,
+                    1 -
+                    Math.exp(
+                        -3.0 * delta
+                    )
+                );
 
             return;
 
         }
 
 
-        /* =============================================
-           ARM TARGET
-        ============================================= */
-
-        let targetProgress =
-            speaking
-                ? 1
-                : 0;
-
-
-        /* =============================================
-           SMOOTH ARM
-        ============================================= */
-
-        const armSmooth =
-            1 -
-            Math.exp(
-                -3.0 * delta
-            );
-
-
-        armGestureProgress =
-            THREE.MathUtils.lerp(
-                armGestureProgress,
-                targetProgress,
-                armSmooth
-            );
-
-
-        /* =============================================
-           EASING
-        ============================================= */
-
-        const eased =
-            armGestureProgress *
-            armGestureProgress *
-            (
-                3 -
-                2 *
-                armGestureProgress
-            );
-
-
-        /* =============================================
-           HAND RAISE
-        ============================================= */
-
-        const raiseAngle =
-            THREE.MathUtils.degToRad(
-                -55
-            );
-
-
-        rightArm.rotation.x =
-            originalRightArmRotation.x +
-            raiseAngle *
-            eased;
-
-
-        /* =============================================
-           SMALL ROTATION
-        ============================================= */
-
-        rightArm.rotation.z =
-            originalRightArmRotation.z +
-            THREE.MathUtils.degToRad(
-                -8
-            ) *
-            eased;
-
-
-        /* =============================================
-           TALKING MOVEMENT
-        ============================================= */
+        /*
+           Setelah selesai loading,
+           kamera perlahan zoom in
+           ke posisi normal.
+        */
 
         if (
-            speaking &&
-            armGestureProgress > 0.75
+            !cameraZoomFinished
         ) {
 
-            const gestureWave =
-                Math.sin(
-                    time * 3.2
-                ) *
-                THREE.MathUtils.degToRad(
-                    3
+            const cameraSmooth =
+                1 -
+                Math.exp(
+                    -1.6 * delta
                 );
 
 
-            rightArm.rotation.x +=
-                gestureWave;
-
-        }
-
-
-        /* =============================================
-           LEFT ARM SMALL MOVEMENT
-        ============================================= */
-
-        if (
-            leftArm &&
-            originalLeftArmRotation
-        ) {
-
-            const leftMovement =
-                speaking
-                    ? Math.sin(
-                        time * 2.5
-                    ) *
-                    THREE.MathUtils.degToRad(
-                        2
-                    )
-                    : 0;
+            camera.position.z =
+                THREE.MathUtils.lerp(
+                    camera.position.z,
+                    normalCameraZ,
+                    cameraSmooth
+                );
 
 
-            leftArm.rotation.z =
-                originalLeftArmRotation.z +
-                leftMovement;
+            camera.position.y =
+                THREE.MathUtils.lerp(
+                    camera.position.y,
+                    0.2,
+                    cameraSmooth
+                );
+
+
+            if (
+                Math.abs(
+                    camera.position.z -
+                    normalCameraZ
+                ) < 0.01
+            ) {
+
+                camera.position.z =
+                    normalCameraZ;
+
+                cameraZoomFinished =
+                    true;
+
+            }
 
         }
 
@@ -1978,10 +1744,18 @@ if (!robotContainer) {
         new GLTFLoader();
 
 
+    /*
+       Status awal.
+    */
+
+    setRobotStatus(
+        "INITIALIZING ROBOT..."
+    );
+
+
     loader.load(
 
         "./robot.glb",
-
 
         gltf => {
 
@@ -1994,36 +1768,19 @@ if (!robotContainer) {
             );
 
 
-            /* =========================================
-               DEBUG ROBOT
-            ========================================= */
+            loadingProgress =
+                100;
 
-            printRobotParts(
-                robot
-            );
-
-
-            /* =========================================
-               MATERIAL
-            ========================================= */
 
             styleRobotMaterials(
                 robot
             );
 
 
-            /* =========================================
-               SCENE
-            ========================================= */
-
             scene.add(
                 robot
             );
 
-
-            /* =========================================
-               HEAD
-            ========================================= */
 
             head =
                 findHead(
@@ -2036,106 +1793,31 @@ if (!robotContainer) {
                 originalHeadRotation =
                     head.rotation.clone();
 
+
                 createRobotFace();
 
             }
 
-
-            /* =========================================
-               RIGHT ARM
-            ========================================= */
-
-            rightArm =
-                findArm(
-                    robot,
-                    "right"
-                );
-
-
-            /* =========================================
-               LEFT ARM
-            ========================================= */
-
-            leftArm =
-                findArm(
-                    robot,
-                    "left"
-                );
-
-
-            /* =========================================
-               SAVE ARM ROTATION
-            ========================================= */
-
-            if (rightArm) {
-
-                originalRightArmRotation =
-                    rightArm.rotation.clone();
-
-
-                console.log(
-                    "RIGHT ARM READY:",
-                    rightArm.name
-                );
-
-            } else {
-
-                console.warn(
-                    "RIGHT ARM TIDAK DITEMUKAN."
-                );
-
-            }
-
-
-            if (leftArm) {
-
-                originalLeftArmRotation =
-                    leftArm.rotation.clone();
-
-
-                console.log(
-                    "LEFT ARM READY:",
-                    leftArm.name
-                );
-
-            }
-
-
-            /* =========================================
-               FRAME
-            ========================================= */
 
             frameRobot(
                 robot
             );
 
 
-            /* =========================================
-               STATUS
-            ========================================= */
+            /*
+               Robot sudah selesai loading.
+            */
 
-            if (robotStatus) {
-
-                robotStatus.textContent =
-                    "READY — MOVE CURSOR";
+            robotLoaded =
+                true;
 
 
-                setTimeout(() => {
-
-                    robotStatus.classList.add(
-                        "hidden"
-                    );
-
-                }, 1000);
-
-            }
+            setRobotStatus(
+                "ROBOT ONLINE — MOVE CURSOR"
+            );
 
         },
 
-
-        /* =============================================
-           PROGRESS
-        ============================================= */
 
         progress => {
 
@@ -2148,31 +1830,32 @@ if (!robotContainer) {
                 progress.total > 0
             ) {
 
-                const percent =
-                    Math.round(
-                        (
-                            progress.loaded /
-                            progress.total
-                        ) * 100
+                loadingProgress =
+                    Math.min(
+                        99,
+                        Math.round(
+                            (
+                                progress.loaded /
+                                progress.total
+                            ) * 100
+                        )
                     );
 
 
-                robotStatus.textContent =
-                    `LOADING ROBOT ${percent}%`;
+                setRobotStatus(
+                    `LOADING ROBOT ${loadingProgress}%`
+                );
 
             } else {
 
-                robotStatus.textContent =
-                    "LOADING ROBOT...";
+                setRobotStatus(
+                    "LOADING ROBOT..."
+                );
 
             }
 
         },
 
-
-        /* =============================================
-           ERROR
-        ============================================= */
 
         error => {
 
@@ -2182,12 +1865,9 @@ if (!robotContainer) {
             );
 
 
-            if (robotStatus) {
-
-                robotStatus.textContent =
-                    "ROBOT FAILED TO LOAD";
-
-            }
+            setRobotStatus(
+                "ROBOT FAILED TO LOAD"
+            );
 
         }
 
@@ -2244,6 +1924,24 @@ if (!robotContainer) {
 
 
         /* =============================================
+           LOADING TEXT
+        ============================================= */
+
+        updateLoadingText(
+            delta
+        );
+
+
+        /* =============================================
+           CAMERA ZOOM
+        ============================================= */
+
+        updateCameraZoom(
+            delta
+        );
+
+
+        /* =============================================
            CURSOR SMOOTHING
         ============================================= */
 
@@ -2266,9 +1964,9 @@ if (!robotContainer) {
 
         if (robot) {
 
-            /* -----------------------------------------
-               BREATHING
-            ----------------------------------------- */
+            /*
+               Slow breathing
+            */
 
             const breathe =
                 Math.sin(
@@ -2276,9 +1974,9 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               SWAY
-            ----------------------------------------- */
+            /*
+               Very slow sway
+            */
 
             const sway =
                 Math.sin(
@@ -2286,18 +1984,18 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               FLOATING
-            ----------------------------------------- */
+            /*
+               Floating
+            */
 
             robot.position.y =
                 baseRobotY +
                 breathe * 0.025;
 
 
-            /* -----------------------------------------
-               FORWARD / BACK
-            ----------------------------------------- */
+            /*
+               Forward/back
+            */
 
             robot.position.z =
                 baseRobotZ +
@@ -2306,9 +2004,9 @@ if (!robotContainer) {
                 ) * 0.008;
 
 
-            /* -----------------------------------------
-               BODY CURSOR
-            ----------------------------------------- */
+            /*
+               Body follows cursor
+            */
 
             const cursorBodyRotation =
                 smoothPointer.x *
@@ -2326,9 +2024,9 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               NATURAL TILT
-            ----------------------------------------- */
+            /*
+               Tiny tilt
+            */
 
             robot.rotation.z =
                 baseRobotRotationZ +
@@ -2351,10 +2049,6 @@ if (!robotContainer) {
             originalHeadRotation
         ) {
 
-            /* -----------------------------------------
-               CURSOR
-            ----------------------------------------- */
-
             targetHead.y =
                 smoothPointer.x *
                 THREE.MathUtils.degToRad(
@@ -2369,9 +2063,9 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               IDLE
-            ----------------------------------------- */
+            /*
+               Idle movement
+            */
 
             targetHead.y +=
                 Math.sin(
@@ -2391,9 +2085,9 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               SMOOTH
-            ----------------------------------------- */
+            /*
+               Head smoothing
+            */
 
             const headSmooth =
                 1 -
@@ -2418,9 +2112,9 @@ if (!robotContainer) {
                 );
 
 
-            /* -----------------------------------------
-               ROTATION
-            ----------------------------------------- */
+            /*
+               Apply
+            */
 
             head.rotation.x =
                 originalHeadRotation.x +
@@ -2432,9 +2126,9 @@ if (!robotContainer) {
                 currentHead.y;
 
 
-            /* -----------------------------------------
-               ROLL
-            ----------------------------------------- */
+            /*
+               Slight roll
+            */
 
             head.rotation.z =
                 originalHeadRotation.z +
@@ -2485,8 +2179,7 @@ if (!robotContainer) {
                 0.06 +
                 Math.sin(
                     time * 1.3
-                ) *
-                0.025;
+                ) * 0.025;
 
 
             faceEyeGlows.forEach(
@@ -2496,7 +2189,6 @@ if (!robotContainer) {
                         glowPulse;
 
                 }
-
             );
 
         }
@@ -2596,75 +2288,26 @@ if (!robotContainer) {
 
         if (faceMouth) {
 
-            if (speaking) {
-
-                faceMouth.scale.x =
-                    0.9 +
-                    Math.sin(
-                        time * 8
-                    ) *
-                    0.18;
-
-                faceMouth.scale.y =
-                    1 +
-                    Math.abs(
-                        Math.sin(
-                            time * 8
-                        )
-                    ) *
-                    1.5;
-
-            } else {
-
-                faceMouth.scale.x =
-                    0.9 +
-                    Math.sin(
-                        time * 1.4
-                    ) *
-                    0.07;
-
-                faceMouth.scale.y =
-                    1;
-
-            }
+            faceMouth.scale.x =
+                0.9 +
+                Math.sin(
+                    time * 1.4
+                ) *
+                0.07;
 
         }
 
 
-        /* =============================================
-           MOUTH DOTS
-        ============================================= */
-
         faceMouthDots.forEach(
             dot => {
 
-                if (speaking) {
-
-                    const talkScale =
-                        0.9 +
-                        Math.abs(
-                            Math.sin(
-                                time * 8
-                            )
-                        ) *
-                        0.35;
-
-
-                    dot.scale.setScalar(
-                        talkScale
-                    );
-
-                } else {
-
-                    dot.scale.setScalar(
-                        0.9 +
-                        Math.sin(
-                            time * 1.4
-                        ) *
-                        0.07
-                    );
-
-                }
+                dot.scale.setScalar(
+                    0.9 +
+                    Math.sin(
+                        time * 1.4
+                    ) *
+                    0.07
+                );
 
             }
         );
@@ -2677,19 +2320,11 @@ if (!robotContainer) {
         if (faceLight) {
 
             faceLight.intensity =
-                speaking
-
-                    ? 0.85 +
-                        Math.sin(
-                            time * 5
-                        ) *
-                        0.15
-
-                    : 0.65 +
-                        Math.sin(
-                            time * 1.4
-                        ) *
-                        0.12;
+                0.65 +
+                Math.sin(
+                    time * 1.4
+                ) *
+                0.12;
 
         }
 
@@ -2725,15 +2360,6 @@ if (!robotContainer) {
 
 
         /* =============================================
-           ARM TALK GESTURE
-        ============================================= */
-
-        updateArmGesture(
-            delta
-        );
-
-
-        /* =============================================
            RENDER
         ============================================= */
 
@@ -2744,10 +2370,6 @@ if (!robotContainer) {
 
     }
 
-
-    /* =================================================
-       START ANIMATION
-    ================================================== */
 
     animate();
 
