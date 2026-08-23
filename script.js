@@ -1,4 +1,4 @@
- /* ============================================================
+/* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
    ============================================================ */
 
@@ -16,10 +16,9 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   ROBOT MENGHADAP DEPAN
-
-   Jangan ubah nilai ini kecuali model GLB memang
-   mempunyai orientasi dasar yang berbeda.
+   Jangan ubah orientasi robot dari cursor.
+   Kalau robot kamu sudah menghadap depan dengan nilai 0,
+   biarkan 0.
 */
 const MODEL_ROTATION_Y = 0;
 
@@ -71,12 +70,9 @@ if (menuToggle && mobileNav) {
     menuToggle.addEventListener(
         "click",
         () => {
-
             mobileNav.classList.toggle("active");
-
         }
     );
-
 
     mobileNav
         .querySelectorAll("a")
@@ -85,14 +81,11 @@ if (menuToggle && mobileNav) {
             link.addEventListener(
                 "click",
                 () => {
-
                     mobileNav.classList.remove("active");
-
                 }
             );
 
         });
-
 }
 
 
@@ -137,7 +130,7 @@ const mouseCurrent =
 
 
 /* ============================================================
-   MOUSE POSITION
+   MOUSE MOVE
    ============================================================ */
 
 window.addEventListener(
@@ -169,11 +162,9 @@ function initRobot() {
        SCENE
        ======================================================== */
 
-    scene =
-        new THREE.Scene();
+    scene = new THREE.Scene();
 
-    clock =
-        new THREE.Clock();
+    clock = new THREE.Clock();
 
 
     /* ========================================================
@@ -189,20 +180,18 @@ function initRobot() {
             100
         );
 
-
-    /*
-       CAMERA STATIS.
-
-       Tidak ada OrbitControls.
-       User tidak dapat memutar kamera.
-    */
-
     camera.position.set(
         0,
         1.1,
         5.8
     );
 
+
+    /*
+       KAMERA DIKUNCI.
+       Tidak ada OrbitControls.
+       Jadi user tidak bisa drag robot/kamera.
+    */
 
     camera.lookAt(
         0,
@@ -217,13 +206,9 @@ function initRobot() {
 
     renderer =
         new THREE.WebGLRenderer({
-
             antialias: true,
-
             alpha: true
-
         });
-
 
     renderer.setPixelRatio(
         Math.min(
@@ -232,24 +217,19 @@ function initRobot() {
         )
     );
 
-
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
-
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
-
 
     renderer.shadowMap.enabled =
         true;
 
-
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
-
 
     robotContainer.appendChild(
         renderer.domElement
@@ -272,16 +252,11 @@ function initRobot() {
     );
 
 
-    /* ========================================================
-       KEY LIGHT
-       ======================================================== */
-
     const keyLight =
         new THREE.DirectionalLight(
             0xffffff,
             3.2
         );
-
 
     keyLight.position.set(
         3,
@@ -289,19 +264,13 @@ function initRobot() {
         5
     );
 
-
     keyLight.castShadow =
         true;
-
 
     scene.add(
         keyLight
     );
 
-
-    /* ========================================================
-       FILL LIGHT
-       ======================================================== */
 
     const fillLight =
         new THREE.DirectionalLight(
@@ -309,22 +278,16 @@ function initRobot() {
             1.8
         );
 
-
     fillLight.position.set(
         -4,
         2,
         3
     );
 
-
     scene.add(
         fillLight
     );
 
-
-    /* ========================================================
-       RIM LIGHT
-       ======================================================== */
 
     const rimLight =
         new THREE.DirectionalLight(
@@ -332,13 +295,11 @@ function initRobot() {
             2.2
         );
 
-
     rimLight.position.set(
         0,
         4,
         -5
     );
-
 
     scene.add(
         rimLight
@@ -356,11 +317,6 @@ function initRobot() {
     loader.load(
 
         MODEL_URL,
-
-
-        /* ======================================================
-           SUCCESS
-           ====================================================== */
 
         function (gltf) {
 
@@ -383,86 +339,47 @@ function initRobot() {
                     object.castShadow =
                         true;
 
-
                     object.receiveShadow =
                         true;
 
 
-                    if (!object.material) {
-                        return;
-                    }
+                    /*
+                       Pertahankan material asli.
+                       Hanya glossy sedikit.
+                    */
 
+                    if (object.material) {
 
-                    const materials =
-                        Array.isArray(
-                            object.material
-                        )
-                            ? object.material
-                            : [
+                        const materials =
+                            Array.isArray(
                                 object.material
-                            ];
+                            )
+                                ? object.material
+                                : [
+                                    object.material
+                                ];
 
 
-                    materials.forEach(
-                        material => {
-
-                            if (
-                                material.isMeshStandardMaterial ||
-                                material.isMeshPhysicalMaterial
-                            ) {
-
-                                /*
-                                   PUTIH KEABU-ABUAN
-
-                                   Tidak terlalu putih.
-                                */
-
-                                material.color.set(
-                                    "#d9dde2"
-                                );
-
-
-                                /*
-                                   GLOSSY
-                                */
-
-                                material.roughness =
-                                    0.24;
-
-
-                                /*
-                                   Sedikit metallic
-                                */
-
-                                material.metalness =
-                                    0.10;
-
-
-                                /*
-                                   CLEAR COAT
-                                */
+                        materials.forEach(
+                            material => {
 
                                 if (
+                                    material.isMeshStandardMaterial ||
                                     material.isMeshPhysicalMaterial
                                 ) {
 
-                                    material.clearcoat =
-                                        0.35;
+                                    material.roughness =
+                                        0.30;
 
-
-                                    material.clearcoatRoughness =
-                                        0.18;
+                                    material.metalness =
+                                        0.12;
 
                                 }
 
-
-                                material.needsUpdate =
-                                    true;
-
                             }
+                        );
 
-                        }
-                    );
+                    }
 
                 }
             );
@@ -495,10 +412,15 @@ function initRobot() {
                ================================================= */
 
             /*
-               BADAN ROBOT TETAP MENGHADAP DEPAN.
+               PENTING:
 
-               Tidak ada rotasi berdasarkan cursor
-               pada object robot utama.
+               Robot utama TIDAK PERNAH diputar berdasarkan
+               cursor.
+
+               Cursor hanya menggerakkan:
+               - kepala
+               - bahu kiri
+               - bahu kanan
             */
 
             robot.rotation.set(
@@ -617,7 +539,7 @@ function initRobot() {
                ================================================= */
 
             console.log(
-                "================================="
+                "=============================="
             );
 
             console.log(
@@ -630,12 +552,12 @@ function initRobot() {
             );
 
             console.log(
-                "Left Shoulder:",
+                "Left shoulder:",
                 shoulderLeft
             );
 
             console.log(
-                "Right Shoulder:",
+                "Right shoulder:",
                 shoulderRight
             );
 
@@ -644,17 +566,16 @@ function initRobot() {
             );
 
             console.log(
-                "Robot body rotation:",
-                MODEL_ROTATION_Y
+                "Robot body rotation: LOCKED"
             );
 
             console.log(
-                "================================="
+                "=============================="
             );
 
 
             /* =================================================
-               ADD ROBOT
+               ADD TO SCENE
                ================================================= */
 
             scene.add(
@@ -691,9 +612,9 @@ function initRobot() {
         },
 
 
-        /* ======================================================
+        /* ====================================================
            LOADING PROGRESS
-           ====================================================== */
+           ==================================================== */
 
         function (xhr) {
 
@@ -710,7 +631,6 @@ function initRobot() {
                         ) * 100
                     );
 
-
                 robotLoading.textContent =
                     `LOADING AI... ${percent}%`;
 
@@ -719,9 +639,9 @@ function initRobot() {
         },
 
 
-        /* ======================================================
+        /* ====================================================
            ERROR
-           ====================================================== */
+           ==================================================== */
 
         function (error) {
 
@@ -751,10 +671,6 @@ function initRobot() {
     );
 
 
-    /* ========================================================
-       START ANIMATION
-       ======================================================== */
-
     animate();
 
 }
@@ -772,7 +688,7 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH CURSOR
+       SMOOTH MOUSE
        ======================================================== */
 
     mouseCurrent.x +=
@@ -798,13 +714,6 @@ function updateRobotLookAt() {
         headOriginalRotation
     ) {
 
-        /*
-           KIRI / KANAN
-
-           Dibatasi agar kepala tidak berputar
-           sampai membelakangi kamera.
-        */
-
         const yaw =
             THREE.MathUtils.clamp(
                 mouseCurrent.x * 0.38,
@@ -812,10 +721,6 @@ function updateRobotLookAt() {
                 0.38
             );
 
-
-        /*
-           ATAS / BAWAH
-        */
 
         const pitch =
             THREE.MathUtils.clamp(
@@ -984,14 +889,12 @@ function resizeRobot() {
     const width =
         robotContainer.clientWidth;
 
-
     const height =
         robotContainer.clientHeight;
 
 
     camera.aspect =
         width / height;
-
 
     camera.updateProjectionMatrix();
 
@@ -1032,13 +935,10 @@ const robotMessages = [
 let speechIndex =
     0;
 
-
 let typingTimer;
 
 
-function typeSpeech(
-    message
-) {
+function typeSpeech(message) {
 
     if (
         !speechText ||
@@ -1421,48 +1321,40 @@ const projectModal =
         "projectModal"
     );
 
-
 const modalOverlay =
     document.getElementById(
         "modalOverlay"
     );
-
 
 const modalClose =
     document.getElementById(
         "modalClose"
     );
 
-
 const modalCategory =
     document.getElementById(
         "modalCategory"
     );
-
 
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
 
-
 const modalDescription =
     document.getElementById(
         "modalDescription"
     );
-
 
 const modalDetails =
     document.getElementById(
         "modalDetails"
     );
 
-
 const modalTags =
     document.getElementById(
         "modalTags"
     );
-
 
 const modalProjectLink =
     document.getElementById(
@@ -1576,10 +1468,6 @@ function closeProject() {
 }
 
 
-/* ============================================================
-   PROJECT CARD EVENTS
-   ============================================================ */
-
 document
     .querySelectorAll(
         ".project-card"
@@ -1623,10 +1511,6 @@ document
         }
     );
 
-
-/* ============================================================
-   MODAL EVENTS
-   ============================================================ */
 
 if (modalClose) {
 
