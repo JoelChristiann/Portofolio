@@ -1051,7 +1051,9 @@ if (!robotContainer) {
             object => {
 
                 if (result) {
+
                     return;
+
                 }
 
 
@@ -1407,6 +1409,19 @@ if (!robotContainer) {
             );
 
 
+        if (
+            maxDimension <= 0
+        ) {
+
+            console.error(
+                "Ukuran robot tidak valid."
+            );
+
+            return;
+
+        }
+
+
         object.position.sub(
             center
         );
@@ -1496,7 +1511,9 @@ if (!robotContainer) {
 
     function createRobotFace() {
 
-        if (!head) {
+        if (
+            !head
+        ) {
 
             return;
 
@@ -1516,8 +1533,7 @@ if (!robotContainer) {
 
 
         /*
-           Penting:
-           wajah adalah child dari HEAD.
+           Wajah adalah child dari HEAD
         */
 
         head.add(
@@ -1569,10 +1585,6 @@ if (!robotContainer) {
 
             );
 
-
-        /*
-           Posisi panel wajah
-        */
 
         facePanel.position.set(
 
@@ -1907,10 +1919,41 @@ if (!robotContainer) {
         new GLTFLoader();
 
 
+    /*
+       IMPORTANT:
+
+       robot.glb berada langsung di root repository.
+
+       Struktur:
+
+       index.html
+       style.css
+       script.js
+       robot.glb
+
+       Jadi path yang benar:
+
+       ./robot.glb
+    */
+
+    const robotModelPath =
+        "./robot.glb";
+
+
+    console.log(
+        "Mencoba memuat robot:",
+        robotModelPath
+    );
+
+
     loader.load(
 
-        "./assets/robot.glb",
+        robotModelPath,
 
+
+        /* =============================================
+           SUCCESS
+        ============================================== */
 
         gltf => {
 
@@ -1919,7 +1962,8 @@ if (!robotContainer) {
 
 
             console.log(
-                "Robot GLB berhasil dimuat."
+                "Robot GLB berhasil dimuat.",
+                gltf
             );
 
 
@@ -1990,7 +2034,7 @@ if (!robotContainer) {
 
 
             /*
-               Loading
+               Loading selesai
             */
 
             if (
@@ -2053,6 +2097,11 @@ if (!robotContainer) {
                 robotStatus.textContent =
                     `LOADING ROBOT ${percent}%`;
 
+
+                console.log(
+                    `Robot loading: ${percent}%`
+                );
+
             } else {
 
                 robotStatus.textContent =
@@ -2070,8 +2119,25 @@ if (!robotContainer) {
         error => {
 
             console.error(
-                "Robot gagal dimuat:",
+                "================================="
+            );
+
+            console.error(
+                "ROBOT GAGAL DIMUAT"
+            );
+
+            console.error(
+                "Path:",
+                robotModelPath
+            );
+
+            console.error(
+                "Error:",
                 error
+            );
+
+            console.error(
+                "================================="
             );
 
 
@@ -2541,6 +2607,20 @@ if (!robotContainer) {
 
             const height =
                 robotContainer.clientHeight;
+
+
+            /*
+               Hindari aspect ratio 0
+            */
+
+            if (
+                width <= 0 ||
+                height <= 0
+            ) {
+
+                return;
+
+            }
 
 
             camera.aspect =
