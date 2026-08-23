@@ -16,7 +16,6 @@
         content="Joel Christian — AI, Data Science, Web Development and Technology."
     >
 
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -25,1265 +24,276 @@
         rel="stylesheet"
     >
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-    <header class="navbar">
+<header class="navbar">
 
-        <div class="nav-inner">
+    <div class="nav-inner">
 
-            <a href="#home" class="brand">
-                JOELCHRIS
-            </a>
+        <a href="#home" class="brand">
+            JOELCHRIS
+        </a>
 
-            <nav class="nav-links">
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#faq">FAQ</a>
+        </nav>
 
-                <a href="#about">
-                    About
-                </a>
+        <a href="#contact" class="nav-cta">
+            Let's Talk →
+        </a>
 
-                <a href="#projects">
-                    Projects
-                </a>
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-                <a href="#skills">
-                    Skills
-                </a>
+    </div>
 
-                <a href="#faq">
-                    FAQ
-                </a>
+    <div class="mobile-nav" id="mobileNav">
 
-            </nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Let's Talk</a>
 
-            <a
-                href="#contact"
-                class="nav-cta"
-            >
-                Let's Talk →
-            </a>
+    </div>
 
-            <button
-                class="menu-toggle"
-                id="menuToggle"
-                aria-label="Open menu"
-            >
+</header>
 
-                <span></span>
-                <span></span>
-                <span></span>
 
-            </button>
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main id="home">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-top">
+
+            <div class="available">
+                <span class="available-dot"></span>
+                AVAILABLE FOR PROJECTS
+            </div>
 
         </div>
 
 
-        <!-- MOBILE NAV -->
+        <h1 class="hero-title">
+            Building digital
+            <span>intelligence.</span>
+        </h1>
 
-        <div
-            class="mobile-nav"
-            id="mobileNav"
-        >
 
-            <a href="#about">
-                About
-            </a>
+        <div class="hero-bottom">
 
-            <a href="#projects">
-                Projects
-            </a>
+            <p class="hero-description">
+                I'm Joel Christian, an Informatics student exploring
+                Artificial Intelligence, Data Science, Web Development
+                and emerging technologies.
+            </p>
 
-            <a href="#skills">
-                Skills
-            </a>
-
-            <a href="#faq">
-                FAQ
-            </a>
-
-            <a href="#contact">
-                Let's Talk
+            <a href="#projects" class="round-button">
+                <strong>↓</strong>
+                <span>Explore</span>
             </a>
 
         </div>
 
-    </header>
-
-
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
-    <main id="home">
-
-        <section class="hero">
-
-            <div class="container">
-
-                <div class="hero-top">
-
-                    <div class="available">
-
-                        <span class="available-dot"></span>
-
-                        AVAILABLE FOR PROJECTS
-
-                    </div>
-
-                </div>
-
-
-                <h1 class="hero-title">
-
-                    Building digital
-                    <span>
-                        intelligence.
-                    </span>
-
-                </h1>
-
-
-                <div class="hero-bottom">
-
-                    <p class="hero-description">
-
-                        I'm Joel Christian, an Informatics student
-                        exploring Artificial Intelligence, Data Science,
-                        Web Development and emerging technologies.
-
-                    </p>
-
-
-                    <a
-                        href="#projects"
-                        class="round-button"
-                    >
-
-                        <strong>↓</strong>
-
-                        <span>
-                            Explore
-                        </span>
-
-                    </a>
-
-                </div>
-
-
-                <!-- =================================================
-                     ROBOT VISUAL
-                ================================================== -->
-
-                <div
-                    class="hero-visual"
-                    id="heroVisual"
-                >
-
-                    <!-- GRID -->
-
-                    <div class="hero-visual-grid"></div>
-
-
-                    <!-- BACKGROUND NAME -->
-
-                    <div
-                        class="hero-background-name"
-                        aria-hidden="true"
-                    >
-                        JOELCHRIS
-                    </div>
-
-
-                    <!-- ROBOT -->
-
-                    <div
-                        class="robot-container"
-                        id="robot-container"
-                    >
-
-                        <div
-                            class="robot-loading"
-                            id="robot-loading"
-                        >
-
-                            INITIALIZING AI...
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ROBOT STATUS -->
-
-                    <div
-                        class="robot-status"
-                        id="robot-status"
-                    >
-                        LOADING ROBOT...
-                    </div>
-
-
-                    <!-- =================================================
-                         ROBOT SPEECH
-                    ================================================== -->
-
-                    <div
-                        class="robot-speech"
-                        id="robotSpeech"
-                    >
-
-                        <div class="speech-line"></div>
-
-                        <div
-                            class="speech-text"
-                            id="speechText"
-                        ></div>
-
-                        <span
-                            class="speech-cursor"
-                        ></span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
 
         <!-- =====================================================
-             TICKER
+             ROBOT AREA
         ====================================================== -->
 
-        <section class="ticker-section">
+        <div class="hero-visual" id="heroVisual">
 
-            <div class="container">
-
-                <div class="ticker-label">
-                    CURRENTLY EXPLORING
-                </div>
-
-            </div>
-
-            <div class="ticker">
-
-                <div class="ticker-track">
-
-                    <span>
-                        ARTIFICIAL INTELLIGENCE
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        MACHINE LEARNING
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        DATA SCIENCE
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        COMPUTER VISION
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        WEB DEVELOPMENT
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        ALGORITHMIC TRADING
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        ARTIFICIAL INTELLIGENCE
-                    </span>
-
-                    <i>✦</i>
-
-                    <span>
-                        MACHINE LEARNING
-                    </span>
-
-                    <i>✦</i>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             ABOUT
-        ====================================================== -->
-
-        <section
-            class="section-padding"
-            id="about"
-        >
-
-            <div class="container">
-
-                <div class="section-label">
-                    01 — ABOUT
-                </div>
-
-                <div class="about-heading">
-
-                    <h2 class="large-title typing-title"
-                        data-text="I build technology to solve real-world problems.">
-                    </h2>
-
-                </div>
-
-
-                <div class="about-grid">
-
-                    <div>
-
-                        <p class="about-text">
-
-                            My focus is on understanding how technology,
-                            data and artificial intelligence can be used
-                            to create useful systems.
-
-                        </p>
-
-                        <p class="about-text">
-
-                            I am particularly interested in Computer Vision,
-                            Deep Learning, Data Science and intelligent
-                            applications for agriculture and society.
-
-                        </p>
-
-                    </div>
-
-
-                    <div>
-
-                        <p class="about-text">
-
-                            Instead of simply building interfaces,
-                            I want to understand the systems behind them —
-                            from data collection and preprocessing to
-                            machine learning models and deployment.
-
-                        </p>
-
-                        <a
-                            href="#projects"
-                            class="text-link"
-                        >
-                            View my work →
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PROJECTS
-        ====================================================== -->
-
-        <section
-            class="section-padding"
-            id="projects"
-        >
-
-            <div class="container">
-
-                <div class="section-heading-row">
-
-                    <div>
-
-                        <div class="section-label">
-                            02 — PROJECTS
-                        </div>
-
-                        <h2 class="large-title">
-                            Selected experiments.
-                        </h2>
-
-                    </div>
-
-                    <p>
-                        A collection of projects exploring AI,
-                        web development, data and algorithmic systems.
-                    </p>
-
-                </div>
-
-
-                <div class="project-grid">
-
-
-                    <!-- AI -->
-
-                    <article
-                        class="project-card"
-                        data-project="ai"
-                        tabindex="0"
-                    >
-
-                        <span class="project-number">
-                            01
-                        </span>
-
-                        <div class="project-image project-ai">
-
-                            <div class="ai-network">
-
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-
-                            </div>
-
-                            <span>
-                                AI
-                            </span>
-
-                        </div>
-
-                        <div class="project-body">
-
-                            <small>
-                                ARTIFICIAL INTELLIGENCE
-                            </small>
-
-                            <h3>
-                                AI Research
-                            </h3>
-
-                            <p>
-                                Eksplorasi Artificial Intelligence
-                                dan Machine Learning untuk menyelesaikan
-                                permasalahan dunia nyata.
-                            </p>
-
-                            <div class="tags">
-
-                                <span>Python</span>
-                                <span>ML</span>
-                                <span>AI</span>
-
-                            </div>
-
-                            <div class="project-view">
-                                View project →
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- WEB -->
-
-                    <article
-                        class="project-card"
-                        data-project="web"
-                        tabindex="0"
-                    >
-
-                        <span class="project-number">
-                            02
-                        </span>
-
-                        <div class="project-image project-web">
-
-                            <div class="mock-browser">
-
-                                <div class="browser-header">
-
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-
-                                </div>
-
-                                <div class="browser-content">
-
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="project-body">
-
-                            <small>
-                                WEB DEVELOPMENT
-                            </small>
-
-                            <h3>
-                                Digital Village
-                            </h3>
-
-                            <p>
-                                Website informasi desa dengan desain
-                                modern, responsive dan mudah digunakan.
-                            </p>
-
-                            <div class="tags">
-
-                                <span>HTML</span>
-                                <span>CSS</span>
-                                <span>JavaScript</span>
-
-                            </div>
-
-                            <div class="project-view">
-                                View project →
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- DATA -->
-
-                    <article
-                        class="project-card"
-                        data-project="data"
-                        tabindex="0"
-                    >
-
-                        <span class="project-number">
-                            03
-                        </span>
-
-                        <div class="project-image project-data">
-
-                            <div class="data-bars">
-
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="project-body">
-
-                            <small>
-                                DATA SCIENCE
-                            </small>
-
-                            <h3>
-                                Data Analytics
-                            </h3>
-
-                            <p>
-                                Eksplorasi data untuk menemukan pola,
-                                insight dan informasi melalui analisis.
-                            </p>
-
-                            <div class="tags">
-
-                                <span>Python</span>
-                                <span>Pandas</span>
-                                <span>SQL</span>
-
-                            </div>
-
-                            <div class="project-view">
-                                View project →
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- TRADING -->
-
-                    <article
-                        class="project-card"
-                        data-project="trading"
-                        tabindex="0"
-                    >
-
-                        <span class="project-number">
-                            04
-                        </span>
-
-                        <div class="project-image project-trading">
-
-                            <svg
-                                viewBox="0 0 500 220"
-                                preserveAspectRatio="none"
-                            >
-
-                                <polyline
-                                    points="0,190 70,155 130,170 190,95 240,130 310,60 360,90 430,30 500,55"
-                                />
-
-                            </svg>
-
-                        </div>
-
-                        <div class="project-body">
-
-                            <small>
-                                ALGORITHMIC TRADING
-                            </small>
-
-                            <h3>
-                                XAUUSD Trading EA
-                            </h3>
-
-                            <p>
-                                Eksperimen Expert Advisor untuk XAUUSD
-                                menggunakan MQL5 dan MetaTrader 5.
-                            </p>
-
-                            <div class="tags">
-
-                                <span>MQL5</span>
-                                <span>MT5</span>
-                                <span>XAUUSD</span>
-
-                            </div>
-
-                            <div class="project-view">
-                                View project →
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PROCESS
-        ====================================================== -->
-
-        <section class="section-padding">
-
-            <div class="container">
-
-                <div class="section-label">
-                    03 — PROCESS
-                </div>
-
-                <h2 class="large-title">
-                    From idea to implementation.
-                </h2>
-
-
-                <div class="process-grid">
-
-                    <div class="process-item">
-
-                        <span>
-                            01
-                        </span>
-
-                        <h3>
-                            Research
-                        </h3>
-
-                        <p>
-                            Understand the problem, collect information
-                            and identify the right approach.
-                        </p>
-
-                    </div>
-
-
-                    <div class="process-item">
-
-                        <span>
-                            02
-                        </span>
-
-                        <h3>
-                            Build
-                        </h3>
-
-                        <p>
-                            Turn ideas into working systems through
-                            code, experimentation and iteration.
-                        </p>
-
-                    </div>
-
-
-                    <div class="process-item">
-
-                        <span>
-                            03
-                        </span>
-
-                        <h3>
-                            Evaluate
-                        </h3>
-
-                        <p>
-                            Test performance, identify weaknesses and
-                            improve the system based on evidence.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             SKILLS
-        ====================================================== -->
-
-        <section
-            class="section-padding"
-            id="skills"
-        >
-
-            <div class="container">
-
-                <div class="section-label">
-                    04 — SKILLS
-                </div>
-
-                <h2 class="large-title">
-                    Technologies I work with.
-                </h2>
-
-
-                <div class="skills-cards">
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            AI
-                        </div>
-
-                        <h3>
-                            Artificial Intelligence
-                        </h3>
-
-                        <p>
-                            Machine Learning, Deep Learning,
-                            Computer Vision and AI research.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>Python</span>
-                            <span>TensorFlow</span>
-                            <span>PyTorch</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            DS
-                        </div>
-
-                        <h3>
-                            Data Science
-                        </h3>
-
-                        <p>
-                            Data cleaning, exploratory analysis,
-                            visualization and statistical modeling.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>Pandas</span>
-                            <span>NumPy</span>
-                            <span>SQL</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            WEB
-                        </div>
-
-                        <h3>
-                            Web Development
-                        </h3>
-
-                        <p>
-                            Building responsive and interactive
-                            websites with modern frontend technologies.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            MT5
-                        </div>
-
-                        <h3>
-                            Algorithmic Systems
-                        </h3>
-
-                        <p>
-                            Experimental algorithmic trading systems,
-                            automation and quantitative analysis.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>MQL5</span>
-                            <span>MetaTrader 5</span>
-                            <span>Backtesting</span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             METRICS
-        ====================================================== -->
-
-        <section class="metrics section-padding">
-
-            <div class="container">
-
-                <div class="metrics-grid">
-
-                    <div>
-
-                        <strong>
-                            04+
-                        </strong>
-
-                        <span>
-                            Active Experiments
-                        </span>
-
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            10+
-                        </strong>
-
-                        <span>
-                            Technologies
-                        </span>
-
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            AI
-                        </strong>
-
-                        <span>
-                            Main Interest
-                        </span>
-
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            ∞
-                        </strong>
-
-                        <span>
-                            Curiosity
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             FAQ
-        ====================================================== -->
-
-        <section
-            class="section-padding"
-            id="faq"
-        >
-
-            <div class="container">
-
-                <div class="faq-heading">
-
-                    <div>
-
-                        <div class="section-label">
-                            05 — FAQ
-                        </div>
-
-                        <h2 class="large-title">
-                            Frequently asked.
-                        </h2>
-
-                    </div>
-
-                    <p>
-                        A few things about my work.
-                    </p>
-
-                </div>
-
-
-                <div class="faq-list">
-
-
-                    <div class="faq-item">
-
-                        <button class="faq-question">
-
-                            What do you focus on?
-
-                            <span>
-                                +
-                            </span>
-
-                        </button>
-
-                        <div class="faq-answer">
-
-                            <p>
-                                My main interests are Artificial
-                                Intelligence, Machine Learning,
-                                Computer Vision, Data Science
-                                and Web Development.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <button class="faq-question">
-
-                            Are these production projects?
-
-                            <span>
-                                +
-                            </span>
-
-                        </button>
-
-                        <div class="faq-answer">
-
-                            <p>
-                                Some are experiments and learning
-                                projects. They are continuously
-                                improved toward production quality.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <button class="faq-question">
-
-                            Can we collaborate?
-
-                            <span>
-                                +
-                            </span>
-
-                        </button>
-
-                        <div class="faq-answer">
-
-                            <p>
-                                Yes. Collaboration opportunities
-                                involving technology, AI, data or
-                                web development are welcome.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             CTA
-        ====================================================== -->
-
-        <section
-            class="cta"
-            id="contact"
-        >
-
-            <div class="cta-grid"></div>
-
-            <div class="cta-content">
-
-                <h2 class="cta-title">
-                    Let's build something intelligent.
-                </h2>
-
-                <p>
-                    Have an idea, project or experiment?
-                    Let's turn it into something real.
-                </p>
-
-                <a
-                    href="mailto:your@email.com"
-                    class="cta-button"
-                >
-                    Start a conversation →
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer>
-
-        <div class="container">
-
-            <div class="footer-main">
-
-                <div class="footer-brand">
-
-                    <div class="brand">
-                        JOELCHRIS
-                    </div>
-
-                    <p>
-                        Exploring AI, data and technology
-                        through real-world experiments.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <small>
-                        NAVIGATION
-                    </small>
-
-                    <a href="#about">
-                        About
-                    </a>
-
-                    <a href="#projects">
-                        Projects
-                    </a>
-
-                    <a href="#skills">
-                        Skills
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <small>
-                        CONNECT
-                    </small>
-
-                    <a href="#">
-                        GitHub
-                    </a>
-
-                    <a href="#">
-                        LinkedIn
-                    </a>
-
-                    <a href="#">
-                        Instagram
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-                <span>
-                    © <span id="year"></span>
-                    Joel Christian
-                </span>
-
-                <span>
-                    Built with code & curiosity.
-                </span>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================================
-         PROJECT MODAL
-    ====================================================== -->
-
-    <div
-        class="project-modal"
-        id="projectModal"
-        aria-hidden="true"
-    >
-
-        <div
-            class="modal-overlay"
-            id="modalOverlay"
-        ></div>
-
-        <div
-            class="modal-content"
-            role="dialog"
-            aria-modal="true"
-        >
-
-            <button
-                class="modal-close"
-                id="modalClose"
-                aria-label="Close"
-            >
-                ×
-            </button>
+            <div class="hero-visual-grid"></div>
 
             <div
-                class="modal-category"
-                id="modalCategory"
-            ></div>
-
-            <h2 id="modalTitle"></h2>
-
-            <p
-                class="modal-description"
-                id="modalDescription"
-            ></p>
-
-            <div class="modal-section">
-
-                <span>
-                    ABOUT PROJECT
-                </span>
-
-                <p id="modalDetails"></p>
-
+                class="hero-background-name"
+                aria-hidden="true"
+            >
+                JOELCHRIS
             </div>
 
-            <div class="modal-section">
 
-                <span>
-                    TECHNOLOGIES
-                </span>
+            <!-- ROBOT -->
+
+            <div
+                class="robot-container"
+                id="robotContainer"
+            >
 
                 <div
-                    class="modal-tags"
-                    id="modalTags"
-                ></div>
+                    class="robot-loading"
+                    id="robotLoading"
+                >
+                    INITIALIZING AI...
+                </div>
 
             </div>
 
-            <div class="modal-actions">
 
-                <a
-                    href="#"
-                    id="modalProjectLink"
-                    class="modal-button"
-                >
-                    Open Project →
+            <!-- ROBOT STATUS -->
+
+            <div
+                class="robot-status"
+                id="robotStatus"
+            >
+                AI SYSTEM ONLINE
+            </div>
+
+
+            <!-- ROBOT SPEECH -->
+
+            <div
+                class="robot-speech"
+                id="robotSpeech"
+            >
+
+                <div class="speech-line"></div>
+
+                <div
+                    class="speech-text"
+                    id="speechText"
+                ></div>
+
+                <span class="speech-cursor"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TICKER
+========================================================= -->
+
+<section class="ticker-section">
+
+    <div class="container">
+
+        <div class="ticker-label">
+            CURRENTLY EXPLORING
+        </div>
+
+    </div>
+
+    <div class="ticker">
+
+        <div class="ticker-track">
+
+            <span>ARTIFICIAL INTELLIGENCE</span>
+            <i>✦</i>
+
+            <span>MACHINE LEARNING</span>
+            <i>✦</i>
+
+            <span>DATA SCIENCE</span>
+            <i>✦</i>
+
+            <span>COMPUTER VISION</span>
+            <i>✦</i>
+
+            <span>WEB DEVELOPMENT</span>
+            <i>✦</i>
+
+            <span>ALGORITHMIC TRADING</span>
+            <i>✦</i>
+
+            <span>ARTIFICIAL INTELLIGENCE</span>
+            <i>✦</i>
+
+            <span>MACHINE LEARNING</span>
+            <i>✦</i>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section class="section-padding" id="about">
+
+    <div class="container">
+
+        <div class="section-label">
+            01 — ABOUT
+        </div>
+
+        <div class="about-heading">
+
+            <h2
+                class="large-title typing-title"
+                data-text="I build technology to solve real-world problems."
+            ></h2>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div>
+
+                <p class="about-text">
+                    My focus is on understanding how technology,
+                    data and artificial intelligence can be used
+                    to create useful systems.
+                </p>
+
+                <p class="about-text">
+                    I am particularly interested in Computer Vision,
+                    Deep Learning, Data Science and intelligent
+                    applications for agriculture and society.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p class="about-text">
+                    Instead of simply building interfaces,
+                    I want to understand the systems behind them —
+                    from data collection and preprocessing to
+                    machine learning models and deployment.
+                </p>
+
+                <a href="#projects" class="text-link">
+                    View my work →
                 </a>
 
             </div>
@@ -1292,35 +302,754 @@
 
     </div>
 
+</section>
 
-    <!-- =====================================================
-         THREE.JS
-    ====================================================== -->
 
-    <script type="importmap">
+<!-- =========================================================
+     PROJECTS
+========================================================= -->
 
-    {
-        "imports": {
+<section class="section-padding" id="projects">
 
-            "three":
-                "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    <div class="container">
 
-            "three/addons/":
-                "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        <div class="section-heading-row">
 
-        }
+            <div>
+
+                <div class="section-label">
+                    02 — PROJECTS
+                </div>
+
+                <h2 class="large-title">
+                    Selected experiments.
+                </h2>
+
+            </div>
+
+            <p>
+                A collection of projects exploring AI,
+                web development, data and algorithmic systems.
+            </p>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+            <!-- PROJECT 01 -->
+
+            <article
+                class="project-card"
+                data-project="ai"
+                tabindex="0"
+            >
+
+                <span class="project-number">01</span>
+
+                <div class="project-image project-ai">
+
+                    <div class="ai-network">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <span>AI</span>
+
+                </div>
+
+                <div class="project-body">
+
+                    <small>
+                        ARTIFICIAL INTELLIGENCE
+                    </small>
+
+                    <h3>AI Research</h3>
+
+                    <p>
+                        Eksplorasi Artificial Intelligence
+                        dan Machine Learning untuk menyelesaikan
+                        permasalahan dunia nyata.
+                    </p>
+
+                    <div class="tags">
+                        <span>Python</span>
+                        <span>ML</span>
+                        <span>AI</span>
+                    </div>
+
+                    <div class="project-view">
+                        View project →
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article
+                class="project-card"
+                data-project="web"
+                tabindex="0"
+            >
+
+                <span class="project-number">02</span>
+
+                <div class="project-image project-web">
+
+                    <div class="mock-browser">
+
+                        <div class="browser-header">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </div>
+
+                        <div class="browser-content">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-body">
+
+                    <small>WEB DEVELOPMENT</small>
+
+                    <h3>Digital Village</h3>
+
+                    <p>
+                        Website informasi desa dengan desain
+                        modern, responsive dan mudah digunakan.
+                    </p>
+
+                    <div class="tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+
+                    <div class="project-view">
+                        View project →
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article
+                class="project-card"
+                data-project="data"
+                tabindex="0"
+            >
+
+                <span class="project-number">03</span>
+
+                <div class="project-image project-data">
+
+                    <div class="data-bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                </div>
+
+                <div class="project-body">
+
+                    <small>DATA SCIENCE</small>
+
+                    <h3>Data Analytics</h3>
+
+                    <p>
+                        Eksplorasi data untuk menemukan pola,
+                        insight dan informasi melalui analisis.
+                    </p>
+
+                    <div class="tags">
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>SQL</span>
+                    </div>
+
+                    <div class="project-view">
+                        View project →
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 04 -->
+
+            <article
+                class="project-card"
+                data-project="trading"
+                tabindex="0"
+            >
+
+                <span class="project-number">04</span>
+
+                <div class="project-image project-trading">
+
+                    <svg
+                        viewBox="0 0 500 220"
+                        preserveAspectRatio="none"
+                    >
+
+                        <polyline
+                            points="0,190 70,155 130,170 190,95 240,130 310,60 360,90 430,30 500,55"
+                        />
+
+                    </svg>
+
+                </div>
+
+                <div class="project-body">
+
+                    <small>ALGORITHMIC TRADING</small>
+
+                    <h3>XAUUSD Trading EA</h3>
+
+                    <p>
+                        Eksperimen Expert Advisor untuk XAUUSD
+                        menggunakan MQL5 dan MetaTrader 5.
+                    </p>
+
+                    <div class="tags">
+                        <span>MQL5</span>
+                        <span>MT5</span>
+                        <span>XAUUSD</span>
+                    </div>
+
+                    <div class="project-view">
+                        View project →
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROCESS
+========================================================= -->
+
+<section class="section-padding">
+
+    <div class="container">
+
+        <div class="section-label">
+            03 — PROCESS
+        </div>
+
+        <h2
+            class="large-title typing-title"
+            data-text="From idea to implementation."
+        ></h2>
+
+
+        <div class="process-grid">
+
+            <div class="process-item">
+
+                <span>01</span>
+
+                <h3>Research</h3>
+
+                <p>
+                    Understand the problem, collect information
+                    and identify the right approach.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>02</span>
+
+                <h3>Build</h3>
+
+                <p>
+                    Turn ideas into working systems through
+                    code, experimentation and iteration.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>03</span>
+
+                <h3>Evaluate</h3>
+
+                <p>
+                    Test performance, identify weaknesses and
+                    improve the system based on evidence.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SKILLS
+========================================================= -->
+
+<section class="section-padding" id="skills">
+
+    <div class="container">
+
+        <div class="section-label">
+            04 — SKILLS
+        </div>
+
+        <h2
+            class="large-title typing-title"
+            data-text="Technologies I work with."
+        ></h2>
+
+
+        <div class="skills-cards">
+
+            <div class="skill-card">
+
+                <div class="skill-icon">AI</div>
+
+                <h3>Artificial Intelligence</h3>
+
+                <p>
+                    Machine Learning, Deep Learning,
+                    Computer Vision and AI research.
+                </p>
+
+                <div class="skill-tags">
+                    <span>Python</span>
+                    <span>TensorFlow</span>
+                    <span>PyTorch</span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">DS</div>
+
+                <h3>Data Science</h3>
+
+                <p>
+                    Data cleaning, exploratory analysis,
+                    visualization and statistical modeling.
+                </p>
+
+                <div class="skill-tags">
+                    <span>Pandas</span>
+                    <span>NumPy</span>
+                    <span>SQL</span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">WEB</div>
+
+                <h3>Web Development</h3>
+
+                <p>
+                    Building responsive and interactive
+                    websites with modern frontend technologies.
+                </p>
+
+                <div class="skill-tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">MT5</div>
+
+                <h3>Algorithmic Systems</h3>
+
+                <p>
+                    Experimental algorithmic trading systems,
+                    automation and quantitative analysis.
+                </p>
+
+                <div class="skill-tags">
+                    <span>MQL5</span>
+                    <span>MetaTrader 5</span>
+                    <span>Backtesting</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     METRICS
+========================================================= -->
+
+<section class="metrics section-padding">
+
+    <div class="container">
+
+        <div class="metrics-grid">
+
+            <div>
+                <strong>04+</strong>
+                <span>Active Experiments</span>
+            </div>
+
+            <div>
+                <strong>10+</strong>
+                <span>Technologies</span>
+            </div>
+
+            <div>
+                <strong>AI</strong>
+                <span>Main Interest</span>
+            </div>
+
+            <div>
+                <strong>∞</strong>
+                <span>Curiosity</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="section-padding" id="faq">
+
+    <div class="container">
+
+        <div class="faq-heading">
+
+            <div>
+
+                <div class="section-label">
+                    05 — FAQ
+                </div>
+
+                <h2 class="large-title">
+                    Frequently asked.
+                </h2>
+
+            </div>
+
+            <p>
+                A few things about my work.
+            </p>
+
+        </div>
+
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    What do you focus on?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        My main interests are Artificial
+                        Intelligence, Machine Learning,
+                        Computer Vision, Data Science
+                        and Web Development.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Are these production projects?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Some are experiments and learning
+                        projects. They are continuously
+                        improved toward production quality.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Can we collaborate?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Yes. Collaboration opportunities
+                        involving technology, AI, data or
+                        web development are welcome.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta" id="contact">
+
+    <div class="cta-grid"></div>
+
+    <div class="cta-content">
+
+        <h2
+            class="cta-title typing-title"
+            data-text="Let's build something intelligent."
+        ></h2>
+
+        <p>
+            Have an idea, project or experiment?
+            Let's turn it into something real.
+        </p>
+
+        <a
+            href="mailto:your@email.com"
+            class="cta-button"
+        >
+            Start a conversation →
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <div class="brand">
+                    JOELCHRIS
+                </div>
+
+                <p>
+                    Exploring AI, data and technology
+                    through real-world experiments.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <small>NAVIGATION</small>
+
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <small>CONNECT</small>
+
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © <span id="year"></span>
+                Joel Christian
+            </span>
+
+            <span>
+                Built with code & curiosity.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     PROJECT MODAL
+========================================================= -->
+
+<div
+    class="project-modal"
+    id="projectModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-overlay"
+        id="modalOverlay"
+    ></div>
+
+    <div
+        class="modal-content"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <button
+            class="modal-close"
+            id="modalClose"
+        >
+            ×
+        </button>
+
+        <div
+            class="modal-category"
+            id="modalCategory"
+        ></div>
+
+        <h2 id="modalTitle"></h2>
+
+        <p
+            class="modal-description"
+            id="modalDescription"
+        ></p>
+
+        <div class="modal-section">
+
+            <span>ABOUT PROJECT</span>
+
+            <p id="modalDetails"></p>
+
+        </div>
+
+        <div class="modal-section">
+
+            <span>TECHNOLOGIES</span>
+
+            <div
+                class="modal-tags"
+                id="modalTags"
+            ></div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <a
+                href="#"
+                id="modalProjectLink"
+                class="modal-button"
+            >
+                Open Project →
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     THREE.JS IMPORT MAP
+========================================================= -->
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     }
+}
+</script>
 
-    </script>
 
-
-    <!-- JAVASCRIPT -->
-
-    <script
-        type="module"
-        src="script.js"
-    ></script>
+<script
+    type="module"
+    src="script.js"
+></script>
 
 </body>
-
 </html>
