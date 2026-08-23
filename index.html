@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -15,7 +17,15 @@
 
     <title>Joel Christian — AI & Technology</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- =================================================
+         FONT
+    ================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
     <link
         rel="preconnect"
@@ -28,13 +38,33 @@
         rel="stylesheet"
     >
 
+
+    <!-- =================================================
+         SPLINE PRELOAD
+    ================================================== -->
+
+    <link
+        rel="preload"
+        href="https://prod.spline.design/v82BoGUTA5Nxw6UU/scene.splinecode"
+        as="fetch"
+        crossorigin
+    >
+
+
+    <!-- =================================================
+         CSS
+    ================================================== -->
+
     <link
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      NAVBAR
@@ -44,12 +74,14 @@
 
     <div class="nav-inner">
 
+
         <a
             href="#beranda"
             class="brand"
         >
             Joel.
         </a>
+
 
         <nav class="nav-links">
 
@@ -71,13 +103,18 @@
 
         </nav>
 
+
         <a
             href="#kontak"
             class="nav-cta"
         >
             Let's talk
-            <span>↗</span>
+
+            <span>
+                ↗
+            </span>
         </a>
+
 
         <button
             class="menu-toggle"
@@ -85,8 +122,10 @@
             type="button"
             aria-label="Menu"
         >
+
             <span></span>
             <span></span>
+
         </button>
 
     </div>
@@ -97,20 +136,30 @@
         id="mobileNav"
     >
 
-        <a href="#tentang">About</a>
+        <a href="#tentang">
+            About
+        </a>
 
-        <a href="#proyek">Projects</a>
+        <a href="#proyek">
+            Projects
+        </a>
 
-        <a href="#keahlian">Skills</a>
+        <a href="#keahlian">
+            Skills
+        </a>
 
-        <a href="#kontak">Contact</a>
+        <a href="#kontak">
+            Contact
+        </a>
 
     </div>
 
 </header>
 
 
+
 <main>
+
 
 <!-- =====================================================
      HERO
@@ -121,7 +170,11 @@
     id="beranda"
 >
 
-    <div class="container">
+
+    <div class="container hero-container">
+
+
+        <!-- AVAILABLE -->
 
         <div class="hero-top">
 
@@ -136,6 +189,9 @@
         </div>
 
 
+
+        <!-- TITLE -->
+
         <h1 class="hero-title">
 
             I turn ideas into
@@ -147,7 +203,11 @@
         </h1>
 
 
+
+        <!-- DESCRIPTION -->
+
         <div class="hero-bottom">
+
 
             <p class="hero-description">
 
@@ -177,73 +237,74 @@
         </div>
 
 
+
         <!-- =================================================
              HERO VISUAL
         ================================================== -->
 
         <div class="hero-visual">
 
+
             <!-- GRID -->
 
             <div class="hero-visual-grid"></div>
 
 
-            <!-- =============================================
-                 ORBIT
-            ============================================== -->
 
-            <div class="orbit-system">
+            <!-- BACKGROUND TEXT -->
 
-                <div class="orbit-ring"></div>
-
-
-                <!-- AI -->
-
-                <div class="orbit-label orbit-ai">
-                    <span>AI</span>
-                </div>
-
-
-                <!-- WEB -->
-
-                <div class="orbit-label orbit-web">
-                    <span>WEB</span>
-                </div>
-
-
-                <!-- CV -->
-
-                <div class="orbit-label orbit-cv">
-                    <span>CV</span>
-                </div>
-
-
-                <!-- DATA -->
-
-                <div class="orbit-label orbit-data">
-                    <span>DATA</span>
-                </div>
-
+            <div class="hero-background-name">
+                JOELCHRIS
             </div>
 
 
-            <!-- =============================================
-                 JC SUN
-            ============================================== -->
 
-            <div class="hero-center">
+            <!-- SPLINE ROBOT -->
 
-                <span>
-                    JC
-                </span>
+            <div class="spline-robot">
+
+
+                <!-- LOADING FALLBACK -->
+
+                <div
+                    class="spline-loading"
+                    id="splineLoading"
+                >
+
+                    <div class="loading-orbit">
+
+                        <span></span>
+
+                    </div>
+
+
+                    <span class="loading-text">
+                        INITIALIZING...
+                    </span>
+
+                </div>
+
+
+
+                <!-- SPLINE -->
+
+                <spline-viewer
+                    id="splineViewer"
+                    url="https://prod.spline.design/v82BoGUTA5Nxw6UU/scene.splinecode"
+                    events-target="global"
+                    background="transparent"
+                ></spline-viewer>
+
 
             </div>
+
 
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -254,6 +315,7 @@
 
     <div class="container">
 
+
         <p class="ticker-label">
             BUILDING WITH
         </p>
@@ -261,28 +323,72 @@
 
         <div class="ticker">
 
+
             <div class="ticker-track">
 
-                <span>ARTIFICIAL INTELLIGENCE</span>
-                <i>✦</i>
 
-                <span>MACHINE LEARNING</span>
-                <i>✦</i>
+                <span>
+                    ARTIFICIAL INTELLIGENCE
+                </span>
 
-                <span>COMPUTER VISION</span>
-                <i>✦</i>
+                <i>
+                    ✦
+                </i>
 
-                <span>DATA SCIENCE</span>
-                <i>✦</i>
 
-                <span>WEB DEVELOPMENT</span>
-                <i>✦</i>
+                <span>
+                    MACHINE LEARNING
+                </span>
 
-                <span>ARTIFICIAL INTELLIGENCE</span>
-                <i>✦</i>
+                <i>
+                    ✦
+                </i>
 
-                <span>MACHINE LEARNING</span>
-                <i>✦</i>
+
+                <span>
+                    COMPUTER VISION
+                </span>
+
+                <i>
+                    ✦
+                </i>
+
+
+                <span>
+                    DATA SCIENCE
+                </span>
+
+                <i>
+                    ✦
+                </i>
+
+
+                <span>
+                    WEB DEVELOPMENT
+                </span>
+
+                <i>
+                    ✦
+                </i>
+
+
+                <span>
+                    ARTIFICIAL INTELLIGENCE
+                </span>
+
+                <i>
+                    ✦
+                </i>
+
+
+                <span>
+                    MACHINE LEARNING
+                </span>
+
+                <i>
+                    ✦
+                </i>
+
 
             </div>
 
@@ -291,6 +397,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -302,7 +409,9 @@
     id="tentang"
 >
 
+
     <div class="container">
+
 
         <div
             class="section-label typing-title"
@@ -312,34 +421,42 @@
 
         <div class="about-heading">
 
+
             <h2
                 class="large-title typing-title"
                 data-text="I build, experiment, and learn through real projects."
             ></h2>
+
 
         </div>
 
 
         <div class="about-grid">
 
+
             <div></div>
 
 
             <div class="about-text">
 
+
                 <p>
+
                     Saya adalah mahasiswa Teknik Informatika
                     yang memiliki ketertarikan pada teknologi
                     Artificial Intelligence dan pengembangan
                     sistem digital.
+
                 </p>
 
 
                 <p>
+
                     Fokus saya saat ini adalah memahami
                     bagaimana data, algoritma, dan software
                     dapat digunakan untuk menyelesaikan
                     masalah nyata.
+
                 </p>
 
 
@@ -347,17 +464,25 @@
                     href="#keahlian"
                     class="text-link"
                 >
+
                     Explore my skills
-                    <span>↗</span>
+
+                    <span>
+                        ↗
+                    </span>
+
                 </a>
 
+
             </div>
+
 
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -369,7 +494,9 @@
     id="proyek"
 >
 
+
     <div class="container">
+
 
         <div
             class="section-label typing-title"
@@ -377,7 +504,9 @@
         ></div>
 
 
+
         <div class="section-heading-row">
+
 
             <h2
                 class="large-title typing-title"
@@ -386,18 +515,25 @@
 
 
             <p>
+
                 Proyek bukan hanya hasil akhir,
                 tetapi cara saya menguji kemampuan
                 dan memahami teknologi.
+
             </p>
 
+
         </div>
+
 
 
         <div class="project-grid">
 
 
-            <!-- PROJECT 01 -->
+
+            <!-- =============================================
+                 PROJECT 01
+            ============================================== -->
 
             <article
                 class="project-card"
@@ -405,12 +541,14 @@
                 tabindex="0"
             >
 
+
                 <div class="project-number">
                     01
                 </div>
 
 
                 <div class="project-image project-ai">
+
 
                     <div class="ai-network">
 
@@ -427,51 +565,74 @@
                         AI
                     </span>
 
+
                 </div>
 
 
                 <div class="project-body">
 
+
                     <small>
                         ARTIFICIAL INTELLIGENCE
                     </small>
+
 
                     <h3>
                         AI Research
                     </h3>
 
+
                     <p>
+
                         Eksplorasi Machine Learning
                         untuk menyelesaikan permasalahan
                         dunia nyata.
+
                     </p>
 
 
                     <div class="tags">
 
-                        <span>Python</span>
-                        <span>ML</span>
-                        <span>AI</span>
+                        <span>
+                            Python
+                        </span>
+
+                        <span>
+                            ML
+                        </span>
+
+                        <span>
+                            AI
+                        </span>
 
                     </div>
 
 
                     <div class="project-view">
-                        View project ↗
+
+                        View project
+                        ↗
+
                     </div>
 
+
                 </div>
+
 
             </article>
 
 
-            <!-- PROJECT 02 -->
+
+            <!-- =============================================
+                 PROJECT 02
+            ============================================== -->
 
             <article
                 class="project-card"
                 data-project="web"
                 tabindex="0"
             >
+
 
                 <div class="project-number">
                     02
@@ -480,7 +641,9 @@
 
                 <div class="project-image project-web">
 
+
                     <div class="mock-browser">
+
 
                         <div class="browser-header">
 
@@ -499,46 +662,69 @@
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
 
                 <div class="project-body">
 
+
                     <small>
                         WEB DEVELOPMENT
                     </small>
+
 
                     <h3>
                         Digital Village
                     </h3>
 
+
                     <p>
+
                         Website informasi desa dengan
                         pendekatan modern dan responsive.
+
                     </p>
 
 
                     <div class="tags">
 
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                        <span>
+                            HTML
+                        </span>
+
+                        <span>
+                            CSS
+                        </span>
+
+                        <span>
+                            JavaScript
+                        </span>
 
                     </div>
 
 
                     <div class="project-view">
-                        View project ↗
+
+                        View project
+                        ↗
+
                     </div>
 
+
                 </div>
+
 
             </article>
 
 
-            <!-- PROJECT 03 -->
+
+            <!-- =============================================
+                 PROJECT 03
+            ============================================== -->
 
             <article
                 class="project-card"
@@ -546,12 +732,14 @@
                 tabindex="0"
             >
 
+
                 <div class="project-number">
                     03
                 </div>
 
 
                 <div class="project-image project-data">
+
 
                     <div class="data-bars">
 
@@ -564,50 +752,73 @@
 
                     </div>
 
+
                 </div>
 
 
                 <div class="project-body">
 
+
                     <small>
                         DATA SCIENCE
                     </small>
+
 
                     <h3>
                         Data Analytics
                     </h3>
 
+
                     <p>
+
                         Mengolah data menjadi insight
                         menggunakan analisis dan visualisasi.
+
                     </p>
 
 
                     <div class="tags">
 
-                        <span>Python</span>
-                        <span>Pandas</span>
-                        <span>SQL</span>
+                        <span>
+                            Python
+                        </span>
+
+                        <span>
+                            Pandas
+                        </span>
+
+                        <span>
+                            SQL
+                        </span>
 
                     </div>
 
 
                     <div class="project-view">
-                        View project ↗
+
+                        View project
+                        ↗
+
                     </div>
 
+
                 </div>
+
 
             </article>
 
 
-            <!-- PROJECT 04 -->
+
+            <!-- =============================================
+                 PROJECT 04
+            ============================================== -->
 
             <article
                 class="project-card"
                 data-project="trading"
                 tabindex="0"
             >
+
 
                 <div class="project-number">
                     04
@@ -616,10 +827,12 @@
 
                 <div class="project-image project-trading">
 
+
                     <svg
                         viewBox="0 0 500 220"
                         preserveAspectRatio="none"
                     >
+
 
                         <polyline
                             points="
@@ -640,44 +853,65 @@
                             "
                         />
 
+
                     </svg>
+
 
                 </div>
 
 
                 <div class="project-body">
 
+
                     <small>
                         ALGORITHMIC TRADING
                     </small>
+
 
                     <h3>
                         XAUUSD Trading EA
                     </h3>
 
+
                     <p>
+
                         Eksperimen Expert Advisor
                         menggunakan MQL5 dan pengujian
                         strategi secara sistematis.
+
                     </p>
 
 
                     <div class="tags">
 
-                        <span>MQL5</span>
-                        <span>MT5</span>
-                        <span>Trading</span>
+                        <span>
+                            MQL5
+                        </span>
+
+                        <span>
+                            MT5
+                        </span>
+
+                        <span>
+                            Trading
+                        </span>
 
                     </div>
 
 
                     <div class="project-view">
-                        View project ↗
+
+                        View project
+                        ↗
+
                     </div>
+
 
                 </div>
 
+
             </article>
+
 
         </div>
 
@@ -686,13 +920,16 @@
 </section>
 
 
+
 <!-- =====================================================
      PROCESS
 ===================================================== -->
 
 <section class="process section-padding">
 
+
     <div class="container">
+
 
         <div
             class="section-label typing-title"
@@ -708,11 +945,16 @@
 
         <div class="process-grid">
 
+
             <div class="process-item">
 
-                <span>01</span>
+                <span>
+                    01
+                </span>
 
-                <h3>Learn</h3>
+                <h3>
+                    Learn
+                </h3>
 
                 <p>
                     Memahami konsep dan teknologi
@@ -724,9 +966,13 @@
 
             <div class="process-item">
 
-                <span>02</span>
+                <span>
+                    02
+                </span>
 
-                <h3>Build</h3>
+                <h3>
+                    Build
+                </h3>
 
                 <p>
                     Mengubah teori menjadi proyek
@@ -738,9 +984,13 @@
 
             <div class="process-item">
 
-                <span>03</span>
+                <span>
+                    03
+                </span>
 
-                <h3>Improve</h3>
+                <h3>
+                    Improve
+                </h3>
 
                 <p>
                     Mengukur hasil, menemukan kelemahan,
@@ -749,11 +999,13 @@
 
             </div>
 
+
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -765,7 +1017,9 @@
     id="keahlian"
 >
 
+
     <div class="container">
+
 
         <div
             class="section-label typing-title"
@@ -775,6 +1029,7 @@
 
         <div class="section-heading-row">
 
+
             <h2
                 class="large-title typing-title"
                 data-text="Tools I use to turn ideas into reality."
@@ -782,14 +1037,19 @@
 
 
             <p>
+
                 Keahlian saya berkembang melalui
                 pembelajaran dan proyek nyata.
+
             </p>
+
 
         </div>
 
 
+
         <div class="skills-cards">
+
 
             <div class="skill-card">
 
@@ -797,24 +1057,38 @@
                     AI
                 </span>
 
+
                 <h3>
                     Artificial Intelligence
                 </h3>
 
+
                 <p>
+
                     AI systems, machine learning,
                     deep learning, dan model development.
+
                 </p>
+
 
                 <div class="skill-tags">
 
-                    <span>Python</span>
-                    <span>TensorFlow</span>
-                    <span>PyTorch</span>
+                    <span>
+                        Python
+                    </span>
+
+                    <span>
+                        TensorFlow
+                    </span>
+
+                    <span>
+                        PyTorch
+                    </span>
 
                 </div>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -823,24 +1097,38 @@
                     CV
                 </span>
 
+
                 <h3>
                     Computer Vision
                 </h3>
 
+
                 <p>
+
                     Image processing, classification,
                     object detection, dan visual analysis.
+
                 </p>
+
 
                 <div class="skill-tags">
 
-                    <span>OpenCV</span>
-                    <span>YOLO</span>
-                    <span>CNN</span>
+                    <span>
+                        OpenCV
+                    </span>
+
+                    <span>
+                        YOLO
+                    </span>
+
+                    <span>
+                        CNN
+                    </span>
 
                 </div>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -849,24 +1137,38 @@
                     DS
                 </span>
 
+
                 <h3>
                     Data Science
                 </h3>
 
+
                 <p>
+
                     Data cleaning, analysis,
                     visualization, dan statistical thinking.
+
                 </p>
+
 
                 <div class="skill-tags">
 
-                    <span>Pandas</span>
-                    <span>NumPy</span>
-                    <span>SQL</span>
+                    <span>
+                        Pandas
+                    </span>
+
+                    <span>
+                        NumPy
+                    </span>
+
+                    <span>
+                        SQL
+                    </span>
 
                 </div>
 
             </div>
+
 
 
             <div class="skill-card">
@@ -875,24 +1177,38 @@
                     WEB
                 </span>
 
+
                 <h3>
                     Web Development
                 </h3>
 
+
                 <p>
+
                     Website modern dengan struktur
                     responsive dan interactive.
+
                 </p>
+
 
                 <div class="skill-tags">
 
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
+                    <span>
+                        HTML
+                    </span>
+
+                    <span>
+                        CSS
+                    </span>
+
+                    <span>
+                        JavaScript
+                    </span>
 
                 </div>
 
             </div>
+
 
         </div>
 
@@ -901,15 +1217,19 @@
 </section>
 
 
+
 <!-- =====================================================
      METRICS
 ===================================================== -->
 
 <section class="metrics section-padding">
 
+
     <div class="container">
 
+
         <div class="metrics-heading">
+
 
             <div
                 class="section-label typing-title"
@@ -922,33 +1242,65 @@
                 data-text="Still learning. Still building."
             ></h2>
 
+
         </div>
+
 
 
         <div class="metrics-grid">
 
+
             <div>
-                <strong>AI</strong>
-                <span>Main Focus</span>
+
+                <strong>
+                    AI
+                </strong>
+
+                <span>
+                    Main Focus
+                </span>
+
             </div>
 
 
             <div>
-                <strong>ML</strong>
-                <span>Machine Learning</span>
+
+                <strong>
+                    ML
+                </strong>
+
+                <span>
+                    Machine Learning
+                </span>
+
             </div>
 
 
             <div>
-                <strong>CV</strong>
-                <span>Computer Vision</span>
+
+                <strong>
+                    CV
+                </strong>
+
+                <span>
+                    Computer Vision
+                </span>
+
             </div>
 
 
             <div>
-                <strong>2026</strong>
-                <span>Building Year</span>
+
+                <strong>
+                    2026
+                </strong>
+
+                <span>
+                    Building Year
+                </span>
+
             </div>
+
 
         </div>
 
@@ -957,13 +1309,16 @@
 </section>
 
 
+
 <!-- =====================================================
      FAQ
 ===================================================== -->
 
 <section class="faq section-padding">
 
+
     <div class="container">
+
 
         <div
             class="section-label typing-title"
@@ -972,6 +1327,7 @@
 
 
         <div class="faq-heading">
+
 
             <h2
                 class="large-title typing-title"
@@ -983,13 +1339,16 @@
                 Beberapa hal yang sedang saya eksplorasi.
             </p>
 
+
         </div>
+
 
 
         <div class="faq-list">
 
 
             <div class="faq-item">
+
 
                 <button
                     class="faq-question"
@@ -998,7 +1357,9 @@
 
                     Apa fokus utama saya?
 
-                    <span>+</span>
+                    <span>
+                        +
+                    </span>
 
                 </button>
 
@@ -1006,9 +1367,11 @@
                 <div class="faq-answer">
 
                     <p>
+
                         Fokus utama saya saat ini adalah
                         Artificial Intelligence, Machine Learning,
                         Computer Vision, dan Data Science.
+
                     </p>
 
                 </div>
@@ -1016,7 +1379,9 @@
             </div>
 
 
+
             <div class="faq-item">
+
 
                 <button
                     class="faq-question"
@@ -1025,7 +1390,9 @@
 
                     Mengapa tertarik pada AI?
 
-                    <span>+</span>
+                    <span>
+                        +
+                    </span>
 
                 </button>
 
@@ -1033,9 +1400,11 @@
                 <div class="faq-answer">
 
                     <p>
+
                         Karena AI memungkinkan software
                         melakukan analisis, prediksi,
                         dan pengambilan keputusan berbasis data.
+
                     </p>
 
                 </div>
@@ -1043,7 +1412,9 @@
             </div>
 
 
+
             <div class="faq-item">
+
 
                 <button
                     class="faq-question"
@@ -1052,7 +1423,9 @@
 
                     Apakah saya menerima kolaborasi?
 
-                    <span>+</span>
+                    <span>
+                        +
+                    </span>
 
                 </button>
 
@@ -1060,9 +1433,11 @@
                 <div class="faq-answer">
 
                     <p>
-                        Ya. Saya terbuka untuk project,
+
+                        Saya terbuka untuk project,
                         penelitian, eksplorasi teknologi,
                         dan kolaborasi yang relevan.
+
                     </p>
 
                 </div>
@@ -1070,7 +1445,9 @@
             </div>
 
 
+
             <div class="faq-item">
+
 
                 <button
                     class="faq-question"
@@ -1079,7 +1456,9 @@
 
                     Apa tujuan saya?
 
-                    <span>+</span>
+                    <span>
+                        +
+                    </span>
 
                 </button>
 
@@ -1087,20 +1466,24 @@
                 <div class="faq-answer">
 
                     <p>
+
                         Membangun kemampuan yang kuat
                         melalui proyek nyata dan menghasilkan
                         teknologi yang benar-benar berguna.
+
                     </p>
 
                 </div>
 
             </div>
 
+
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -1112,10 +1495,12 @@
     id="kontak"
 >
 
+
     <div class="cta-grid"></div>
 
 
     <div class="cta-content">
+
 
         <div
             class="section-label typing-title"
@@ -1130,9 +1515,11 @@
 
 
         <p>
+
             Terbuka untuk project,
             kolaborasi, penelitian,
             dan diskusi teknologi.
+
         </p>
 
 
@@ -1140,15 +1527,23 @@
             href="mailto:joelchristiann05@gmail.com"
             class="cta-button"
         >
+
             Get in touch
-            <span>↗</span>
+
+            <span>
+                ↗
+            </span>
+
         </a>
+
 
     </div>
 
 </section>
 
+
 </main>
+
 
 
 <!-- =====================================================
@@ -1157,10 +1552,12 @@
 
 <footer>
 
+
     <div class="container footer-main">
 
 
         <div class="footer-brand">
+
 
             <a
                 href="#beranda"
@@ -1171,36 +1568,58 @@
 
 
             <p>
+
                 AI & Technology enthusiast
                 building things that matter.
+
             </p>
+
 
         </div>
 
 
+
         <div class="footer-column">
+
 
             <small>
                 NAVIGATION
             </small>
 
-            <a href="#beranda">Home</a>
-            <a href="#tentang">About</a>
-            <a href="#proyek">Projects</a>
-            <a href="#keahlian">Skills</a>
+
+            <a href="#beranda">
+                Home
+            </a>
+
+            <a href="#tentang">
+                About
+            </a>
+
+            <a href="#proyek">
+                Projects
+            </a>
+
+            <a href="#keahlian">
+                Skills
+            </a>
+
 
         </div>
 
 
+
         <div class="footer-column">
+
 
             <small>
                 CONNECT
             </small>
 
+
             <a href="#kontak">
                 Contact
             </a>
+
 
             <a
                 href="https://github.com/"
@@ -1210,32 +1629,54 @@
                 GitHub
             </a>
 
-            <a href="#">
+
+            <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 LinkedIn
             </a>
 
-            <a href="#">
+
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 Instagram
             </a>
 
+
         </div>
+
 
     </div>
 
 
+
     <div class="container footer-bottom">
 
+
         <span>
-            © <span id="year"></span> Joel Christian.
+
+            ©
+            <span id="year"></span>
+            Joel Christian.
+
         </span>
+
 
         <span>
             Built with curiosity.
         </span>
 
+
     </div>
 
+
 </footer>
+
 
 
 <!-- =====================================================
@@ -1248,6 +1689,7 @@
     aria-hidden="true"
 >
 
+
     <div
         class="modal-overlay"
         id="modalOverlay"
@@ -1258,13 +1700,15 @@
         class="modal-content"
         role="dialog"
         aria-modal="true"
+        aria-labelledby="modalTitle"
     >
+
 
         <button
             class="modal-close"
             id="modalClose"
             type="button"
-            aria-label="Close"
+            aria-label="Close project"
         >
             ×
         </button>
@@ -1291,30 +1735,37 @@
 
         <div class="modal-section">
 
+
             <span>
                 TECHNOLOGIES
             </span>
+
 
             <div
                 class="modal-tags"
                 id="modalTags"
             ></div>
 
+
         </div>
 
 
         <div class="modal-section">
 
+
             <span>
                 ABOUT PROJECT
             </span>
 
+
             <p id="modalDetails"></p>
+
 
         </div>
 
 
         <div class="modal-actions">
+
 
             <a
                 href="#"
@@ -1323,17 +1774,42 @@
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Open Project ↗
+
+                Open Project
+
+                <span>
+                    ↗
+                </span>
+
             </a>
 
+
         </div>
+
 
     </div>
 
 </div>
 
 
+
+<!-- =====================================================
+     SPLINE VIEWER
+===================================================== -->
+
+<script
+    type="module"
+    src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"
+></script>
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+===================================================== -->
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
