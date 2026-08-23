@@ -1,12 +1,8 @@
-/* ============================================================
+ /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
    ============================================================ */
 
 import * as THREE from "three";
-
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
 
 import {
     GLTFLoader
@@ -20,11 +16,10 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   ORIENTASI DASAR ROBOT
+   ROBOT MENGHADAP DEPAN
 
-   Tetap 0 agar robot menghadap ke depan.
-   JANGAN diubah karena sistem look-at bekerja
-   berdasarkan orientasi dasar ini.
+   Jangan ubah nilai ini kecuali model GLB memang
+   mempunyai orientasi dasar yang berbeda.
 */
 const MODEL_ROTATION_Y = 0;
 
@@ -76,9 +71,12 @@ if (menuToggle && mobileNav) {
     menuToggle.addEventListener(
         "click",
         () => {
+
             mobileNav.classList.toggle("active");
+
         }
     );
+
 
     mobileNav
         .querySelectorAll("a")
@@ -87,11 +85,14 @@ if (menuToggle && mobileNav) {
             link.addEventListener(
                 "click",
                 () => {
+
                     mobileNav.classList.remove("active");
+
                 }
             );
 
         });
+
 }
 
 
@@ -102,7 +103,6 @@ if (menuToggle && mobileNav) {
 let scene;
 let camera;
 let renderer;
-let controls;
 let robot;
 let clock;
 
@@ -137,7 +137,7 @@ const mouseCurrent =
 
 
 /* ============================================================
-   MOUSE MOVE
+   MOUSE POSITION
    ============================================================ */
 
 window.addEventListener(
@@ -169,9 +169,11 @@ function initRobot() {
        SCENE
        ======================================================== */
 
-    scene = new THREE.Scene();
+    scene =
+        new THREE.Scene();
 
-    clock = new THREE.Clock();
+    clock =
+        new THREE.Clock();
 
 
     /* ========================================================
@@ -187,10 +189,25 @@ function initRobot() {
             100
         );
 
+
+    /*
+       CAMERA STATIS.
+
+       Tidak ada OrbitControls.
+       User tidak dapat memutar kamera.
+    */
+
     camera.position.set(
         0,
         1.1,
         5.8
+    );
+
+
+    camera.lookAt(
+        0,
+        1.25,
+        0
     );
 
 
@@ -200,9 +217,13 @@ function initRobot() {
 
     renderer =
         new THREE.WebGLRenderer({
+
             antialias: true,
+
             alpha: true
+
         });
+
 
     renderer.setPixelRatio(
         Math.min(
@@ -211,19 +232,24 @@ function initRobot() {
         )
     );
 
+
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
+
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
+
 
     renderer.shadowMap.enabled =
         true;
 
+
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
+
 
     robotContainer.appendChild(
         renderer.domElement
@@ -246,11 +272,16 @@ function initRobot() {
     );
 
 
+    /* ========================================================
+       KEY LIGHT
+       ======================================================== */
+
     const keyLight =
         new THREE.DirectionalLight(
             0xffffff,
             3.2
         );
+
 
     keyLight.position.set(
         3,
@@ -258,13 +289,19 @@ function initRobot() {
         5
     );
 
+
     keyLight.castShadow =
         true;
+
 
     scene.add(
         keyLight
     );
 
+
+    /* ========================================================
+       FILL LIGHT
+       ======================================================== */
 
     const fillLight =
         new THREE.DirectionalLight(
@@ -272,16 +309,22 @@ function initRobot() {
             1.8
         );
 
+
     fillLight.position.set(
         -4,
         2,
         3
     );
 
+
     scene.add(
         fillLight
     );
 
+
+    /* ========================================================
+       RIM LIGHT
+       ======================================================== */
 
     const rimLight =
         new THREE.DirectionalLight(
@@ -289,46 +332,16 @@ function initRobot() {
             2.2
         );
 
+
     rimLight.position.set(
         0,
         4,
         -5
     );
 
+
     scene.add(
         rimLight
-    );
-
-
-    /* ========================================================
-       CONTROLS
-       ======================================================== */
-
-    controls =
-        new OrbitControls(
-            camera,
-            renderer.domElement
-        );
-
-    controls.enableDamping =
-        true;
-
-    controls.enablePan =
-        false;
-
-    controls.enableZoom =
-        false;
-
-    controls.minPolarAngle =
-        Math.PI * 0.38;
-
-    controls.maxPolarAngle =
-        Math.PI * 0.62;
-
-    controls.target.set(
-        0,
-        1.25,
-        0
     );
 
 
@@ -339,9 +352,15 @@ function initRobot() {
     const loader =
         new GLTFLoader();
 
+
     loader.load(
 
         MODEL_URL,
+
+
+        /* ======================================================
+           SUCCESS
+           ====================================================== */
 
         function (gltf) {
 
@@ -351,7 +370,6 @@ function initRobot() {
 
             /* =================================================
                ROBOT MATERIAL
-               WHITE / GREY GLOSSY
                ================================================= */
 
             robot.traverse(
@@ -361,89 +379,90 @@ function initRobot() {
                         return;
                     }
 
+
                     object.castShadow =
                         true;
+
 
                     object.receiveShadow =
                         true;
 
 
-                    if (object.material) {
+                    if (!object.material) {
+                        return;
+                    }
 
-                        const materials =
-                            Array.isArray(
+
+                    const materials =
+                        Array.isArray(
+                            object.material
+                        )
+                            ? object.material
+                            : [
                                 object.material
-                            )
-                                ? object.material
-                                : [object.material];
+                            ];
 
 
-                        materials.forEach(
-                            material => {
+                    materials.forEach(
+                        material => {
+
+                            if (
+                                material.isMeshStandardMaterial ||
+                                material.isMeshPhysicalMaterial
+                            ) {
 
                                 /*
-                                   Jangan mengubah material
-                                   yang bukan material standar.
+                                   PUTIH KEABU-ABUAN
+
+                                   Tidak terlalu putih.
+                                */
+
+                                material.color.set(
+                                    "#d9dde2"
+                                );
+
+
+                                /*
+                                   GLOSSY
+                                */
+
+                                material.roughness =
+                                    0.24;
+
+
+                                /*
+                                   Sedikit metallic
+                                */
+
+                                material.metalness =
+                                    0.10;
+
+
+                                /*
+                                   CLEAR COAT
                                 */
 
                                 if (
-                                    material.isMeshStandardMaterial ||
                                     material.isMeshPhysicalMaterial
                                 ) {
 
-                                    /*
-                                       WARNA ROBOT
-
-                                       Tidak menggunakan putih murni.
-                                       Sedikit abu-abu agar lebih realistis.
-                                    */
-                                    material.color.set(
-                                        "#d9dde2"
-                                    );
+                                    material.clearcoat =
+                                        0.35;
 
 
-                                    /*
-                                       GLOSSY
+                                    material.clearcoatRoughness =
+                                        0.18;
 
-                                       Roughness lebih rendah
-                                       = permukaan lebih halus.
-                                    */
-                                    material.roughness =
-                                        0.24;
-
-
-                                    /*
-                                       Sedikit metallic.
-                                    */
-                                    material.metalness =
-                                        0.10;
-
-
-                                    /*
-                                       CLEAR COAT
-
-                                       Hanya digunakan apabila
-                                       material mendukungnya.
-                                    */
-                                    if (
-                                        material.isMeshPhysicalMaterial
-                                    ) {
-
-                                        material.clearcoat =
-                                            0.35;
-
-                                        material.clearcoatRoughness =
-                                            0.18;
-                                    }
-
-
-                                    material.needsUpdate =
-                                        true;
                                 }
 
+
+                                material.needsUpdate =
+                                    true;
+
                             }
-                        );
-                    }
+
+                        }
+                    );
 
                 }
             );
@@ -476,9 +495,10 @@ function initRobot() {
                ================================================= */
 
             /*
-               Robot tetap menghadap DEPAN.
+               BADAN ROBOT TETAP MENGHADAP DEPAN.
 
-               Look-at TIDAK memutar seluruh badan robot.
+               Tidak ada rotasi berdasarkan cursor
+               pada object robot utama.
             */
 
             robot.rotation.set(
@@ -519,6 +539,7 @@ function initRobot() {
 
                         head =
                             object;
+
                     }
 
 
@@ -537,6 +558,7 @@ function initRobot() {
 
                         shoulderLeft =
                             object;
+
                     }
 
 
@@ -555,6 +577,7 @@ function initRobot() {
 
                         shoulderRight =
                             object;
+
                     }
 
                 }
@@ -594,7 +617,11 @@ function initRobot() {
                ================================================= */
 
             console.log(
-                "Robot loaded"
+                "================================="
+            );
+
+            console.log(
+                "ROBOT LOADED"
             );
 
             console.log(
@@ -603,18 +630,31 @@ function initRobot() {
             );
 
             console.log(
-                "Left shoulder:",
+                "Left Shoulder:",
                 shoulderLeft
             );
 
             console.log(
-                "Right shoulder:",
+                "Right Shoulder:",
                 shoulderRight
+            );
+
+            console.log(
+                "OrbitControls: DISABLED"
+            );
+
+            console.log(
+                "Robot body rotation:",
+                MODEL_ROTATION_Y
+            );
+
+            console.log(
+                "================================="
             );
 
 
             /* =================================================
-               ADD TO SCENE
+               ADD ROBOT
                ================================================= */
 
             scene.add(
@@ -651,9 +691,9 @@ function initRobot() {
         },
 
 
-        /* ====================================================
+        /* ======================================================
            LOADING PROGRESS
-           ==================================================== */
+           ====================================================== */
 
         function (xhr) {
 
@@ -670,6 +710,7 @@ function initRobot() {
                         ) * 100
                     );
 
+
                 robotLoading.textContent =
                     `LOADING AI... ${percent}%`;
 
@@ -678,9 +719,9 @@ function initRobot() {
         },
 
 
-        /* ====================================================
+        /* ======================================================
            ERROR
-           ==================================================== */
+           ====================================================== */
 
         function (error) {
 
@@ -689,12 +730,14 @@ function initRobot() {
                 error
             );
 
+
             if (robotLoading) {
 
                 robotLoading.textContent =
                     "ROBOT MODEL NOT FOUND";
 
             }
+
 
             if (robotStatus) {
 
@@ -708,7 +751,12 @@ function initRobot() {
     );
 
 
+    /* ========================================================
+       START ANIMATION
+       ======================================================== */
+
     animate();
+
 }
 
 
@@ -724,7 +772,7 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH MOUSE
+       SMOOTH CURSOR
        ======================================================== */
 
     mouseCurrent.x +=
@@ -732,6 +780,7 @@ function updateRobotLookAt() {
             mouseTarget.x -
             mouseCurrent.x
         ) * 0.08;
+
 
     mouseCurrent.y +=
         (
@@ -749,12 +798,24 @@ function updateRobotLookAt() {
         headOriginalRotation
     ) {
 
+        /*
+           KIRI / KANAN
+
+           Dibatasi agar kepala tidak berputar
+           sampai membelakangi kamera.
+        */
+
         const yaw =
             THREE.MathUtils.clamp(
                 mouseCurrent.x * 0.38,
                 -0.38,
                 0.38
             );
+
+
+        /*
+           ATAS / BAWAH
+        */
 
         const pitch =
             THREE.MathUtils.clamp(
@@ -768,9 +829,11 @@ function updateRobotLookAt() {
             headOriginalRotation.x -
             pitch;
 
+
         head.rotation.y =
             headOriginalRotation.y +
             yaw;
+
 
         head.rotation.z =
             headOriginalRotation.z;
@@ -790,6 +853,7 @@ function updateRobotLookAt() {
         const shoulderYaw =
             mouseCurrent.x * 0.06;
 
+
         const shoulderPitch =
             mouseCurrent.y * 0.035;
 
@@ -798,9 +862,11 @@ function updateRobotLookAt() {
             shoulderLeftOriginalRotation.y +
             shoulderYaw;
 
+
         shoulderLeft.rotation.x =
             shoulderLeftOriginalRotation.x -
             shoulderPitch;
+
 
         shoulderLeft.rotation.z =
             shoulderLeftOriginalRotation.z;
@@ -820,6 +886,7 @@ function updateRobotLookAt() {
         const shoulderYaw =
             mouseCurrent.x * 0.06;
 
+
         const shoulderPitch =
             mouseCurrent.y * 0.035;
 
@@ -828,9 +895,11 @@ function updateRobotLookAt() {
             shoulderRightOriginalRotation.y +
             shoulderYaw;
 
+
         shoulderRight.rotation.x =
             shoulderRightOriginalRotation.x -
             shoulderPitch;
+
 
         shoulderRight.rotation.z =
             shoulderRightOriginalRotation.z;
@@ -878,17 +947,6 @@ function animate() {
 
 
     /* ========================================================
-       CONTROLS
-       ======================================================== */
-
-    if (controls) {
-
-        controls.update();
-
-    }
-
-
-    /* ========================================================
        RENDER
        ======================================================== */
 
@@ -926,12 +984,14 @@ function resizeRobot() {
     const width =
         robotContainer.clientWidth;
 
+
     const height =
         robotContainer.clientHeight;
 
 
     camera.aspect =
         width / height;
+
 
     camera.updateProjectionMatrix();
 
@@ -971,6 +1031,7 @@ const robotMessages = [
 
 let speechIndex =
     0;
+
 
 let typingTimer;
 
@@ -1019,6 +1080,7 @@ function typeSpeech(
                     );
 
                     return;
+
                 }
 
 
@@ -1175,6 +1237,7 @@ function typeTitle(
                     );
 
                     return;
+
                 }
 
 
@@ -1358,40 +1421,48 @@ const projectModal =
         "projectModal"
     );
 
+
 const modalOverlay =
     document.getElementById(
         "modalOverlay"
     );
+
 
 const modalClose =
     document.getElementById(
         "modalClose"
     );
 
+
 const modalCategory =
     document.getElementById(
         "modalCategory"
     );
+
 
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
 
+
 const modalDescription =
     document.getElementById(
         "modalDescription"
     );
+
 
 const modalDetails =
     document.getElementById(
         "modalDetails"
     );
 
+
 const modalTags =
     document.getElementById(
         "modalTags"
     );
+
 
 const modalProjectLink =
     document.getElementById(
@@ -1420,11 +1491,14 @@ function openProject(
     modalCategory.textContent =
         data.category;
 
+
     modalTitle.textContent =
         data.title;
 
+
     modalDescription.textContent =
         data.description;
+
 
     modalDetails.textContent =
         data.details;
