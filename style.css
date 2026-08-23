@@ -3587,3 +3587,250 @@ footer {
     }
 
 }
+
+/* ============================================================
+   FINAL FIX — ROBOT SPEECH POSITION
+   Jangan letakkan speech di tengah kepala robot
+   ============================================================ */
+
+/* =========================
+   DESKTOP
+   ========================= */
+
+@media (min-width: 769px) {
+
+    .hero-visual {
+        position: relative;
+        overflow: hidden;
+    }
+
+    /*
+       Speech berada di sisi kanan robot.
+       !important dipakai supaya kalau JS memberikan
+       style left/top secara inline, CSS ini tetap menang.
+    */
+
+    .robot-speech {
+        position: absolute !important;
+
+        left: auto !important;
+        right: 5% !important;
+
+        top: 27% !important;
+        bottom: auto !important;
+
+        width: min(390px, 32%) !important;
+
+        min-height: 82px;
+
+        transform:
+            translateY(18px)
+            scale(.96) !important;
+    }
+
+    .robot-speech.active {
+        transform:
+            translateY(0)
+            scale(1) !important;
+    }
+
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .robot-speech {
+        right: 3% !important;
+        top: 25% !important;
+
+        width: 34% !important;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .hero-visual {
+        position: relative;
+        overflow: hidden;
+
+        /*
+           Tambahkan ruang khusus untuk speech
+           supaya tidak menimpa robot.
+        */
+        height: 650px;
+    }
+
+    /*
+       Robot hanya menggunakan bagian atas.
+       Speech berada di area bawah.
+    */
+
+    .robot-container {
+        position: absolute !important;
+
+        left: 0 !important;
+        right: 0 !important;
+
+        top: 0 !important;
+        bottom: 145px !important;
+
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /*
+       SPEECH BENAR-BENAR DI BAWAH ROBOT.
+       Bukan di tengah.
+    */
+
+    .robot-speech {
+        position: absolute !important;
+
+        left: 14px !important;
+        right: 14px !important;
+
+        top: auto !important;
+        bottom: 18px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        min-height: 76px;
+
+        transform:
+            translateY(20px)
+            scale(.96) !important;
+    }
+
+    .robot-speech.active {
+        transform:
+            translateY(0)
+            scale(1) !important;
+    }
+
+    /*
+       Status robot juga dipindahkan di antara
+       robot dan speech.
+    */
+
+    .robot-status {
+        position: absolute !important;
+
+        left: 50% !important;
+
+        top: auto !important;
+        bottom: 105px !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        z-index: 60 !important;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .hero-visual {
+        height: 590px !important;
+    }
+
+    .robot-container {
+        top: 0 !important;
+        bottom: 145px !important;
+    }
+
+    .robot-speech {
+        left: 10px !important;
+        right: 10px !important;
+
+        bottom: 12px !important;
+
+        width: auto !important;
+
+        min-height: 72px;
+        padding: 12px 14px !important;
+    }
+
+    .speech-text {
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+
+        /*
+           Jangan potong teks.
+        */
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+    }
+
+    .robot-status {
+        display: none !important;
+    }
+
+}
+
+
+/* ============================================================
+   FINAL TEXT SAFETY
+   ============================================================ */
+
+/*
+   Memastikan isi speech tidak pernah keluar
+   dari kotak.
+*/
+
+.robot-speech,
+.robot-speech * {
+    max-width: 100%;
+}
+
+.speech-text {
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+
+/* ============================================================
+   IMPORTANT — ROBOT CANVAS
+   ============================================================ */
+
+.robot-container canvas {
+    display: block;
+
+    position: absolute !important;
+
+    left: 0 !important;
+    top: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* ============================================================
+   SPEECH Z-INDEX
+   ============================================================ */
+
+.robot-speech {
+    z-index: 100 !important;
+}
+
+.robot-status {
+    z-index: 90 !important;
+}
