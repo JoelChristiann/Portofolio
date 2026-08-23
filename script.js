@@ -1,6 +1,6 @@
 /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
-   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT CURSOR
+   ROBOT STATIC BODY + HEAD/SHOULDER LOOK AT CURSOR
    ============================================================ */
 
 import * as THREE from "three";
@@ -17,8 +17,10 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   Kalau robot masih membelakangi kamera,
-   ubah nilai ini menjadi Math.PI.
+   ORIENTASI ROBOT
+
+   Jika robot menghadap belakang:
+   ubah menjadi Math.PI
 
    Pilihan:
    0
@@ -113,7 +115,6 @@ let scene;
 let camera;
 let renderer;
 let robot;
-let clock;
 
 
 /* ============================================================
@@ -187,9 +188,6 @@ function initRobot() {
     scene =
         new THREE.Scene();
 
-    clock =
-        new THREE.Clock();
-
 
     /* ========================================================
        CAMERA
@@ -204,13 +202,16 @@ function initRobot() {
             100
         );
 
-    /*
-       KAMERA BENAR-BENAR DIKUNCI.
 
-       Tidak ada OrbitControls.
-       Tidak bisa drag.
-       Tidak bisa rotate.
-       Tidak bisa zoom.
+    /*
+       CAMERA LOCKED
+
+       Tidak menggunakan OrbitControls.
+       Tidak bisa:
+       - drag
+       - rotate
+       - zoom
+       - pan
     */
 
     camera.position.set(
@@ -218,6 +219,7 @@ function initRobot() {
         1.1,
         5.8
     );
+
 
     camera.lookAt(
         0,
@@ -236,6 +238,7 @@ function initRobot() {
             alpha: true
         });
 
+
     renderer.setPixelRatio(
         Math.min(
             window.devicePixelRatio,
@@ -243,25 +246,28 @@ function initRobot() {
         )
     );
 
+
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
+
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
 
+
     renderer.shadowMap.enabled =
         true;
+
 
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
 
 
     /*
-       Canvas tetap menerima cursor untuk
-       membaca posisi mouse, tetapi tidak
-       memiliki kontrol kamera.
+       Canvas tidak mempunyai
+       kontrol kamera.
     */
 
     renderer.domElement.style.cursor =
@@ -269,6 +275,7 @@ function initRobot() {
 
     renderer.domElement.style.touchAction =
         "none";
+
 
     robotContainer.appendChild(
         renderer.domElement
@@ -297,14 +304,17 @@ function initRobot() {
             3.2
         );
 
+
     keyLight.position.set(
         3,
         5,
         5
     );
 
+
     keyLight.castShadow =
         true;
+
 
     scene.add(
         keyLight
@@ -317,11 +327,13 @@ function initRobot() {
             1.8
         );
 
+
     fillLight.position.set(
         -4,
         2,
         3
     );
+
 
     scene.add(
         fillLight
@@ -334,11 +346,13 @@ function initRobot() {
             2.2
         );
 
+
     rimLight.position.set(
         0,
         4,
         -5
     );
+
 
     scene.add(
         rimLight
@@ -378,13 +392,14 @@ function initRobot() {
                     object.castShadow =
                         true;
 
+
                     object.receiveShadow =
                         true;
 
 
                     /*
-                       Material tetap menggunakan
-                       material asli GLB.
+                       MATERIAL ASLI GLB
+                       TIDAK DIGANTI
                     */
 
                     if (object.material) {
@@ -406,10 +421,6 @@ function initRobot() {
                                     material.isMeshStandardMaterial ||
                                     material.isMeshPhysicalMaterial
                                 ) {
-
-                                    /*
-                                       Sedikit glossy.
-                                    */
 
                                     material.roughness =
                                         0.30;
@@ -615,12 +626,16 @@ function initRobot() {
             );
 
             console.log(
+                "Robot body movement: DISABLED"
+            );
+
+            console.log(
                 "================================"
             );
 
 
             /* =================================================
-               ADD ROBOT
+               ADD ROBOT TO SCENE
                ================================================= */
 
             scene.add(
@@ -756,13 +771,20 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       HEAD
+       HEAD LOOK AT
        ======================================================== */
 
     if (
         head &&
         headOriginalRotation
     ) {
+
+        /*
+           Horizontal movement.
+
+           Cursor kiri  -> kepala kiri
+           Cursor kanan -> kepala kanan
+        */
 
         const yaw =
             THREE.MathUtils.clamp(
@@ -771,6 +793,13 @@ function updateRobotLookAt() {
                 0.38
             );
 
+
+        /*
+           Vertical movement.
+
+           Cursor atas  -> kepala sedikit naik
+           Cursor bawah -> kepala sedikit turun
+        */
 
         const pitch =
             THREE.MathUtils.clamp(
@@ -789,6 +818,10 @@ function updateRobotLookAt() {
             headOriginalRotation.y +
             yaw;
 
+
+        /*
+           Jangan membuat kepala miring.
+        */
 
         head.rotation.z =
             headOriginalRotation.z;
@@ -866,6 +899,7 @@ function updateRobotLookAt() {
 
 /* ============================================================
    ANIMATION
+   BODY ROBOT TIDAK BERGERAK
    ============================================================ */
 
 function animate() {
@@ -873,25 +907,6 @@ function animate() {
     requestAnimationFrame(
         animate
     );
-
-
-    const elapsed =
-        clock.getElapsedTime();
-
-
-    /* ========================================================
-       FLOATING
-       ======================================================== */
-
-    if (robot) {
-
-        robot.position.y =
-            -1.15 +
-            Math.sin(
-                elapsed * 1.2
-            ) * 0.025;
-
-    }
 
 
     /* ========================================================
@@ -1529,6 +1544,10 @@ function closeProject() {
 }
 
 
+/* ============================================================
+   PROJECT CARD EVENTS
+   ============================================================ */
+
 document
     .querySelectorAll(
         ".project-card"
@@ -1574,6 +1593,10 @@ document
         }
     );
 
+
+/* ============================================================
+   MODAL CLOSE
+   ============================================================ */
 
 if (modalClose) {
 
