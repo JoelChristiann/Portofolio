@@ -16,9 +16,11 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   Jangan ubah orientasi robot dari cursor.
-   Kalau robot kamu sudah menghadap depan dengan nilai 0,
-   biarkan 0.
+   Arah dasar robot.
+   Jika robot menghadap belakang, coba:
+   Math.PI
+   Math.PI / 2
+   -Math.PI / 2
 */
 const MODEL_ROTATION_Y = 0;
 
@@ -57,7 +59,8 @@ const year =
    ============================================================ */
 
 if (year) {
-    year.textContent = new Date().getFullYear();
+    year.textContent =
+        new Date().getFullYear();
 }
 
 
@@ -70,9 +73,14 @@ if (menuToggle && mobileNav) {
     menuToggle.addEventListener(
         "click",
         () => {
-            mobileNav.classList.toggle("active");
+
+            mobileNav.classList.toggle(
+                "active"
+            );
+
         }
     );
+
 
     mobileNav
         .querySelectorAll("a")
@@ -81,11 +89,16 @@ if (menuToggle && mobileNav) {
             link.addEventListener(
                 "click",
                 () => {
-                    mobileNav.classList.remove("active");
+
+                    mobileNav.classList.remove(
+                        "active"
+                    );
+
                 }
             );
 
         });
+
 }
 
 
@@ -138,10 +151,17 @@ window.addEventListener(
     event => {
 
         mouseTarget.x =
-            (event.clientX / window.innerWidth) * 2 - 1;
+            (event.clientX /
+                window.innerWidth) *
+            2 - 1;
+
 
         mouseTarget.y =
-            -(event.clientY / window.innerHeight) * 2 + 1;
+            -(
+                event.clientY /
+                window.innerHeight
+            ) *
+            2 + 1;
 
     }
 );
@@ -162,9 +182,12 @@ function initRobot() {
        SCENE
        ======================================================== */
 
-    scene = new THREE.Scene();
+    scene =
+        new THREE.Scene();
 
-    clock = new THREE.Clock();
+
+    clock =
+        new THREE.Clock();
 
 
     /* ========================================================
@@ -180,6 +203,7 @@ function initRobot() {
             100
         );
 
+
     camera.position.set(
         0,
         1.1,
@@ -189,8 +213,13 @@ function initRobot() {
 
     /*
        KAMERA DIKUNCI.
-       Tidak ada OrbitControls.
-       Jadi user tidak bisa drag robot/kamera.
+
+       Tidak menggunakan OrbitControls.
+       User tidak bisa:
+       - rotate
+       - pan
+       - zoom
+       - drag camera
     */
 
     camera.lookAt(
@@ -210,6 +239,7 @@ function initRobot() {
             alpha: true
         });
 
+
     renderer.setPixelRatio(
         Math.min(
             window.devicePixelRatio,
@@ -217,19 +247,24 @@ function initRobot() {
         )
     );
 
+
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
+
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
+
 
     renderer.shadowMap.enabled =
         true;
 
+
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
+
 
     robotContainer.appendChild(
         renderer.domElement
@@ -247,6 +282,7 @@ function initRobot() {
             2.2
         );
 
+
     scene.add(
         ambient
     );
@@ -258,14 +294,17 @@ function initRobot() {
             3.2
         );
 
+
     keyLight.position.set(
         3,
         5,
         5
     );
 
+
     keyLight.castShadow =
         true;
+
 
     scene.add(
         keyLight
@@ -278,11 +317,13 @@ function initRobot() {
             1.8
         );
 
+
     fillLight.position.set(
         -4,
         2,
         3
     );
+
 
     scene.add(
         fillLight
@@ -295,11 +336,13 @@ function initRobot() {
             2.2
         );
 
+
     rimLight.position.set(
         0,
         4,
         -5
     );
+
 
     scene.add(
         rimLight
@@ -317,6 +360,11 @@ function initRobot() {
     loader.load(
 
         MODEL_URL,
+
+
+        /* ====================================================
+           SUCCESS
+           ==================================================== */
 
         function (gltf) {
 
@@ -339,13 +387,16 @@ function initRobot() {
                     object.castShadow =
                         true;
 
+
                     object.receiveShadow =
                         true;
 
 
                     /*
-                       Pertahankan material asli.
-                       Hanya glossy sedikit.
+                       Pertahankan material asli
+                       robot.glb.
+
+                       Hanya sedikit glossy.
                     */
 
                     if (object.material) {
@@ -370,6 +421,7 @@ function initRobot() {
 
                                     material.roughness =
                                         0.30;
+
 
                                     material.metalness =
                                         0.12;
@@ -408,19 +460,16 @@ function initRobot() {
 
 
             /* =================================================
-               BASE ORIENTATION
+               ROBOT BASE ROTATION
                ================================================= */
 
             /*
                PENTING:
 
-               Robot utama TIDAK PERNAH diputar berdasarkan
-               cursor.
+               Badan robot hanya mempunyai rotasi dasar.
 
-               Cursor hanya menggerakkan:
-               - kepala
-               - bahu kiri
-               - bahu kanan
+               Cursor TIDAK akan mengubah
+               robot.rotation.y.
             */
 
             robot.rotation.set(
@@ -431,7 +480,7 @@ function initRobot() {
 
 
             /* =================================================
-               FIND ROBOT PARTS
+               FIND HEAD & SHOULDERS
                ================================================= */
 
             robot.traverse(
@@ -453,9 +502,15 @@ function initRobot() {
                     if (
                         !head &&
                         (
-                            name.includes("head") ||
-                            name.includes("kepala") ||
-                            name.includes("face")
+                            name.includes(
+                                "head"
+                            ) ||
+                            name.includes(
+                                "kepala"
+                            ) ||
+                            name.includes(
+                                "face"
+                            )
                         )
                     ) {
 
@@ -472,9 +527,15 @@ function initRobot() {
                     if (
                         !shoulderLeft &&
                         (
-                            name.includes("shoulderleft") ||
-                            name.includes("leftshoulder") ||
-                            name.includes("shoulderl")
+                            name.includes(
+                                "shoulderleft"
+                            ) ||
+                            name.includes(
+                                "leftshoulder"
+                            ) ||
+                            name.includes(
+                                "shoulderl"
+                            )
                         )
                     ) {
 
@@ -491,9 +552,15 @@ function initRobot() {
                     if (
                         !shoulderRight &&
                         (
-                            name.includes("shoulderright") ||
-                            name.includes("rightshoulder") ||
-                            name.includes("shoulderr")
+                            name.includes(
+                                "shoulderright"
+                            ) ||
+                            name.includes(
+                                "rightshoulder"
+                            ) ||
+                            name.includes(
+                                "shoulderr"
+                            )
                         )
                     ) {
 
@@ -507,7 +574,7 @@ function initRobot() {
 
 
             /* =================================================
-               SAVE ORIGINAL ROTATION
+               SAVE ORIGINAL ROTATIONS
                ================================================= */
 
             if (head) {
@@ -539,7 +606,7 @@ function initRobot() {
                ================================================= */
 
             console.log(
-                "=============================="
+                "================================"
             );
 
             console.log(
@@ -552,30 +619,34 @@ function initRobot() {
             );
 
             console.log(
-                "Left shoulder:",
+                "Left Shoulder:",
                 shoulderLeft
             );
 
             console.log(
-                "Right shoulder:",
+                "Right Shoulder:",
                 shoulderRight
             );
 
             console.log(
-                "OrbitControls: DISABLED"
+                "OrbitControls: REMOVED"
             );
 
             console.log(
-                "Robot body rotation: LOCKED"
+                "Camera: LOCKED"
             );
 
             console.log(
-                "=============================="
+                "Robot Body Rotation: LOCKED"
+            );
+
+            console.log(
+                "================================"
             );
 
 
             /* =================================================
-               ADD TO SCENE
+               ADD ROBOT
                ================================================= */
 
             scene.add(
@@ -613,7 +684,7 @@ function initRobot() {
 
 
         /* ====================================================
-           LOADING PROGRESS
+           PROGRESS
            ==================================================== */
 
         function (xhr) {
@@ -630,6 +701,7 @@ function initRobot() {
                             xhr.total
                         ) * 100
                     );
+
 
                 robotLoading.textContent =
                     `LOADING AI... ${percent}%`;
@@ -671,6 +743,10 @@ function initRobot() {
     );
 
 
+    /* ========================================================
+       START ANIMATION
+       ======================================================== */
+
     animate();
 
 }
@@ -688,7 +764,7 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH MOUSE
+       SMOOTH CURSOR
        ======================================================== */
 
     mouseCurrent.x +=
@@ -729,6 +805,10 @@ function updateRobotLookAt() {
                 0.20
             );
 
+
+        /*
+           Kepala mengikuti cursor.
+        */
 
         head.rotation.x =
             headOriginalRotation.x -
@@ -889,12 +969,14 @@ function resizeRobot() {
     const width =
         robotContainer.clientWidth;
 
+
     const height =
         robotContainer.clientHeight;
 
 
     camera.aspect =
         width / height;
+
 
     camera.updateProjectionMatrix();
 
@@ -935,10 +1017,13 @@ const robotMessages = [
 let speechIndex =
     0;
 
+
 let typingTimer;
 
 
-function typeSpeech(message) {
+function typeSpeech(
+    message
+) {
 
     if (
         !speechText ||
@@ -1321,46 +1406,58 @@ const projectModal =
         "projectModal"
     );
 
+
 const modalOverlay =
     document.getElementById(
         "modalOverlay"
     );
+
 
 const modalClose =
     document.getElementById(
         "modalClose"
     );
 
+
 const modalCategory =
     document.getElementById(
         "modalCategory"
     );
+
 
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
 
+
 const modalDescription =
     document.getElementById(
         "modalDescription"
     );
+
 
 const modalDetails =
     document.getElementById(
         "modalDetails"
     );
 
+
 const modalTags =
     document.getElementById(
         "modalTags"
     );
+
 
 const modalProjectLink =
     document.getElementById(
         "modalProjectLink"
     );
 
+
+/* ============================================================
+   OPEN PROJECT
+   ============================================================ */
 
 function openProject(
     projectKey
@@ -1443,6 +1540,10 @@ function openProject(
 }
 
 
+/* ============================================================
+   CLOSE PROJECT
+   ============================================================ */
+
 function closeProject() {
 
     if (!projectModal) {
@@ -1467,6 +1568,10 @@ function closeProject() {
 
 }
 
+
+/* ============================================================
+   PROJECT CARD
+   ============================================================ */
 
 document
     .querySelectorAll(
@@ -1511,6 +1616,10 @@ document
         }
     );
 
+
+/* ============================================================
+   MODAL BUTTON
+   ============================================================ */
 
 if (modalClose) {
 
