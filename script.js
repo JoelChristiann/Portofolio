@@ -1,5 +1,6 @@
 /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
+   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT CURSOR
    ============================================================ */
 
 import * as THREE from "three";
@@ -16,8 +17,11 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   Arah dasar robot.
-   Jika robot menghadap belakang, coba:
+   Kalau robot masih membelakangi kamera,
+   ubah nilai ini menjadi Math.PI.
+
+   Pilihan:
+   0
    Math.PI
    Math.PI / 2
    -Math.PI / 2
@@ -81,7 +85,6 @@ if (menuToggle && mobileNav) {
         }
     );
 
-
     mobileNav
         .querySelectorAll("a")
         .forEach(link => {
@@ -118,7 +121,9 @@ let clock;
    ============================================================ */
 
 let head = null;
+
 let shoulderLeft = null;
+
 let shoulderRight = null;
 
 
@@ -127,7 +132,9 @@ let shoulderRight = null;
    ============================================================ */
 
 let headOriginalRotation = null;
+
 let shoulderLeftOriginalRotation = null;
+
 let shoulderRightOriginalRotation = null;
 
 
@@ -152,16 +159,11 @@ window.addEventListener(
 
         mouseTarget.x =
             (event.clientX /
-                window.innerWidth) *
-            2 - 1;
-
+                window.innerWidth) * 2 - 1;
 
         mouseTarget.y =
-            -(
-                event.clientY /
-                window.innerHeight
-            ) *
-            2 + 1;
+            -(event.clientY /
+                window.innerHeight) * 2 + 1;
 
     }
 );
@@ -185,7 +187,6 @@ function initRobot() {
     scene =
         new THREE.Scene();
 
-
     clock =
         new THREE.Clock();
 
@@ -203,24 +204,20 @@ function initRobot() {
             100
         );
 
+    /*
+       KAMERA BENAR-BENAR DIKUNCI.
+
+       Tidak ada OrbitControls.
+       Tidak bisa drag.
+       Tidak bisa rotate.
+       Tidak bisa zoom.
+    */
 
     camera.position.set(
         0,
         1.1,
         5.8
     );
-
-
-    /*
-       KAMERA DIKUNCI.
-
-       Tidak menggunakan OrbitControls.
-       User tidak bisa:
-       - rotate
-       - pan
-       - zoom
-       - drag camera
-    */
 
     camera.lookAt(
         0,
@@ -239,7 +236,6 @@ function initRobot() {
             alpha: true
         });
 
-
     renderer.setPixelRatio(
         Math.min(
             window.devicePixelRatio,
@@ -247,24 +243,32 @@ function initRobot() {
         )
     );
 
-
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
-
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
-
 
     renderer.shadowMap.enabled =
         true;
 
-
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
 
+
+    /*
+       Canvas tetap menerima cursor untuk
+       membaca posisi mouse, tetapi tidak
+       memiliki kontrol kamera.
+    */
+
+    renderer.domElement.style.cursor =
+        "default";
+
+    renderer.domElement.style.touchAction =
+        "none";
 
     robotContainer.appendChild(
         renderer.domElement
@@ -282,7 +286,6 @@ function initRobot() {
             2.2
         );
 
-
     scene.add(
         ambient
     );
@@ -294,17 +297,14 @@ function initRobot() {
             3.2
         );
 
-
     keyLight.position.set(
         3,
         5,
         5
     );
 
-
     keyLight.castShadow =
         true;
-
 
     scene.add(
         keyLight
@@ -317,13 +317,11 @@ function initRobot() {
             1.8
         );
 
-
     fillLight.position.set(
         -4,
         2,
         3
     );
-
 
     scene.add(
         fillLight
@@ -336,13 +334,11 @@ function initRobot() {
             2.2
         );
 
-
     rimLight.position.set(
         0,
         4,
         -5
     );
-
 
     scene.add(
         rimLight
@@ -360,11 +356,6 @@ function initRobot() {
     loader.load(
 
         MODEL_URL,
-
-
-        /* ====================================================
-           SUCCESS
-           ==================================================== */
 
         function (gltf) {
 
@@ -387,16 +378,13 @@ function initRobot() {
                     object.castShadow =
                         true;
 
-
                     object.receiveShadow =
                         true;
 
 
                     /*
-                       Pertahankan material asli
-                       robot.glb.
-
-                       Hanya sedikit glossy.
+                       Material tetap menggunakan
+                       material asli GLB.
                     */
 
                     if (object.material) {
@@ -419,9 +407,12 @@ function initRobot() {
                                     material.isMeshPhysicalMaterial
                                 ) {
 
+                                    /*
+                                       Sedikit glossy.
+                                    */
+
                                     material.roughness =
                                         0.30;
-
 
                                     material.metalness =
                                         0.12;
@@ -460,17 +451,8 @@ function initRobot() {
 
 
             /* =================================================
-               ROBOT BASE ROTATION
+               BASE ORIENTATION
                ================================================= */
-
-            /*
-               PENTING:
-
-               Badan robot hanya mempunyai rotasi dasar.
-
-               Cursor TIDAK akan mengubah
-               robot.rotation.y.
-            */
 
             robot.rotation.set(
                 0,
@@ -480,7 +462,7 @@ function initRobot() {
 
 
             /* =================================================
-               FIND HEAD & SHOULDERS
+               FIND ROBOT PARTS
                ================================================= */
 
             robot.traverse(
@@ -574,7 +556,7 @@ function initRobot() {
 
 
             /* =================================================
-               SAVE ORIGINAL ROTATIONS
+               SAVE ORIGINAL ROTATION
                ================================================= */
 
             if (head) {
@@ -619,25 +601,17 @@ function initRobot() {
             );
 
             console.log(
-                "Left Shoulder:",
+                "Left shoulder:",
                 shoulderLeft
             );
 
             console.log(
-                "Right Shoulder:",
+                "Right shoulder:",
                 shoulderRight
             );
 
             console.log(
-                "OrbitControls: REMOVED"
-            );
-
-            console.log(
-                "Camera: LOCKED"
-            );
-
-            console.log(
-                "Robot Body Rotation: LOCKED"
+                "Camera controls: DISABLED"
             );
 
             console.log(
@@ -684,7 +658,7 @@ function initRobot() {
 
 
         /* ====================================================
-           PROGRESS
+           LOADING PROGRESS
            ==================================================== */
 
         function (xhr) {
@@ -764,7 +738,7 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH CURSOR
+       SMOOTH MOUSE
        ======================================================== */
 
     mouseCurrent.x +=
@@ -805,10 +779,6 @@ function updateRobotLookAt() {
                 0.20
             );
 
-
-        /*
-           Kepala mengikuti cursor.
-        */
 
         head.rotation.x =
             headOriginalRotation.x -
@@ -1021,9 +991,7 @@ let speechIndex =
 let typingTimer;
 
 
-function typeSpeech(
-    message
-) {
+function typeSpeech(message) {
 
     if (
         !speechText ||
@@ -1455,10 +1423,6 @@ const modalProjectLink =
     );
 
 
-/* ============================================================
-   OPEN PROJECT
-   ============================================================ */
-
 function openProject(
     projectKey
 ) {
@@ -1540,10 +1504,6 @@ function openProject(
 }
 
 
-/* ============================================================
-   CLOSE PROJECT
-   ============================================================ */
-
 function closeProject() {
 
     if (!projectModal) {
@@ -1569,10 +1529,6 @@ function closeProject() {
 }
 
 
-/* ============================================================
-   PROJECT CARD
-   ============================================================ */
-
 document
     .querySelectorAll(
         ".project-card"
@@ -1597,8 +1553,10 @@ document
                 event => {
 
                     if (
-                        event.key === "Enter" ||
-                        event.key === " "
+                        event.key ===
+                            "Enter" ||
+                        event.key ===
+                            " "
                     ) {
 
                         event.preventDefault();
@@ -1616,10 +1574,6 @@ document
         }
     );
 
-
-/* ============================================================
-   MODAL BUTTON
-   ============================================================ */
 
 if (modalClose) {
 
