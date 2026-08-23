@@ -1,11 +1,9 @@
 /* ============================================================
    JOEL CHRISTIAN — MAIN JAVASCRIPT
-   ROBOT STATIC CAMERA + HEAD/SHOULDER LOOK AT
-   MOUSE + TOUCH MOBILE
+   ROBOT STATIC + LOOK AT CURSOR/TOUCH + SPEAKING ARM
    ============================================================ */
 
 import * as THREE from "three";
-
 import {
     GLTFLoader
 } from "three/addons/loaders/GLTFLoader.js";
@@ -18,16 +16,11 @@ import {
 const MODEL_URL = "./robot.glb";
 
 /*
-   Orientasi dasar robot.
-
-   Jika robot menghadap belakang:
+   Jika robot membelakangi kamera:
    Math.PI
 
-   Pilihan:
+   Jika robot sudah menghadap depan:
    0
-   Math.PI
-   Math.PI / 2
-   -Math.PI / 2
 */
 const MODEL_ROTATION_Y = 0;
 
@@ -124,8 +117,12 @@ let clock;
    ============================================================ */
 
 let head = null;
+
 let shoulderLeft = null;
 let shoulderRight = null;
+
+let armLeft = null;
+let armRight = null;
 
 
 /* ============================================================
@@ -133,21 +130,17 @@ let shoulderRight = null;
    ============================================================ */
 
 let headOriginalRotation = null;
+
 let shoulderLeftOriginalRotation = null;
 let shoulderRightOriginalRotation = null;
 
+let armLeftOriginalRotation = null;
+let armRightOriginalRotation = null;
+
 
 /* ============================================================
-   POINTER
+   MOUSE / TOUCH
    ============================================================ */
-
-/*
-   mouseTarget:
-   posisi cursor / jari yang dituju robot.
-
-   mouseCurrent:
-   posisi aktual yang digunakan animasi.
-*/
 
 const mouseTarget =
     new THREE.Vector2(0, 0);
@@ -157,116 +150,200 @@ const mouseCurrent =
 
 
 /* ============================================================
-   POINTER ACTIVE STATE
+   MOUSE
    ============================================================ */
 
-let pointerInsideRobot = false;
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        mouseTarget.x =
+            (event.clientX /
+                window.innerWidth) * 2 - 1;
+
+        mouseTarget.y =
+            -(
+                event.clientY /
+                window.innerHeight
+            ) * 2 + 1;
+
+    }
+);
 
 
 /* ============================================================
-   UPDATE POINTER POSITION
+   TOUCH
    ============================================================ */
 
-function updatePointerPosition(
-    clientX,
-    clientY
-) {
+window.addEventListener(
+    "touchmove",
+    event => {
 
-    mouseTarget.x =
-        (clientX /
-            window.innerWidth) * 2 - 1;
+        if (
+            !event.touches ||
+            !event.touches.length
+        ) {
+            return;
+        }
 
-    mouseTarget.y =
-        -(clientY /
-            window.innerHeight) * 2 + 1;
+        const touch =
+            event.touches[0];
+
+        mouseTarget.x =
+            (touch.clientX /
+                window.innerWidth) * 2 - 1;
+
+        mouseTarget.y =
+            -(
+                touch.clientY /
+                window.innerHeight
+            ) * 2 + 1;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* ============================================================
+   TOUCH START
+   ============================================================ */
+
+window.addEventListener(
+    "touchstart",
+    event => {
+
+        if (
+            !event.touches ||
+            !event.touches.length
+        ) {
+            return;
+        }
+
+        const touch =
+            event.touches[0];
+
+        mouseTarget.x =
+            (touch.clientX /
+                window.innerWidth) * 2 - 1;
+
+        mouseTarget.y =
+            -(
+                touch.clientY /
+                window.innerHeight
+            ) * 2 + 1;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* ============================================================
+   FIND ROBOT PART
+   ============================================================ */
+
+function normalizeName(name) {
+
+    return String(name || "")
+        .toLowerCase()
+        .replace(
+            /[\s_\-.]/g,
+            ""
+        );
 
 }
 
 
 /* ============================================================
-   DESKTOP + MOBILE POINTER
+   CHECK HEAD
    ============================================================ */
 
-/*
-   pointermove bekerja untuk:
+function isHeadName(name) {
 
-   - Mouse
-   - Touch
-   - Stylus
-
-   Jadi tidak perlu lagi mousemove khusus.
-*/
-
-window.addEventListener(
-    "pointermove",
-    event => {
-
-        updatePointerPosition(
-            event.clientX,
-            event.clientY
-        );
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-/* ============================================================
-   POINTER DOWN
-   ============================================================ */
-
-/*
-   Saat jari pertama kali menyentuh layar,
-   robot langsung melihat titik sentuhan.
-*/
-
-window.addEventListener(
-    "pointerdown",
-    event => {
-
-        updatePointerPosition(
-            event.clientX,
-            event.clientY
-        );
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-/* ============================================================
-   POINTER ENTER ROBOT AREA
-   ============================================================ */
-
-if (robotContainer) {
-
-    robotContainer.addEventListener(
-        "pointerenter",
-        () => {
-
-            pointerInsideRobot = true;
-
-        },
-        {
-            passive: true
-        }
+    return (
+        name.includes("head") ||
+        name.includes("kepala") ||
+        name.includes("face") ||
+        name.includes("kepalarobot")
     );
 
+}
 
-    robotContainer.addEventListener(
-        "pointerleave",
-        () => {
 
-            pointerInsideRobot = false;
+/* ============================================================
+   CHECK LEFT SHOULDER
+   ============================================================ */
 
-        },
-        {
-            passive: true
-        }
+function isLeftShoulderName(name) {
+
+    return (
+        name.includes("shoulderleft") ||
+        name.includes("leftshoulder") ||
+        name.includes("shoulderl") ||
+        name.includes("lshoulder") ||
+        name.includes("shoulder_l")
+    );
+
+}
+
+
+/* ============================================================
+   CHECK RIGHT SHOULDER
+   ============================================================ */
+
+function isRightShoulderName(name) {
+
+    return (
+        name.includes("shoulderright") ||
+        name.includes("rightshoulder") ||
+        name.includes("shoulderr") ||
+        name.includes("rshoulder") ||
+        name.includes("shoulder_r")
+    );
+
+}
+
+
+/* ============================================================
+   CHECK LEFT ARM
+   ============================================================ */
+
+function isLeftArmName(name) {
+
+    return (
+        name.includes("armleft") ||
+        name.includes("leftarm") ||
+        name.includes("arml") ||
+        name.includes("larm") ||
+        name.includes("upperarml") ||
+        name.includes("leftupperarm") ||
+        name.includes("upperarmleft") ||
+        name.includes("forearml") ||
+        name.includes("leftforearm")
+    );
+
+}
+
+
+/* ============================================================
+   CHECK RIGHT ARM
+   ============================================================ */
+
+function isRightArmName(name) {
+
+    return (
+        name.includes("armright") ||
+        name.includes("rightarm") ||
+        name.includes("armr") ||
+        name.includes("rarm") ||
+        name.includes("upperarmr") ||
+        name.includes("rightupperarm") ||
+        name.includes("upperarmright") ||
+        name.includes("forearmr") ||
+        name.includes("rightforearm")
     );
 
 }
@@ -307,22 +384,11 @@ function initRobot() {
             100
         );
 
-
-    /*
-       CAMERA DIKUNCI.
-
-       Tidak menggunakan OrbitControls.
-       Tidak bisa drag.
-       Tidak bisa rotate.
-       Tidak bisa zoom.
-    */
-
     camera.position.set(
         0,
         1.1,
         5.8
     );
-
 
     camera.lookAt(
         0,
@@ -341,7 +407,6 @@ function initRobot() {
             alpha: true
         });
 
-
     renderer.setPixelRatio(
         Math.min(
             window.devicePixelRatio,
@@ -349,38 +414,34 @@ function initRobot() {
         )
     );
 
-
     renderer.setSize(
         robotContainer.clientWidth,
         robotContainer.clientHeight
     );
 
-
     renderer.outputColorSpace =
         THREE.SRGBColorSpace;
 
-
     renderer.shadowMap.enabled =
         true;
-
 
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
 
 
     /*
-       Tidak menggunakan OrbitControls.
-
-       touchAction auto membuat halaman tetap
-       bisa menerima gesture touch normal.
+       Pastikan canvas tidak memiliki
+       OrbitControls.
     */
 
     renderer.domElement.style.cursor =
         "default";
 
     renderer.domElement.style.touchAction =
-        "auto";
+        "none";
 
+    renderer.domElement.style.userSelect =
+        "none";
 
     robotContainer.appendChild(
         renderer.domElement
@@ -469,11 +530,6 @@ function initRobot() {
 
         MODEL_URL,
 
-
-        /* ====================================================
-           SUCCESS
-           ==================================================== */
-
         function (gltf) {
 
             robot =
@@ -481,7 +537,7 @@ function initRobot() {
 
 
             /* =================================================
-               ROBOT MATERIAL
+               MATERIAL
                ================================================= */
 
             robot.traverse(
@@ -490,7 +546,6 @@ function initRobot() {
                     if (!object.isMesh) {
                         return;
                     }
-
 
                     object.castShadow =
                         true;
@@ -520,8 +575,8 @@ function initRobot() {
                                 ) {
 
                                     /*
-                                       Material asli GLB
-                                       tetap dipertahankan.
+                                       Tetap mempertahankan
+                                       warna asli GLB.
                                     */
 
                                     material.roughness =
@@ -529,9 +584,6 @@ function initRobot() {
 
                                     material.metalness =
                                         0.12;
-
-                                    material.needsUpdate =
-                                        true;
 
                                 }
 
@@ -585,31 +637,28 @@ function initRobot() {
                 object => {
 
                     const name =
+                        normalizeName(
+                            object.name
+                        );
+
+
+                    /* =========================================
+                       DEBUG NAME
+                       ========================================= */
+
+                    console.log(
+                        "ROBOT PART:",
                         object.name
-                            .toLowerCase()
-                            .replace(
-                                /[\s_-]/g,
-                                ""
-                            );
+                    );
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        HEAD
-                       ----------------------------------------- */
+                       ========================================= */
 
                     if (
                         !head &&
-                        (
-                            name.includes(
-                                "head"
-                            ) ||
-                            name.includes(
-                                "kepala"
-                            ) ||
-                            name.includes(
-                                "face"
-                            )
-                        )
+                        isHeadName(name)
                     ) {
 
                         head =
@@ -618,23 +667,13 @@ function initRobot() {
                     }
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        LEFT SHOULDER
-                       ----------------------------------------- */
+                       ========================================= */
 
                     if (
                         !shoulderLeft &&
-                        (
-                            name.includes(
-                                "shoulderleft"
-                            ) ||
-                            name.includes(
-                                "leftshoulder"
-                            ) ||
-                            name.includes(
-                                "shoulderl"
-                            )
-                        )
+                        isLeftShoulderName(name)
                     ) {
 
                         shoulderLeft =
@@ -643,26 +682,46 @@ function initRobot() {
                     }
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        RIGHT SHOULDER
-                       ----------------------------------------- */
+                       ========================================= */
 
                     if (
                         !shoulderRight &&
-                        (
-                            name.includes(
-                                "shoulderright"
-                            ) ||
-                            name.includes(
-                                "rightshoulder"
-                            ) ||
-                            name.includes(
-                                "shoulderr"
-                            )
-                        )
+                        isRightShoulderName(name)
                     ) {
 
                         shoulderRight =
+                            object;
+
+                    }
+
+
+                    /* =========================================
+                       LEFT ARM
+                       ========================================= */
+
+                    if (
+                        !armLeft &&
+                        isLeftArmName(name)
+                    ) {
+
+                        armLeft =
+                            object;
+
+                    }
+
+
+                    /* =========================================
+                       RIGHT ARM
+                       ========================================= */
+
+                    if (
+                        !armRight &&
+                        isRightArmName(name)
+                    ) {
+
+                        armRight =
                             object;
 
                     }
@@ -699,12 +758,28 @@ function initRobot() {
             }
 
 
+            if (armLeft) {
+
+                armLeftOriginalRotation =
+                    armLeft.rotation.clone();
+
+            }
+
+
+            if (armRight) {
+
+                armRightOriginalRotation =
+                    armRight.rotation.clone();
+
+            }
+
+
             /* =================================================
                DEBUG
                ================================================= */
 
             console.log(
-                "================================"
+                "===================================="
             );
 
             console.log(
@@ -712,34 +787,36 @@ function initRobot() {
             );
 
             console.log(
-                "Head:",
+                "HEAD:",
                 head
             );
 
             console.log(
-                "Left shoulder:",
+                "LEFT SHOULDER:",
                 shoulderLeft
             );
 
             console.log(
-                "Right shoulder:",
+                "RIGHT SHOULDER:",
                 shoulderRight
             );
 
             console.log(
-                "Camera controls: DISABLED"
+                "LEFT ARM:",
+                armLeft
             );
 
             console.log(
-                "Pointer tracking: ENABLED"
+                "RIGHT ARM:",
+                armRight
             );
 
             console.log(
-                "Mouse + Touch: ENABLED"
+                "CAMERA CONTROLS: DISABLED"
             );
 
             console.log(
-                "================================"
+                "===================================="
             );
 
 
@@ -841,17 +918,13 @@ function initRobot() {
     );
 
 
-    /* ========================================================
-       START ANIMATION
-       ======================================================== */
-
     animate();
 
 }
 
 
 /* ============================================================
-   ROBOT LOOK AT CURSOR / TOUCH
+   LOOK AT CURSOR / TOUCH
    ============================================================ */
 
 function updateRobotLookAt() {
@@ -862,21 +935,21 @@ function updateRobotLookAt() {
 
 
     /* ========================================================
-       SMOOTH POINTER
+       SMOOTH MOVEMENT
        ======================================================== */
 
     mouseCurrent.x +=
         (
             mouseTarget.x -
             mouseCurrent.x
-        ) * 0.12;
+        ) * 0.08;
 
 
     mouseCurrent.y +=
         (
             mouseTarget.y -
             mouseCurrent.y
-        ) * 0.12;
+        ) * 0.08;
 
 
     /* ========================================================
@@ -888,25 +961,19 @@ function updateRobotLookAt() {
         headOriginalRotation
     ) {
 
-        /*
-           YAW = kiri / kanan
-
-           Pitch = atas / bawah
-        */
-
         const yaw =
             THREE.MathUtils.clamp(
-                mouseCurrent.x * 0.55,
-                -0.55,
-                0.55
+                mouseCurrent.x * 0.38,
+                -0.38,
+                0.38
             );
 
 
         const pitch =
             THREE.MathUtils.clamp(
-                mouseCurrent.y * 0.30,
-                -0.30,
-                0.30
+                mouseCurrent.y * 0.20,
+                -0.20,
+                0.20
             );
 
 
@@ -995,6 +1062,176 @@ function updateRobotLookAt() {
 
 
 /* ============================================================
+   SPEAKING ARM
+   ============================================================ */
+
+let activeSpeaking = false;
+
+
+/*
+   Tangan kanan akan naik ketika robot bicara.
+
+   Nilai ini sengaja dibuat kecil supaya
+   robot tidak terlihat seperti sedang
+   melakukan gerakan berlebihan.
+*/
+
+function updateRobotArms() {
+
+    if (!robot) {
+        return;
+    }
+
+
+    const time =
+        clock.getElapsedTime();
+
+
+    /* ========================================================
+       RIGHT ARM
+       ======================================================== */
+
+    if (
+        armRight &&
+        armRightOriginalRotation
+    ) {
+
+        if (activeSpeaking) {
+
+            /*
+               Gerakan tangan saat berbicara.
+            */
+
+            const wave =
+                Math.sin(
+                    time * 4
+                ) * 0.08;
+
+
+            armRight.rotation.x =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.x,
+                    armRightOriginalRotation.x -
+                    0.65 +
+                    wave,
+                    0.12
+                );
+
+
+            armRight.rotation.y =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.y,
+                    armRightOriginalRotation.y -
+                    0.12,
+                    0.12
+                );
+
+
+            armRight.rotation.z =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.z,
+                    armRightOriginalRotation.z -
+                    0.15,
+                    0.12
+                );
+
+        }
+        else {
+
+            /*
+               Kembali ke posisi normal.
+            */
+
+            armRight.rotation.x =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.x,
+                    armRightOriginalRotation.x,
+                    0.10
+                );
+
+
+            armRight.rotation.y =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.y,
+                    armRightOriginalRotation.y,
+                    0.10
+                );
+
+
+            armRight.rotation.z =
+                THREE.MathUtils.lerp(
+                    armRight.rotation.z,
+                    armRightOriginalRotation.z,
+                    0.10
+                );
+
+        }
+
+    }
+
+
+    /* ========================================================
+       LEFT ARM
+       ======================================================== */
+
+    if (
+        armLeft &&
+        armLeftOriginalRotation
+    ) {
+
+        /*
+           Tangan kiri hanya bergerak sedikit
+           supaya tidak terlalu kaku.
+        */
+
+        if (activeSpeaking) {
+
+            const subtleMove =
+                Math.sin(
+                    time * 2
+                ) * 0.025;
+
+
+            armLeft.rotation.x =
+                THREE.MathUtils.lerp(
+                    armLeft.rotation.x,
+                    armLeftOriginalRotation.x +
+                    subtleMove,
+                    0.08
+                );
+
+        }
+        else {
+
+            armLeft.rotation.x =
+                THREE.MathUtils.lerp(
+                    armLeft.rotation.x,
+                    armLeftOriginalRotation.x,
+                    0.08
+                );
+
+            armLeft.rotation.y =
+                THREE.MathUtils.lerp(
+                    armLeft.rotation.y,
+                    armLeftOriginalRotation.y,
+                    0.08
+                );
+
+            armLeft.rotation.z =
+                THREE.MathUtils.lerp(
+                    armLeft.rotation.z,
+                    armLeftOriginalRotation.z,
+                    0.08
+                );
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
    ANIMATION
    ============================================================ */
 
@@ -1025,10 +1262,17 @@ function animate() {
 
 
     /* ========================================================
-       LOOK AT POINTER
+       LOOK AT
        ======================================================== */
 
     updateRobotLookAt();
+
+
+    /* ========================================================
+       ARM ANIMATION
+       ======================================================== */
+
+    updateRobotArms();
 
 
     /* ========================================================
@@ -1074,14 +1318,6 @@ function resizeRobot() {
         robotContainer.clientHeight;
 
 
-    if (
-        width === 0 ||
-        height === 0
-    ) {
-        return;
-    }
-
-
     camera.aspect =
         width / height;
 
@@ -1125,9 +1361,12 @@ const robotMessages = [
 let speechIndex =
     0;
 
+let typingTimer = null;
 
-let typingTimer;
 
+/* ============================================================
+   TYPE SPEECH
+   ============================================================ */
 
 function typeSpeech(message) {
 
@@ -1152,6 +1391,10 @@ function typeSpeech(message) {
         0;
 
 
+    activeSpeaking =
+        true;
+
+
     robotSpeech.classList.add(
         "active"
     );
@@ -1170,6 +1413,42 @@ function typeSpeech(message) {
                         typingTimer
                     );
 
+
+                    /*
+                       Robot selesai berbicara.
+                    */
+
+                    activeSpeaking =
+                        false;
+
+
+                    /*
+                       Tunggu 1.5 detik,
+                       kemudian hilangkan teks.
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            if (
+                                robotSpeech &&
+                                !activeSpeaking
+                            ) {
+
+                                robotSpeech.classList.remove(
+                                    "active"
+                                );
+
+                                speechText.textContent =
+                                    "";
+
+                            }
+
+                        },
+                        1500
+                    );
+
+
                     return;
 
                 }
@@ -1187,6 +1466,10 @@ function typeSpeech(message) {
 
 }
 
+
+/* ============================================================
+   START ROBOT SPEECH
+   ============================================================ */
 
 function startRobotSpeech() {
 
@@ -1299,6 +1582,10 @@ function setupTypingTitles() {
 
 }
 
+
+/* ============================================================
+   TYPE TITLE
+   ============================================================ */
 
 function typeTitle(
     element,
@@ -1512,54 +1799,50 @@ const projectModal =
         "projectModal"
     );
 
-
 const modalOverlay =
     document.getElementById(
         "modalOverlay"
     );
-
 
 const modalClose =
     document.getElementById(
         "modalClose"
     );
 
-
 const modalCategory =
     document.getElementById(
         "modalCategory"
     );
-
 
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
 
-
 const modalDescription =
     document.getElementById(
         "modalDescription"
     );
-
 
 const modalDetails =
     document.getElementById(
         "modalDetails"
     );
 
-
 const modalTags =
     document.getElementById(
         "modalTags"
     );
-
 
 const modalProjectLink =
     document.getElementById(
         "modalProjectLink"
     );
 
+
+/* ============================================================
+   OPEN PROJECT
+   ============================================================ */
 
 function openProject(
     projectKey
@@ -1642,6 +1925,10 @@ function openProject(
 }
 
 
+/* ============================================================
+   CLOSE PROJECT
+   ============================================================ */
+
 function closeProject() {
 
     if (!projectModal) {
@@ -1667,6 +1954,10 @@ function closeProject() {
 }
 
 
+/* ============================================================
+   PROJECT CARDS
+   ============================================================ */
+
 document
     .querySelectorAll(
         ".project-card"
@@ -1691,10 +1982,8 @@ document
                 event => {
 
                     if (
-                        event.key ===
-                            "Enter" ||
-                        event.key ===
-                            " "
+                        event.key === "Enter" ||
+                        event.key === " "
                     ) {
 
                         event.preventDefault();
@@ -1712,6 +2001,10 @@ document
         }
     );
 
+
+/* ============================================================
+   MODAL CLOSE
+   ============================================================ */
 
 if (modalClose) {
 
