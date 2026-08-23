@@ -335,31 +335,23 @@ function openProject(projectId) {
     }
 
     if (modalCategory) {
-
         modalCategory.textContent =
             project.category;
-
     }
 
     if (modalTitle) {
-
         modalTitle.textContent =
             project.title;
-
     }
 
     if (modalDescription) {
-
         modalDescription.textContent =
             project.description;
-
     }
 
     if (modalDetails) {
-
         modalDetails.textContent =
             project.details;
-
     }
 
     if (modalTags) {
@@ -570,20 +562,10 @@ if (!robotContainer) {
         );
 
 
-    /*
-       Posisi kamera awal.
-       Nanti akan berubah ketika robot selesai loading.
-    */
-
-    const loadingCameraZ = 7.5;
-
-    const normalCameraZ = 4.8;
-
-
     camera.position.set(
         0,
-        0.2,
-        loadingCameraZ
+        0.15,
+        5
     );
 
 
@@ -649,11 +631,9 @@ if (!robotContainer) {
 
     const ambientLight =
         new THREE.HemisphereLight(
-
             0xffffff,
             0x303833,
             3.0
-
         );
 
     scene.add(
@@ -663,10 +643,8 @@ if (!robotContainer) {
 
     const keyLight =
         new THREE.DirectionalLight(
-
             0xffffff,
             4.5
-
         );
 
     keyLight.position.set(
@@ -682,12 +660,10 @@ if (!robotContainer) {
 
     const frontLight =
         new THREE.PointLight(
-
             0xffffff,
             4.2,
             15,
             2
-
         );
 
     frontLight.position.set(
@@ -703,12 +679,10 @@ if (!robotContainer) {
 
     const leftLight =
         new THREE.PointLight(
-
             0xffffff,
             3.5,
             14,
             2
-
         );
 
     leftLight.position.set(
@@ -724,12 +698,10 @@ if (!robotContainer) {
 
     const rightLight =
         new THREE.PointLight(
-
             0xd9ffe6,
             2.4,
             12,
             2
-
         );
 
     rightLight.position.set(
@@ -745,12 +717,10 @@ if (!robotContainer) {
 
     const greenRim =
         new THREE.PointLight(
-
             0x39ff73,
             2.7,
             14,
             2
-
         );
 
     greenRim.position.set(
@@ -766,12 +736,10 @@ if (!robotContainer) {
 
     const greenBack =
         new THREE.PointLight(
-
             0x65ff94,
             1.2,
             12,
             2
-
         );
 
     greenBack.position.set(
@@ -807,6 +775,30 @@ if (!robotContainer) {
 
     let faceLight = null;
 
+
+    /* =================================================
+       RIGHT ARM VARIABLES
+    ================================================== */
+
+    let rightArm = null;
+
+    let rightHand = null;
+
+    let originalRightArmRotation = null;
+
+    let originalRightHandRotation = null;
+
+    let speaking = false;
+
+    let speechTimer = 0;
+
+    let speechIndex = 0;
+
+
+    /* =================================================
+       ROBOT BASE
+    ================================================== */
+
     let baseRobotY = 0;
 
     let baseRobotZ = 0;
@@ -817,14 +809,20 @@ if (!robotContainer) {
 
 
     /* =================================================
-       LOADING STATE
-    ================================================== */
+       LOADING ZOOM
+    ================================================= */
 
-    let robotLoaded = false;
+    let loadingZoom = true;
 
     let loadingProgress = 0;
 
-    let cameraZoomFinished = false;
+    let loadingZoomStart = 0;
+
+    const loadingZoomDuration = 1.8;
+
+    const loadingStartScale = 1.75;
+
+    const loadingEndScale = 1;
 
 
     /* =================================================
@@ -847,7 +845,7 @@ if (!robotContainer) {
 
     /* =================================================
        HEAD MOTION
-    ================================================== */
+    ================================================= */
 
     const targetHead =
         new THREE.Vector3(
@@ -872,9 +870,7 @@ if (!robotContainer) {
     const clock =
         new THREE.Clock();
 
-
-    let time =
-        0;
+    let time = 0;
 
 
     /* =================================================
@@ -893,58 +889,331 @@ if (!robotContainer) {
 
 
     /* =================================================
+       SPEECH TEXT
+    ================================================== */
+
+    const speechMessages = [
+
+        {
+            title: "HELLO 👋",
+            text: "WELCOME TO MY WEBSITE",
+            duration: 4.5
+        },
+
+        {
+            title: "I'M JOEL'S AI ASSISTANT",
+            text: "NICE TO MEET YOU",
+            duration: 4.5
+        },
+
+        {
+            title: "LET'S EXPLORE MY WORK",
+            text: "TOGETHER →",
+            duration: 4.5
+        }
+
+    ];
+
+
+    /* =================================================
+       CREATE SPEECH BUBBLE
+    ================================================== */
+
+    const speechBubble =
+        document.createElement("div");
+
+    speechBubble.className =
+        "robot-speech-bubble";
+
+
+    speechBubble.innerHTML = `
+
+        <div class="speech-line"></div>
+
+        <div class="speech-title">
+            HELLO 👋
+        </div>
+
+        <div class="speech-text">
+            WELCOME TO MY WEBSITE
+        </div>
+
+        <div class="speech-cursor"></div>
+
+    `;
+
+
+    robotContainer.appendChild(
+        speechBubble
+    );
+
+
+    const speechTitle =
+        speechBubble.querySelector(
+            ".speech-title"
+        );
+
+
+    const speechText =
+        speechBubble.querySelector(
+            ".speech-text"
+        );
+
+
+    /* =================================================
+       SPEECH POSITION
+    ================================================== */
+
+    function positionSpeechBubble() {
+
+        if (!robot) {
+            return;
+        }
+
+
+        const worldPosition =
+            new THREE.Vector3(
+                1.15,
+                0.8,
+                0
+            );
+
+
+        robot.localToWorld(
+            worldPosition
+        );
+
+
+        const projected =
+            worldPosition.clone()
+                .project(camera);
+
+
+        const x =
+            (
+                projected.x *
+                0.5 +
+                0.5
+            ) *
+            robotContainer.clientWidth;
+
+
+        const y =
+            (
+                -projected.y *
+                0.5 +
+                0.5
+            ) *
+            robotContainer.clientHeight;
+
+
+        speechBubble.style.left =
+            `${x}px`;
+
+        speechBubble.style.top =
+            `${y}px`;
+
+    }
+
+
+    /* =================================================
+       SPEECH
+    ================================================== */
+
+    function startSpeaking() {
+
+        if (
+            speechMessages.length === 0
+        ) {
+            return;
+        }
+
+
+        const message =
+            speechMessages[
+                speechIndex
+            ];
+
+
+        speechTitle.textContent =
+            message.title;
+
+
+        speechText.textContent =
+            message.text;
+
+
+        speechBubble.classList.remove(
+            "show"
+        );
+
+
+        requestAnimationFrame(() => {
+
+            speechBubble.classList.add(
+                "show"
+            );
+
+        });
+
+
+        speaking = true;
+
+        speechTimer =
+            message.duration;
+
+
+        speechIndex++;
+
+        if (
+            speechIndex >=
+            speechMessages.length
+        ) {
+
+            speechIndex = 0;
+
+        }
+
+    }
+
+
+    /* =================================================
+       FIND OBJECT
+    ================================================== */
+
+    function findObjectByNames(
+        root,
+        names
+    ) {
+
+        let found = null;
+
+
+        const normalizedNames =
+            names.map(
+                name =>
+                    name
+                        .toLowerCase()
+                        .replace(
+                            /[\s_-]/g,
+                            ""
+                        )
+            );
+
+
+        root.traverse(
+            object => {
+
+                if (found) {
+                    return;
+                }
+
+
+                const objectName =
+                    (
+                        object.name ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .replace(
+                        /[\s_-]/g,
+                        ""
+                    );
+
+
+                if (
+                    normalizedNames.includes(
+                        objectName
+                    )
+                ) {
+
+                    found = object;
+
+                }
+
+            }
+        );
+
+
+        return found;
+
+    }
+
+
+    /* =================================================
        FIND HEAD
     ================================================== */
 
     function findHead(root) {
 
-        let found = null;
+        return findObjectByNames(
+            root,
+            [
+                "head",
+                "Head",
+                "HEAD",
+                "head 2",
+                "Head 2",
+                "face",
+                "Face"
+            ]
+        );
 
-        const names = [
-
-            "head",
-            "Head",
-            "HEAD",
-            "head 2",
-            "Head 2",
-            "face",
-            "Face"
-
-        ];
-
-
-        root.traverse(object => {
-
-            if (found) {
-                return;
-            }
-
-            const name =
-                (
-                    object.name ||
-                    ""
-                )
-                .trim()
-                .toLowerCase();
+    }
 
 
-            if (
-                names
-                    .map(n =>
-                        n.toLowerCase()
-                    )
-                    .includes(name)
-            ) {
+    /* =================================================
+       FIND RIGHT ARM
+    ================================================== */
 
-                found =
-                    object;
+    function findRightArm(root) {
 
-            }
+        return findObjectByNames(
+            root,
+            [
 
-        });
+                "RightArm",
+                "right_arm",
+                "right arm",
+                "Arm_R",
+                "arm_r",
+                "armR",
+                "upperarm_r",
+                "UpperArm_R",
+                "RightUpperArm",
+                "rightupperarm",
+                "RightShoulder",
+                "rightshoulder",
+                "shoulder_r"
+
+            ]
+        );
+
+    }
 
 
-        return found;
+    /* =================================================
+       FIND RIGHT HAND
+    ================================================== */
+
+    function findRightHand(root) {
+
+        return findObjectByNames(
+            root,
+            [
+
+                "RightHand",
+                "right_hand",
+                "right hand",
+                "Hand_R",
+                "hand_r",
+                "handR",
+                "righthand",
+                "wrist_r",
+                "Wrist_R"
+
+            ]
+        );
 
     }
 
@@ -970,176 +1239,185 @@ if (!robotContainer) {
                     : [object.material];
 
 
-            materials.forEach(material => {
+            materials.forEach(
+                material => {
 
-                if (!material) {
-                    return;
-                }
+                    if (!material) {
+                        return;
+                    }
 
 
-                const name =
-                    (
+                    const name =
                         (
-                            material.name ||
-                            ""
-                        ) +
-                        " " +
-                        (
-                            object.name ||
-                            ""
+                            (
+                                material.name ||
+                                ""
+                            ) +
+                            " " +
+                            (
+                                object.name ||
+                                ""
+                            )
                         )
-                    )
-                    .toLowerCase();
+                        .toLowerCase();
 
 
-                /* =====================================
-                   GREEN
-                ===================================== */
+                    /* GREEN */
 
-                if (
-                    name.includes("green") ||
-                    name.includes("led") ||
-                    name.includes("glow") ||
-                    name.includes("neon") ||
-                    name.includes("emission")
-                ) {
+                    if (
+                        name.includes("green") ||
+                        name.includes("led") ||
+                        name.includes("glow") ||
+                        name.includes("neon") ||
+                        name.includes("emission")
+                    ) {
 
-                    if (material.color) {
+                        if (
+                            material.color
+                        ) {
+
+                            material.color.set(
+                                "#65ff91"
+                            );
+
+                        }
+
+
+                        if (
+                            "emissive"
+                            in material
+                        ) {
+
+                            material.emissive.set(
+                                "#42ff7a"
+                            );
+
+                            material.emissiveIntensity =
+                                1.4;
+
+                        }
+
+
+                        if (
+                            "metalness"
+                            in material
+                        ) {
+
+                            material.metalness =
+                                0.35;
+
+                        }
+
+
+                        if (
+                            "roughness"
+                            in material
+                        ) {
+
+                            material.roughness =
+                                0.2;
+
+                        }
+
+
+                        return;
+
+                    }
+
+
+                    /* SILVER */
+
+                    if (
+                        name.includes("silver") ||
+                        name.includes("chrome") ||
+                        name.includes("white")
+                    ) {
+
+                        if (
+                            material.color
+                        ) {
+
+                            material.color.set(
+                                "#d4ddd8"
+                            );
+
+                        }
+
+
+                        if (
+                            "metalness"
+                            in material
+                        ) {
+
+                            material.metalness =
+                                0.7;
+
+                        }
+
+
+                        if (
+                            "roughness"
+                            in material
+                        ) {
+
+                            material.roughness =
+                                0.22;
+
+                        }
+
+
+                        return;
+
+                    }
+
+
+                    /* MAIN ROBOT */
+
+                    if (
+                        material.color
+                    ) {
 
                         material.color.set(
-                            "#65ff91"
+                            "#3a413e"
                         );
 
                     }
 
+
                     if (
-                        "emissive"
+                        "metalness"
                         in material
                     ) {
 
-                        material.emissive.set(
-                            "#42ff7a"
-                        );
+                        material.metalness =
+                            0.62;
 
-                        material.emissiveIntensity =
+                    }
+
+
+                    if (
+                        "roughness"
+                        in material
+                    ) {
+
+                        material.roughness =
+                            0.28;
+
+                    }
+
+
+                    if (
+                        "envMapIntensity"
+                        in material
+                    ) {
+
+                        material.envMapIntensity =
                             1.4;
 
                     }
 
-                    if (
-                        "metalness"
-                        in material
-                    ) {
-
-                        material.metalness =
-                            0.35;
-
-                    }
-
-                    if (
-                        "roughness"
-                        in material
-                    ) {
-
-                        material.roughness =
-                            0.2;
-
-                    }
-
-                    return;
-
                 }
-
-
-                /* =====================================
-                   SILVER
-                ===================================== */
-
-                if (
-                    name.includes("silver") ||
-                    name.includes("chrome") ||
-                    name.includes("white")
-                ) {
-
-                    if (material.color) {
-
-                        material.color.set(
-                            "#d4ddd8"
-                        );
-
-                    }
-
-                    if (
-                        "metalness"
-                        in material
-                    ) {
-
-                        material.metalness =
-                            0.7;
-
-                    }
-
-                    if (
-                        "roughness"
-                        in material
-                    ) {
-
-                        material.roughness =
-                            0.22;
-
-                    }
-
-                    return;
-
-                }
-
-
-                /* =====================================
-                   MAIN ROBOT
-                ===================================== */
-
-                if (material.color) {
-
-                    material.color.set(
-                        "#3a413e"
-                    );
-
-                }
-
-
-                if (
-                    "metalness"
-                    in material
-                ) {
-
-                    material.metalness =
-                        0.62;
-
-                }
-
-
-                if (
-                    "roughness"
-                    in material
-                ) {
-
-                    material.roughness =
-                        0.28;
-
-                }
-
-
-                if (
-                    "envMapIntensity"
-                    in material
-                ) {
-
-                    material.envMapIntensity =
-                        1.4;
-
-                }
-
-            });
+            );
 
         });
 
@@ -1207,16 +1485,25 @@ if (!robotContainer) {
         );
 
 
-        /*
-           Jangan langsung menentukan
-           camera final di sini.
-           Kita simpan target normal.
-        */
+        const fov =
+            THREE.MathUtils.degToRad(
+                camera.fov
+            );
+
+
+        const distance =
+            (
+                desiredSize / 2
+            ) /
+            Math.tan(
+                fov / 2
+            );
+
 
         camera.position.set(
             0,
             0.2,
-            loadingCameraZ
+            distance * 0.86
         );
 
 
@@ -1249,6 +1536,24 @@ if (!robotContainer) {
         baseRobotRotationZ =
             object.rotation.z;
 
+
+        /*
+           Start large
+        */
+
+        object.scale.setScalar(
+            scale *
+            loadingStartScale
+        );
+
+
+        loadingZoomStart =
+            performance.now();
+
+
+        loadingZoom =
+            true;
+
     }
 
 
@@ -1272,9 +1577,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           PANEL
-        ============================================= */
+        /* PANEL */
 
         const panelGeometry =
             new THREE.BoxGeometry(
@@ -1324,9 +1627,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           EYES
-        ============================================= */
+        /* EYES */
 
         const eyeGeometry =
             new THREE.SphereGeometry(
@@ -1402,9 +1703,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           GLOW
-        ============================================= */
+        /* GLOW */
 
         const glowGeometry =
             new THREE.SphereGeometry(
@@ -1476,9 +1775,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           MOUTH
-        ============================================= */
+        /* MOUTH */
 
         const mouthGeometry =
             new THREE.BoxGeometry(
@@ -1516,9 +1813,7 @@ if (!robotContainer) {
         );
 
 
-        /* =============================================
-           MOUTH DOTS
-        ============================================= */
+        /* MOUTH DOTS */
 
         const dotGeometry =
             new THREE.SphereGeometry(
@@ -1560,9 +1855,7 @@ if (!robotContainer) {
         }
 
 
-        /* =============================================
-           FACE LIGHT
-        ============================================= */
+        /* FACE LIGHT */
 
         faceLight =
             new THREE.PointLight(
@@ -1588,148 +1881,246 @@ if (!robotContainer) {
 
 
     /* =================================================
-       ROBOT STATUS
+       ARM POSE
     ================================================== */
 
-    function setRobotStatus(text) {
+    function updateSpeakingPose() {
 
-        if (!robotStatus) {
+        if (
+            !rightArm &&
+            !rightHand
+        ) {
             return;
         }
 
-        robotStatus.textContent =
-            text;
 
         /*
-           Pastikan status tidak tersembunyi.
+           Smooth animation
         */
 
-        robotStatus.classList.remove(
-            "hidden"
-        );
+        const target =
+            speaking
+                ? 1
+                : 0;
 
-        robotStatus.style.opacity =
-            "1";
+
+        const wave =
+            speaking
+                ? Math.sin(
+                    time * 4
+                ) * 0.08
+                : 0;
+
+
+        if (rightArm) {
+
+            if (
+                !originalRightArmRotation
+            ) {
+
+                originalRightArmRotation =
+                    rightArm.rotation.clone();
+
+            }
+
+
+            const targetX =
+                originalRightArmRotation.x -
+                THREE.MathUtils.degToRad(
+                    25
+                ) *
+                target;
+
+
+            const targetZ =
+                originalRightArmRotation.z +
+                THREE.MathUtils.degToRad(
+                    55
+                ) *
+                target;
+
+
+            rightArm.rotation.x =
+                THREE.MathUtils.lerp(
+                    rightArm.rotation.x,
+                    targetX + wave,
+                    0.08
+                );
+
+
+            rightArm.rotation.z =
+                THREE.MathUtils.lerp(
+                    rightArm.rotation.z,
+                    targetZ,
+                    0.08
+                );
+
+        }
+
+
+        if (rightHand) {
+
+            if (
+                !originalRightHandRotation
+            ) {
+
+                originalRightHandRotation =
+                    rightHand.rotation.clone();
+
+            }
+
+
+            const targetY =
+                originalRightHandRotation.y +
+                THREE.MathUtils.degToRad(
+                    15
+                ) *
+                target;
+
+
+            rightHand.rotation.y =
+                THREE.MathUtils.lerp(
+                    rightHand.rotation.y,
+                    targetY,
+                    0.08
+                );
+
+        }
 
     }
 
 
     /* =================================================
-       LOADING TEXT ANIMATION
+       SPEAKING GLOW
     ================================================== */
 
-    let loadingDots = 0;
+    function updateSpeakingGlow() {
 
-    let loadingTextTimer = 0;
+        const pulse =
+            Math.sin(
+                time * 7
+            ) * 0.5 + 0.5;
 
-
-    function updateLoadingText(delta) {
-
-        if (robotLoaded) {
-            return;
-        }
-
-        loadingTextTimer +=
-            delta;
 
         if (
-            loadingTextTimer >= 0.45
+            faceEyes.length > 0
         ) {
 
-            loadingTextTimer = 0;
+            faceEyes.forEach(
+                eye => {
 
-            loadingDots =
-                (loadingDots + 1) % 4;
+                    if (
+                        eye.material &&
+                        "emissiveIntensity"
+                        in eye.material
+                    ) {
 
-            const dots =
-                ".".repeat(
-                    loadingDots
-                );
+                        const target =
+                            speaking
+                                ? 7 +
+                                  pulse * 3
+                                : 3 +
+                                  Math.sin(
+                                      time * 1.4
+                                  ) *
+                                  0.45;
 
-            setRobotStatus(
-                `LOADING ROBOT ${loadingProgress}%${dots}`
+
+                        eye.material.emissiveIntensity =
+                            THREE.MathUtils.lerp(
+                                eye.material.emissiveIntensity,
+                                target,
+                                0.12
+                            );
+
+                    }
+
+                }
             );
 
         }
 
-    }
+
+        if (
+            faceEyeGlows.length > 0
+        ) {
+
+            faceEyeGlows.forEach(
+                glow => {
+
+                    const target =
+                        speaking
+                            ? 0.18 +
+                              pulse * 0.08
+                            : 0.06 +
+                              Math.sin(
+                                  time * 1.3
+                              ) *
+                              0.025;
 
 
-    /* =================================================
-       CAMERA ZOOM
-    ================================================== */
+                    glow.material.opacity =
+                        THREE.MathUtils.lerp(
+                            glow.material.opacity,
+                            target,
+                            0.12
+                        );
 
-    function updateCameraZoom(delta) {
-
-        if (!robotLoaded) {
-
-            /*
-               Selama loading kamera
-               tetap jauh.
-            */
-
-            camera.position.z =
-                THREE.MathUtils.lerp(
-                    camera.position.z,
-                    loadingCameraZ,
-                    1 -
-                    Math.exp(
-                        -3.0 * delta
-                    )
-                );
-
-            return;
+                }
+            );
 
         }
 
 
-        /*
-           Setelah selesai loading,
-           kamera perlahan zoom in
-           ke posisi normal.
-        */
+        if (faceMouth) {
 
-        if (
-            !cameraZoomFinished
-        ) {
+            faceMouth.material.color.set(
+                speaking
+                    ? 0x8affad
+                    : 0x52ff82
+            );
 
-            const cameraSmooth =
-                1 -
-                Math.exp(
-                    -1.6 * delta
+
+            faceMouth.material.opacity =
+                speaking
+                    ? 1
+                    : 0.85;
+
+        }
+
+
+        faceMouthDots.forEach(
+            dot => {
+
+                dot.material.color.set(
+                    speaking
+                        ? 0x8affad
+                        : 0x52ff82
                 );
-
-
-            camera.position.z =
-                THREE.MathUtils.lerp(
-                    camera.position.z,
-                    normalCameraZ,
-                    cameraSmooth
-                );
-
-
-            camera.position.y =
-                THREE.MathUtils.lerp(
-                    camera.position.y,
-                    0.2,
-                    cameraSmooth
-                );
-
-
-            if (
-                Math.abs(
-                    camera.position.z -
-                    normalCameraZ
-                ) < 0.01
-            ) {
-
-                camera.position.z =
-                    normalCameraZ;
-
-                cameraZoomFinished =
-                    true;
 
             }
+        );
+
+
+        if (faceLight) {
+
+            const target =
+                speaking
+                    ? 2.2 +
+                      pulse * 0.8
+                    : 0.65 +
+                      Math.sin(
+                          time * 1.4
+                      ) *
+                      0.12;
+
+
+            faceLight.intensity =
+                THREE.MathUtils.lerp(
+                    faceLight.intensity,
+                    target,
+                    0.1
+                );
 
         }
 
@@ -1742,15 +2133,6 @@ if (!robotContainer) {
 
     const loader =
         new GLTFLoader();
-
-
-    /*
-       Status awal.
-    */
-
-    setRobotStatus(
-        "INITIALIZING ROBOT..."
-    );
 
 
     loader.load(
@@ -1766,10 +2148,6 @@ if (!robotContainer) {
             console.log(
                 "Robot berhasil dimuat."
             );
-
-
-            loadingProgress =
-                100;
 
 
             styleRobotMaterials(
@@ -1799,25 +2177,90 @@ if (!robotContainer) {
             }
 
 
+            /*
+               Find right arm
+            */
+
+            rightArm =
+                findRightArm(
+                    robot
+                );
+
+
+            rightHand =
+                findRightHand(
+                    robot
+                );
+
+
+            if (rightArm) {
+
+                originalRightArmRotation =
+                    rightArm.rotation.clone();
+
+                console.log(
+                    "Right arm ditemukan:",
+                    rightArm.name
+                );
+
+            } else {
+
+                console.warn(
+                    "Right arm tidak ditemukan."
+                );
+
+            }
+
+
+            if (rightHand) {
+
+                originalRightHandRotation =
+                    rightHand.rotation.clone();
+
+                console.log(
+                    "Right hand ditemukan:",
+                    rightHand.name
+                );
+
+            }
+
+
             frameRobot(
                 robot
             );
 
 
+            if (robotStatus) {
+
+                robotStatus.textContent =
+                    "READY — MOVE CURSOR";
+
+
+                setTimeout(() => {
+
+                    robotStatus.classList.add(
+                        "hidden"
+                    );
+
+                }, 1000);
+
+            }
+
+
             /*
-               Robot sudah selesai loading.
+               Start speech after loading zoom
             */
 
-            robotLoaded =
-                true;
+            setTimeout(
+                () => {
 
+                    startSpeaking();
 
-            setRobotStatus(
-                "ROBOT ONLINE — MOVE CURSOR"
+                },
+                2100
             );
 
         },
-
 
         progress => {
 
@@ -1830,32 +2273,30 @@ if (!robotContainer) {
                 progress.total > 0
             ) {
 
-                loadingProgress =
-                    Math.min(
-                        99,
-                        Math.round(
-                            (
-                                progress.loaded /
-                                progress.total
-                            ) * 100
-                        )
+                const percent =
+                    Math.round(
+                        (
+                            progress.loaded /
+                            progress.total
+                        ) * 100
                     );
 
 
-                setRobotStatus(
-                    `LOADING ROBOT ${loadingProgress}%`
-                );
+                loadingProgress =
+                    percent;
+
+
+                robotStatus.textContent =
+                    `LOADING ROBOT ${percent}%`;
 
             } else {
 
-                setRobotStatus(
-                    "LOADING ROBOT..."
-                );
+                robotStatus.textContent =
+                    "LOADING ROBOT...";
 
             }
 
         },
-
 
         error => {
 
@@ -1865,9 +2306,12 @@ if (!robotContainer) {
             );
 
 
-            setRobotStatus(
-                "ROBOT FAILED TO LOAD"
-            );
+            if (robotStatus) {
+
+                robotStatus.textContent =
+                    "ROBOT FAILED TO LOAD";
+
+            }
 
         }
 
@@ -1924,26 +2368,8 @@ if (!robotContainer) {
 
 
         /* =============================================
-           LOADING TEXT
-        ============================================= */
-
-        updateLoadingText(
-            delta
-        );
-
-
-        /* =============================================
-           CAMERA ZOOM
-        ============================================= */
-
-        updateCameraZoom(
-            delta
-        );
-
-
-        /* =============================================
            CURSOR SMOOTHING
-        ============================================= */
+        ============================================== */
 
         const cursorSmooth =
             1 -
@@ -1959,14 +2385,103 @@ if (!robotContainer) {
 
 
         /* =============================================
-           BODY
-        ============================================= */
+           LOADING ZOOM
+        ============================================== */
 
-        if (robot) {
+        if (
+            robot &&
+            loadingZoom
+        ) {
+
+            const elapsed =
+                (
+                    performance.now() -
+                    loadingZoomStart
+                ) /
+                1000;
+
+
+            let progress =
+                Math.min(
+                    elapsed /
+                    loadingZoomDuration,
+                    1
+                );
+
 
             /*
-               Slow breathing
+               Ease Out
             */
+
+            const eased =
+                1 -
+                Math.pow(
+                    1 - progress,
+                    3
+                );
+
+
+            const scaleValue =
+                THREE.MathUtils.lerp(
+                    loadingStartScale,
+                    loadingEndScale,
+                    eased
+                );
+
+
+            /*
+               Keep original robot scale
+            */
+
+            const currentBaseScale =
+                robot.userData.baseScale ||
+                1;
+
+
+            robot.scale.setScalar(
+                currentBaseScale *
+                scaleValue
+            );
+
+
+            /*
+               Slight rotation while zooming
+            */
+
+            robot.rotation.y =
+                baseRobotRotationY +
+                THREE.MathUtils.degToRad(
+                    8 *
+                    (1 - eased)
+                );
+
+
+            if (
+                progress >= 1
+            ) {
+
+                loadingZoom =
+                    false;
+
+
+                robot.scale.setScalar(
+                    currentBaseScale
+                );
+
+
+                robot.rotation.y =
+                    baseRobotRotationY;
+
+            }
+
+        }
+
+
+        /* =============================================
+           BODY
+        ============================================== */
+
+        if (robot) {
 
             const breathe =
                 Math.sin(
@@ -1974,39 +2489,24 @@ if (!robotContainer) {
                 );
 
 
-            /*
-               Very slow sway
-            */
-
             const sway =
                 Math.sin(
                     time * 0.48
                 );
 
 
-            /*
-               Floating
-            */
-
             robot.position.y =
                 baseRobotY +
                 breathe * 0.025;
 
 
-            /*
-               Forward/back
-            */
-
             robot.position.z =
                 baseRobotZ +
                 Math.sin(
                     time * 0.7
-                ) * 0.008;
+                ) *
+                0.008;
 
-
-            /*
-               Body follows cursor
-            */
 
             const cursorBodyRotation =
                 smoothPointer.x *
@@ -2015,18 +2515,23 @@ if (!robotContainer) {
                 );
 
 
-            robot.rotation.y =
-                baseRobotRotationY +
-                cursorBodyRotation +
-                sway *
-                THREE.MathUtils.degToRad(
-                    1.0
-                );
-
-
             /*
-               Tiny tilt
+               Jangan override zoom rotation
+               ketika masih loading
             */
+
+            if (!loadingZoom) {
+
+                robot.rotation.y =
+                    baseRobotRotationY +
+                    cursorBodyRotation +
+                    sway *
+                    THREE.MathUtils.degToRad(
+                        1.0
+                    );
+
+            }
+
 
             robot.rotation.z =
                 baseRobotRotationZ +
@@ -2042,7 +2547,7 @@ if (!robotContainer) {
 
         /* =============================================
            HEAD
-        ============================================= */
+        ============================================== */
 
         if (
             head &&
@@ -2063,10 +2568,6 @@ if (!robotContainer) {
                 );
 
 
-            /*
-               Idle movement
-            */
-
             targetHead.y +=
                 Math.sin(
                     time * 0.65
@@ -2084,10 +2585,6 @@ if (!robotContainer) {
                     1.1
                 );
 
-
-            /*
-               Head smoothing
-            */
 
             const headSmooth =
                 1 -
@@ -2112,10 +2609,6 @@ if (!robotContainer) {
                 );
 
 
-            /*
-               Apply
-            */
-
             head.rotation.x =
                 originalHeadRotation.x +
                 currentHead.x;
@@ -2125,10 +2618,6 @@ if (!robotContainer) {
                 originalHeadRotation.y +
                 currentHead.y;
 
-
-            /*
-               Slight roll
-            */
 
             head.rotation.z =
                 originalHeadRotation.z +
@@ -2142,18 +2631,24 @@ if (!robotContainer) {
 
         /* =============================================
            EYES
-        ============================================= */
+        ============================================== */
 
         if (
             faceEyes.length > 0
         ) {
 
             const eyePulse =
-                3.0 +
-                Math.sin(
-                    time * 1.4
-                ) *
-                0.45;
+                speaking
+                    ? 7 +
+                      Math.sin(
+                          time * 7
+                      ) *
+                      2
+                    : 3 +
+                      Math.sin(
+                          time * 1.4
+                      ) *
+                      0.45;
 
 
             faceEyes.forEach(
@@ -2167,26 +2662,14 @@ if (!robotContainer) {
 
                         eye.material
                             .emissiveIntensity =
-                            eyePulse;
+                            THREE.MathUtils.lerp(
+                                eye.material
+                                    .emissiveIntensity,
+                                eyePulse,
+                                0.12
+                            );
 
                     }
-
-                }
-            );
-
-
-            const glowPulse =
-                0.06 +
-                Math.sin(
-                    time * 1.3
-                ) * 0.025;
-
-
-            faceEyeGlows.forEach(
-                glow => {
-
-                    glow.material.opacity =
-                        glowPulse;
 
                 }
             );
@@ -2196,7 +2679,7 @@ if (!robotContainer) {
 
         /* =============================================
            BLINK
-        ============================================= */
+        ============================================== */
 
         blinkTimer +=
             delta;
@@ -2204,6 +2687,7 @@ if (!robotContainer) {
 
         if (
             !blinking &&
+            !speaking &&
             blinkTimer >= nextBlink
         ) {
 
@@ -2284,16 +2768,22 @@ if (!robotContainer) {
 
         /* =============================================
            MOUTH
-        ============================================= */
+        ============================================== */
 
         if (faceMouth) {
 
             faceMouth.scale.x =
-                0.9 +
-                Math.sin(
-                    time * 1.4
-                ) *
-                0.07;
+                speaking
+                    ? 0.85 +
+                      Math.sin(
+                          time * 8
+                      ) *
+                      0.22
+                    : 0.9 +
+                      Math.sin(
+                          time * 1.4
+                      ) *
+                      0.07;
 
         }
 
@@ -2302,11 +2792,19 @@ if (!robotContainer) {
             dot => {
 
                 dot.scale.setScalar(
-                    0.9 +
-                    Math.sin(
-                        time * 1.4
-                    ) *
-                    0.07
+
+                    speaking
+                        ? 0.9 +
+                          Math.sin(
+                              time * 8
+                          ) *
+                          0.18
+                        : 0.9 +
+                          Math.sin(
+                              time * 1.4
+                          ) *
+                          0.07
+
                 );
 
             }
@@ -2314,24 +2812,89 @@ if (!robotContainer) {
 
 
         /* =============================================
+           SPEAKING
+        ============================================== */
+
+        if (speaking) {
+
+            speechTimer -=
+                delta;
+
+
+            if (
+                speechTimer <= 0
+            ) {
+
+                speaking =
+                    false;
+
+
+                speechBubble.classList.remove(
+                    "show"
+                );
+
+
+                /*
+                   Wait before next sentence
+                */
+
+                setTimeout(
+                    () => {
+
+                        startSpeaking();
+
+                    },
+                    1000
+                );
+
+            }
+
+        }
+
+
+        /* =============================================
+           SPEAKING POSE
+        ============================================== */
+
+        updateSpeakingPose();
+
+
+        /* =============================================
+           SPEAKING GLOW
+        ============================================== */
+
+        updateSpeakingGlow();
+
+
+        /* =============================================
            FACE LIGHT
-        ============================================= */
+        ============================================== */
 
         if (faceLight) {
 
+            const targetIntensity =
+                speaking
+                    ? 2.3
+                    : 0.65 +
+                      Math.sin(
+                          time * 1.4
+                      ) *
+                      0.12;
+
+
             faceLight.intensity =
-                0.65 +
-                Math.sin(
-                    time * 1.4
-                ) *
-                0.12;
+                THREE.MathUtils.lerp(
+                    faceLight.intensity,
+                    targetIntensity,
+                    0.1
+                );
 
         }
 
 
         /* =============================================
            LIGHT MOVEMENT
-        ============================================= */
+        ============================================== */
 
         const lightPulse =
             Math.sin(
@@ -2360,8 +2923,24 @@ if (!robotContainer) {
 
 
         /* =============================================
+           SPEECH POSITION
+        ============================================== */
+
+        if (
+            robot &&
+            speechBubble.classList.contains(
+                "show"
+            )
+        ) {
+
+            positionSpeechBubble();
+
+        }
+
+
+        /* =============================================
            RENDER
-        ============================================= */
+        ============================================== */
 
         renderer.render(
             scene,
